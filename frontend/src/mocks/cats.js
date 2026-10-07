@@ -1,0 +1,16 @@
+export const gatosMock = [ {
+    id: "gato-001",
+    nome: "Mimo",
+    dataNascimento: "2024-03-15",
+    nascimentoEstimado: true,
+    sexo: "Macho",
+    personalidade: ["Sociável", "Carinhoso"],
+    descricao: "Resgatado e acolhido pelo abrigo",
+    status: "disponível",
+    fotoUril: null,
+    dataEntrada: "2026-10-07",
+    dataAdocao: null,
+    criadoEm: "2026-10-07T12:00:00Z",
+    atualizadoEm: "2026-10-07T12:00:00Z",
+},
+];

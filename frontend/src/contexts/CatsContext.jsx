@@ -1,0 +1,1 @@
+import { gatosMock } from "../mocks/cats";

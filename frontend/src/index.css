@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+@theme {
+  --color-creme: #faf8f0;
+  --color-roxo: #9670c5;
+  --color-lilas: #c9afe0;
+  --color-lima: #c7d97a;
+  --color-texto: #29262d;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: var(--color-creme);
+  color: var(--color-texto);
+  font-family: Arial, sans-serif;
+}
