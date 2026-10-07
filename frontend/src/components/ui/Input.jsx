@@ -5,7 +5,7 @@ export default function Input({
     ...props
 }) {
     return (
-        <div className="flex flex-col gap2">
+        <div className="flex flex-col gap-2">
         <label
         htmlFor={id}
         className="text-sm font-medium text-texto"
@@ -20,7 +20,7 @@ export default function Input({
         min-h-11 w-full rounded-xl
         border border-lima bg-transparent
         px-3 py-2 text-texto
-        outline-nome
+        outline-none
         focus:border-roxo focus:ring-2
         focus:ring-roxo/20"
         {...props}

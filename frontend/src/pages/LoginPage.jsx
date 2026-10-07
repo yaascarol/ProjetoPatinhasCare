@@ -19,7 +19,7 @@ export default function LoginPace() {
             return;
         }
         
-        //demosntração, pra afzer ainda
+        //demosntração, pra fazer ainda
         navigate("/")
         }
 
@@ -32,10 +32,10 @@ export default function LoginPace() {
             <section aria-label="titulo-login" className="w-full max-w-xl rounded 3xl border border-lima px-6 py-10 sm:px-16 sm:py-12">
             <header className="text-center">
                 <div className="flex items-center justify-center gap-3">
-                    <img src="../imagens/icones-patinhascare/LOGO PatinhasCare.png" alt="PatinhasCare" aria-hidden="true" className="h-16 w-auto"/>
+                    <img src="../imagens/icones-patinhascare/LOGO PatinhasCare.png" alt="PatinhasCare" aria-hidden="true" className="h-auto w-50"/>
                 </div>
 
-                <p classNAme="mt-2 text-sm text-stone-600">
+                <p className="mt-2 text-sm text-stone-600">
                     Sistema de gestão integrada para seu abrigo
                 </p>
             </header>
@@ -61,7 +61,7 @@ export default function LoginPace() {
                 name="senha"
                 label="Senha"
                 type="Password"
-                autoCOmplete="current-password"
+                autoComplete="current-password"
                 required
                 value={senha}
                 onChange={(event) => setSenha(event.target.value)}

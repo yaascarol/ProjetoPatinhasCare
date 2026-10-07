@@ -10,7 +10,7 @@ export default function App() {
       <Route path="/" element={<HomePage />} />
 
       <Route path="*" element={
-        <main classNAme="min-h-screen bg-creme p-8">
+        <main className="min-h-screen bg-creme p-8">
           <h1 className="text-2xl font-semibold">
             Página não encontrada
           </h1>
