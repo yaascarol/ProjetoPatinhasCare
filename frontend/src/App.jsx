@@ -1,10 +1,18 @@
 import { Link, Route, Routes } from "react-router";
 
+import CatsProvider from "./contexts/CatsContext";
+import AppLayout from "./layouts/AppLayout";
+
 import LoginPage from "./pages/LoginPage";
 import HomePage from "./pages/HomePage";
+//import CatsPage from "./pages/CatsPage";
+//import CreateCatPage from "./pages/CreateCatPage"
+//import EditCatPage from "./pages/EditCatPage"
+//import NotFoundPage from "./pages/NotFoundPage"
 
 export default function App() {
   return (
+    <CatsProvider>
     <Routes>
       <Route path="/login" element={<LoginPage />} />
       <Route path="/" element={<HomePage />} />
@@ -22,5 +30,6 @@ export default function App() {
       }
       />
     </Routes>
+    </CatsProvider>
   );
 }

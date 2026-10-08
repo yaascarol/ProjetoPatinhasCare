@@ -35,7 +35,7 @@ export default function Sidebar() {
                     {proximasSecoes.map((nome) => (
                         <li key={nome} className="px-4 text-stone-600">
                             <span className="block">{nome}</span>
-                            <span classNAme="text-xs">Em breve</span>
+                            <span className="text-xs">Em breve</span>
                         </li>
                     ))}
                 </ul>

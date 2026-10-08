@@ -7,11 +7,11 @@ export default function CatsProvider({ children }) {
     const [gatos, setGatos] = useState(gatosMock);
 
     function criarGato(dados) {
-        const novoGatos = {
+        const novoGato = {
             ...dados,
             id: crypto.randomUUID(),
             criadoEm: new Date().toISOString(),
-        }
+        };
 
         setGatos((atuais) => [novoGato, ...atuais]);
     }
@@ -32,10 +32,10 @@ export default function CatsProvider({ children }) {
     }
 
     return (
-        <CatsContext.CatsProvider
+        <CatsContext.Provider
         value={{ gatos, criarGato, atualizarGato }}
         >
             {children}  
-        </CatsContext.CatsProvider>
+        </CatsContext.Provider>
     );
 }

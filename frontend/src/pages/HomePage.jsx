@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import { Link } from "react-router";
 
-import {CatsContext } from "../contexts/cats-context"
-import { alterasMock } from "../mocks/alerts";
+import {CatsContext } from "../contexts/cats-context.js"
+import { alertsMock } from "../mocks/alerts.js";
 
 export default function HomePage() {
     const { gatos } = useContext(CatsContext);
@@ -17,7 +17,7 @@ const adotados = gatos.filter(
     (gato) => gato.status === "adotado"
 ).length;
 
-const alertasAtivos = alertasMock.filter(
+const alertasAtivos = alertsMock.filter(
     (alerta) => !alerta.resolvido
 );
 
@@ -27,7 +27,7 @@ const fichasIncompletas = gatos.filter(
 
 const ultimosCadastros = [...gatos]
 .sort((a, b) => b.criadoEm.localeCompare(a.criadoEm))
-.slide(0, 5)
+.slice(0, 5)
 
 const indicadores = [
     { label: "Gatos no abrigo", valor: noAbrigo },

@@ -1,3 +1,3 @@
-import { CreateCOntext } from "react";
+import { createContext } from "react";
 
-export const CatsCOntext = createContext(null);
+export const CatsContext = createContext(null);

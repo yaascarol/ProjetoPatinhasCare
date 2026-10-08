@@ -1,1 +1,1 @@
-export const alertasMock = [];
+export const alertsMock = [];
