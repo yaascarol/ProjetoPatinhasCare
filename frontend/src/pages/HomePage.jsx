@@ -1,32 +1,142 @@
+import { useContext } from "react";
 import { Link } from "react-router";
 
+import {CatsContext } from "../contexts/cats-context"
+import { alterasMock } from "../mocks/alerts";
+
 export default function HomePage() {
+    const { gatos } = useContext(CatsContext);
+
+    const noAbrigo = gatos.filter((gato) =>
+    ["disponível", "indisponível", "em_observacao"].includes(
+        gato.status
+    )
+).length;
+
+const adotados = gatos.filter(
+    (gato) => gato.status === "adotado"
+).length;
+
+const alertasAtivos = alertasMock.filter(
+    (alerta) => !alerta.resolvido
+);
+
+const fichasIncompletas = gatos.filter(
+    (gato) => !gato.dataNascimento || gato.sexo === "nao_informado"
+);
+
+const ultimosCadastros = [...gatos]
+.sort((a, b) => b.criadoEm.localeCompare(a.criadoEm))
+.slide(0, 5)
+
+const indicadores = [
+    { label: "Gatos no abrigo", valor: noAbrigo },
+    { label: "Gatos adotados", valor: adotados },
+    { label: "Alertas ativos", valor: alertasAtivos.length },
+];
 
     return (
-        <main className="min-h-screen bg-creme p-8 sm:p-10">
-            <section className="mx-auto max-w-5xl">
-                <p className="text-sm text-stone-600">
-                    PatinhasCare
+
+        <div className="space-y-6">
+            <h1 className="text-2xl font-semibold">
+                Visão geral
+            </h1>
+
+            <section
+            aria-label="Indicadores"
+            className="grid gap-4 sm:grid-cols-3"
+            >
+                {indicadores.map((indicador) => (
+                    <article
+                    key={indicador.label}
+                    className="rounded-2xl border border-lima p-6"
+                    >
+                        <p className="text-4xl font-semibold">
+                            {indicador.valor}
+                        </p>
+                        <h2 className="mt-2 text-stone-700">
+                            {indicador.label}
+                        </h2>
+                    </article>
+                ))}
+            </section>
+
+            <section className="rounded-2xl border border-lima p-5">
+                <h2 className="text-lg font-semibold">
+                    Alertas de saúde
+                </h2>
+
+                <p className="mt-3 text-stone-600">
+                    Módulo de saúde ainda em implantação.
+                    Sem alertas para demonstração cadastrados.
                 </p>
+            </section>
 
-                <h1 className="mt-2 text-3xl font-semibold">
-                    Visão geral do abrigo
-                </h1>
-
-                <div className="mt-6 rounded-2xl border border-lima p-6">
-                    <h2 className="text-lg font-medium">
-                        Navegação funcionando
+            <div className="grid gap-4 lg:grid-cols-2">
+                <section className="rounded-2xl border border-lima p-5">
+                    <h2 className="text-lg font-semibold">
+                        Fichas com informações pendentes
                     </h2>
 
-                    <p className="mt-2 text-stone-600">
-                        na proxima etapa, acrescentaremos o menu lateral, indicadores e alertas do abrigo.
-                    </p>
-                </div>
+                    {fichasIncompletas.length === 0 ? (
+                        <p className="mt-3 text-stone-600">
+                            Nenhuma pendência de nascimento ou sexo.
+                        </p>
+                    ) : (
+                        <ul className="mt-3 space-y-3">
+                            {fichasIncompletas.map((gato) => (
+                                <li key={gato.id}>
+                                    <Link to={`/gatinhos/${gato.id}/editar`}
+                                    className="font-medium underline"
+                                    >
+                                        {gato.nome}
+                                    </Link>
 
-                <Link to="/login" className="mt-6 inline-block rounded text-texto underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-roxo">
-                Voltar ao login
-                </Link>
-            </section>
-        </main>
+                                    <p className="text-sm text-stone-60">
+                                        {[
+                                            !gato.dataNascimento && "Nascimento não informado",
+                                            gato.sexo === "nao_informado" && "Sexo não informado",
+                                        ]
+                                        .filter(Boolean)
+                                        .join(" . ")
+                                        }
+                                    </p>
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+                </section>
+
+                <section className="rounded-2xl border border-lima p-5">
+                    <h2 className="text-lg font-semibold">
+                        Últimos cadastros
+                    </h2>
+
+                    {ultimosCadastros.length === 0 && (
+                        <p className="mt-3 text-stone-600">
+                            Nenhum gatinho cadastrado
+                        </p>
+                    )}
+
+                    <ul className="mt-3 space-y-3">
+                        {ultimosCadastros.map((gato) => (
+                            <li key={gato.id}
+                            className="flex justify-between gap-4"
+                            >
+                                <Link to={`/gatinhos/${gato.id}/editar`}
+                                className="underline"
+                                >
+                                    {gato.nome}
+                                </Link>
+
+                                <span className="text-sm text-stone-600">
+                                    {new Date(gato.criadoEm).toLocaleDateString("pt-BR")}
+                                </span>
+                            </li>
+                        ))}
+                    </ul>
+                </section>
+            </div>
+        </div>
     );
 }
