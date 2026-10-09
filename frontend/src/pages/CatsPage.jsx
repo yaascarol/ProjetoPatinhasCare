@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router";
 
 import { CatsContext } from "../contexts/cats-context";
@@ -14,7 +14,7 @@ export default function CatsPage() {
 
     const gatosFiltrados = gatos.filter((gato) => {
         const correspondeNome = gato.nome
-        .toLocateLowerCase("pt-BR")
+        .toLocaleLowerCase("pt-BR")
         .includes(busca.trim().toLocaleLowerCase("pt-BR"));
 
         const correspondeStatus = !status || gato.status === status;

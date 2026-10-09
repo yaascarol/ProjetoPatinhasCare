@@ -3,10 +3,11 @@ import { Link } from "react-router";
 import { obterNomeStatus } from "../../utils/catOptions";
 
 const coresStatus = {
-    disponivel: "bg-green-100 text-green-900",
+    disponivel: "bg-green-200 text-green-900",
     indisponivel: "bg-red-100 text-red-900",
     em_observacao: "bg-amber-100 text-amber-900",
     adotado: "bg-purple-100 text-purple-900",
+    nao_informado: "bg-gray-200 text-gray-900",
 };
 
 export default function CatCard({gato}) {

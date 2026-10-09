@@ -24,7 +24,7 @@ export default function Sidebar() {
                             ${isActive ? "bg-lilas font-semibold" : "hover:bg-lilas/30"}`
                             }
                             >
-                                <span aria-hidden="true">{link.icon}</span>
+                                <img src={link.icon} alt="" aria-hidden="true" className="h-7 w-7 object-contain"/>
                                 {link.label}
                             </NavLink>
                         </li>
