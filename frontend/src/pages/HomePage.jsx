@@ -8,7 +8,7 @@ export default function HomePage() {
     const { gatos } = useContext(CatsContext);
 
     const noAbrigo = gatos.filter((gato) =>
-    ["disponível", "indisponível", "em_observacao"].includes(
+    ["disponivel", "indisponivel", "em_observacao", "nao_informado"].includes(
         gato.status
     )
 ).length;

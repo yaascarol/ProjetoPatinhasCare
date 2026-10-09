@@ -7,7 +7,7 @@ const links = [
 
 const proximasSecoes = [
     "Saúde",
-    "ALertas",
+    "Alertas",
     "Mural de Histórias",
     "Equipe",
 ];
