@@ -19,7 +19,7 @@ export default function App() {
       <Route index element={<HomePage />}/>
       <Route path="gatinhos" element={<CatsPage />} />
       <Route path="gatinhos/novo" element={<CreateCatPage />}/>
-      <Route path="gatinhos/:d/editar" element={<EditCatPage/>}/>
+      <Route path="gatinhos/:id/editar" element={<EditCatPage/>}/>
 
 
       <Route path="*" element={

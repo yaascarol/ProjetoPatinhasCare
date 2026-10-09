@@ -14,7 +14,7 @@ export default function HomePage() {
 ).length;
 
 const adotados = gatos.filter(
-    (gato) => gato.status === "adotado"
+    (gato) => gato.status === "adotado" || gato.status === "adotada"
 ).length;
 
 const alertasAtivos = alertsMock.filter(
@@ -30,9 +30,21 @@ const ultimosCadastros = [...gatos]
 .slice(0, 5)
 
 const indicadores = [
-    { label: "Gatos no abrigo", valor: noAbrigo },
-    { label: "Gatos adotados", valor: adotados },
-    { label: "Alertas ativos", valor: alertasAtivos.length },
+    {
+        label: "Gatos no abrigo",
+        valor: noAbrigo,
+        icone: "/imagens/icones-patinhascare/GATOS COUNT.png",
+    },
+    {
+        label: "Gatos adotados",
+        valor: adotados,
+        icone: "/imagens/icones-patinhascare/GATOS ADOTADOS.png",
+    },
+    {
+        label: "Alertas ativos",
+        valor: alertasAtivos.length,
+        icone: "/imagens/icones-patinhascare/ALERTAS COUNT.png",
+    },
 ];
 
     return (
@@ -49,14 +61,22 @@ const indicadores = [
                 {indicadores.map((indicador) => (
                     <article
                     key={indicador.label}
-                    className="rounded-2xl border border-lima p-6"
+                    className="flex items-center gap-4 rounded-2xl border border-lima p-6"
                     >
+                        <img
+                        src={indicador.icone}
+                        alt=""
+                        className="h-15 w-15 shrink-0 object-contain bg-violet-500 rounded-4xl"
+                        />
+
+                        <div>
                         <p className="text-4xl font-semibold">
                             {indicador.valor}
                         </p>
                         <h2 className="mt-2 text-stone-700">
                             {indicador.label}
                         </h2>
+                      </div>
                     </article>
                 ))}
             </section>
