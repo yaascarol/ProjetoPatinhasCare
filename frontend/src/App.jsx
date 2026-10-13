@@ -8,34 +8,50 @@ import HomePage from "./pages/HomePage";
 import CatsPage from "./pages/CatsPage";
 import CreateCatPage from "./pages/CreateCatPage"
 import EditCatPage from "./pages/EditCatPage"
+
+import HealthProvider from "./contexts/HealthProvider";
+import HealthPage from "./pages/HealthPage";
+import HealthDetailPage from "./pages/HealthDetailPage";
+
+
 //import NotFoundPage from "./pages/NotFoundPage"
 
 export default function App() {
   return (
     <CatsProvider>
-    <Routes>
-      <Route path="/login" element={<LoginPage />} />
-      <Route element={<AppLayout />}>
-      <Route index element={<HomePage />}/>
-      <Route path="gatinhos" element={<CatsPage />} />
-      <Route path="gatinhos/novo" element={<CreateCatPage />}/>
-      <Route path="gatinhos/:id/editar" element={<EditCatPage/>}/>
+      <HealthProvider>
+        <Routes>
+          <Route path="/login" element={<LoginPage />} />
+          <Route element={<AppLayout />}>
+            <Route index element={<HomePage />} />
+            <Route path="gatinhos" element={<CatsPage />} />
+            <Route path="gatinhos/novo" element={<CreateCatPage />} />
+            <Route path="gatinhos/:id/editar" element={<EditCatPage />} />
 
 
-      <Route path="*" element={
-        <section>
-          <h1 className="text-2xl font-semibold">
-            Página não encontrada
-          </h1>
+            <Route path="*" element={
+              <section>
+                <h1 className="text-2xl font-semibold">
+                  Página não encontrada
+                </h1>
 
-          <Link to="/" className="mt4 inline-block underline">
-            Voltar para a página inicial
-          </Link>
-        </section>
-      }
-      />
-      </Route>
-    </Routes>
-  </CatsProvider>
+                <Link to="/" className="mt4 inline-block underline">
+                  Voltar para a página inicial
+                </Link>
+
+                <Route path="saude" element={<HealthPage />} />
+
+                <Route
+                  path="saude/:id/:aba/:tipo?"
+                  element={<HealthDetailPage />}
+                />
+
+              </section>
+            }
+            />
+          </Route>
+        </Routes>
+      </HealthProvider>
+    </CatsProvider>
   );
 }

@@ -1,51 +1,70 @@
 import { useContext } from "react";
 import { Link } from "react-router";
 
-import {CatsContext } from "../contexts/cats-context.js"
-import { alertsMock } from "../mocks/alerts.js";
+import { CatsContext } from "../contexts/cats-context.js"
+import { HealthContext } from "../contexts/health-context";
+
+import {
+    acompanhamentosAtuais,
+    statusDoPrazo,
+} from "../utils/health";
+
 
 export default function HomePage() {
     const { gatos } = useContext(CatsContext);
 
     const noAbrigo = gatos.filter((gato) =>
-    ["disponivel", "indisponivel", "em_observacao", "nao_informado"].includes(
-        gato.status
-    )
-).length;
+        ["disponivel", "indisponivel", "em_observacao", "nao_informado"].includes(
+            gato.status
+        )
+    ).length;
 
-const adotados = gatos.filter(
-    (gato) => gato.status === "adotado" || gato.status === "adotada"
-).length;
+    const adotados = gatos.filter(
+        (gato) => gato.status === "adotado" || gato.status === "adotada"
+    ).length;
 
-const alertasAtivos = alertsMock.filter(
-    (alerta) => !alerta.resolvido
-);
+    const alertasAtivos = gatos.flatMap((gato) => {
+        const registrosDoGato = registros.filter(
+            (registro) => registro.gatoId === gato.id
+        );
 
-const fichasIncompletas = gatos.filter(
-    (gato) => !gato.dataNascimento || gato.sexo === "nao_informado"
-);
+        return acompanhamentosAtuais(registrosDoGato)
+            .filter((registro) =>
+                ["vencido", "a_vencer"].includes(statusDoPrazo(registro))
+            )
+            .map((registro) => ({
+                ...registro,
+                nomeGato: gato.nome,
+            }));
+    });
 
-const ultimosCadastros = [...gatos]
-.sort((a, b) => b.criadoEm.localeCompare(a.criadoEm))
-.slice(0, 5)
+    const fichasIncompletas = gatos.filter(
+        (gato) => !gato.dataNascimento || gato.sexo === "nao_informado"
+    );
 
-const indicadores = [
-    {
-        label: "Gatos no abrigo",
-        valor: noAbrigo,
-        icone: "/imagens/icones-patinhascare/GATOS COUNT.png",
-    },
-    {
-        label: "Gatos adotados",
-        valor: adotados,
-        icone: "/imagens/icones-patinhascare/GATOS ADOTADOS.png",
-    },
-    {
-        label: "Alertas ativos",
-        valor: alertasAtivos.length,
-        icone: "/imagens/icones-patinhascare/ALERTAS COUNT.png",
-    },
-];
+    const ultimosCadastros = [...gatos]
+        .sort((a, b) => b.criadoEm.localeCompare(a.criadoEm))
+        .slice(0, 5)
+
+    const indicadores = [
+        {
+            label: "Gatos no abrigo",
+            valor: noAbrigo,
+            icone: "/imagens/icones-patinhascare/GATOS COUNT.png",
+        },
+        {
+            label: "Gatos adotados",
+            valor: adotados,
+            icone: "/imagens/icones-patinhascare/GATOS ADOTADOS.png",
+        },
+        {
+            label: "Alertas ativos",
+            valor: alertasAtivos.length,
+            icone: "/imagens/icones-patinhascare/ALERTAS COUNT.png",
+        },
+    ];
+
+    const { registros } = useContext(HealthContext);
 
     return (
 
@@ -55,28 +74,28 @@ const indicadores = [
             </h1>
 
             <section
-            aria-label="Indicadores"
-            className="grid gap-4 sm:grid-cols-3"
+                aria-label="Indicadores"
+                className="grid gap-4 sm:grid-cols-3"
             >
                 {indicadores.map((indicador) => (
                     <article
-                    key={indicador.label}
-                    className="flex items-center gap-4 rounded-2xl border border-lima p-6"
+                        key={indicador.label}
+                        className="flex items-center gap-4 rounded-2xl border border-lima p-6"
                     >
                         <img
-                        src={indicador.icone}
-                        alt=""
-                        className="h-15 w-15 shrink-0 object-contain bg-violet-500 rounded-4xl"
+                            src={indicador.icone}
+                            alt=""
+                            className="h-15 w-15 shrink-0 object-contain bg-violet-500 rounded-4xl"
                         />
 
                         <div>
-                        <p className="text-4xl font-semibold">
-                            {indicador.valor}
-                        </p>
-                        <h2 className="mt-2 text-stone-700">
-                            {indicador.label}
-                        </h2>
-                      </div>
+                            <p className="text-4xl font-semibold">
+                                {indicador.valor}
+                            </p>
+                            <h2 className="mt-2 text-stone-700">
+                                {indicador.label}
+                            </h2>
+                        </div>
                     </article>
                 ))}
             </section>
@@ -86,10 +105,30 @@ const indicadores = [
                     Alertas de saúde
                 </h2>
 
-                <p className="mt-3 text-stone-600">
-                    Módulo de saúde ainda em implantação.
-                    Sem alertas para demonstração cadastrados.
-                </p>
+                {alertasAtivos.length === 0 ? (
+                    <p className="mt-3 text-stone-600">
+                        Nenhum prazo vencido ou a vencer nos registros cadastrados.
+                    </p>
+                ) : (
+                    <ul className="mt-3 space-y-2">
+                        {alertasAtivos.map((alerta) => (
+                            <li key={alerta.id}>
+                                <Link
+                                    to={`/saude/${alerta.gatoId}/historico`}
+                                    className="underline"
+                                >
+                                    {alerta.nomeGato} — {alerta.titulo}
+                                </Link>
+
+                                <span className="ml-2 text-sm">
+                                    {statusDoPrazo(alerta) === "vencido"
+                                        ? "Vencido"
+                                        : "A vencer"}
+                                </span>
+                            </li>
+                        ))}
+                    </ul>
+                )}
             </section>
 
             <div className="grid gap-4 lg:grid-cols-2">
@@ -107,7 +146,7 @@ const indicadores = [
                             {fichasIncompletas.map((gato) => (
                                 <li key={gato.id}>
                                     <Link to={`/gatinhos/${gato.id}/editar`}
-                                    className="font-medium underline"
+                                        className="font-medium underline"
                                     >
                                         {gato.nome}
                                     </Link>
@@ -117,8 +156,8 @@ const indicadores = [
                                             !gato.dataNascimento && "Nascimento não informado",
                                             gato.sexo === "nao_informado" && "Sexo não informado",
                                         ]
-                                        .filter(Boolean)
-                                        .join(" . ")
+                                            .filter(Boolean)
+                                            .join(" . ")
                                         }
                                     </p>
                                 </li>
@@ -141,10 +180,10 @@ const indicadores = [
                     <ul className="mt-3 space-y-3">
                         {ultimosCadastros.map((gato) => (
                             <li key={gato.id}
-                            className="flex justify-between gap-4"
+                                className="flex justify-between gap-4"
                             >
                                 <Link to={`/gatinhos/${gato.id}/editar`}
-                                className="underline"
+                                    className="underline"
                                 >
                                     {gato.nome}
                                 </Link>
