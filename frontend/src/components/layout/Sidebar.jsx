@@ -8,12 +8,21 @@ const links = [
         label: "Saúde",
         icon: "/imagens/icones-patinhascare/SAÚDE.png",
     },
-];
-
-const proximasSecoes = [
-    "Alertas",
-    "Mural de Histórias",
-    "Equipe",
+    {
+        to: "/alertas",
+        label: "Alertas",
+        icon: "/imagens/icones-patinhascare/ALERTAS.png",
+    },
+    {
+        to: "/historias",
+        label: "Mural de Histórias",
+        icon: "/imagens/icones-patinhascare/MURAL.png",
+    },
+    {
+        to: "/equipe",
+        label: "Equipe",
+        icon: "/imagens/icones-patinhascare/EQUIPE.png",
+    },
 ];
 
 export default function Sidebar() {
@@ -35,14 +44,6 @@ export default function Sidebar() {
                     ))}
                 </ul>
 
-                <ul className="mt-5 hidden space-y-4 md:block">
-                    {proximasSecoes.map((nome) => (
-                        <li key={nome} className="px-4 text-stone-600">
-                            <span className="block">{nome}</span>
-                            <span className="text-xs">Em breve</span>
-                        </li>
-                    ))}
-                </ul>
             </nav>
         </aside>
     );

@@ -13,6 +13,9 @@ import HealthProvider from "./contexts/HealthProvider";
 import HealthPage from "./pages/HealthPage";
 import HealthDetailPage from "./pages/HealthDetailPage";
 
+import AlertsPage from "./pages/AlertsPage";
+import StoriesPage from "./pages/StoriesPage";
+import TeamPage from "./pages/TeamPage";
 
 //import NotFoundPage from "./pages/NotFoundPage"
 
@@ -33,6 +36,9 @@ export default function App() {
               element={<HealthDetailPage />}
             />
 
+            <Route path="alertas" element={<AlertsPage />} />
+            <Route path="historias" element={<StoriesPage />} />
+            <Route path="equipe" element={<TeamPage />} />
 
             <Route path="*" element={
               <section>

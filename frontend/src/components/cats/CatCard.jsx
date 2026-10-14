@@ -10,19 +10,19 @@ const coresStatus = {
     nao_informado: "bg-gray-200 text-gray-900",
 };
 
-export default function CatCard({gato}) {
+export default function CatCard({ gato }) {
     return (
         <article className="rounded-2xl border border-lima p-4">
             <div className="flex aspect-square items-center justify-center overflow-hidden rounded-xl bg-lilas/30">
                 {gato.fotoUrl ? (
                     <img
-                    src={gato.fotoUrl}
-                    alt={`Foto de ${gato.nome}`}
-                    className="h-full w-full object-cover"
+                        src={gato.fotoUrl}
+                        alt={`Foto de ${gato.nome}`}
+                        className="h-full w-full object-cover"
                     />
                 ) : (
-                    <img src="../../public/imagens/icones-patinhascare/GATO SEM FOTO.png"/>
-                    )}
+                    <img src="../../imagens/icones-patinhascare/GATO SEM FOTO.png" />
+                )}
             </div>
 
             <span className={`mt-3 inline-block rounded-full px-3 py-1 text-xs font-medium ${coresStatus[gato.status] ?? "bg-stone-100 text-stone-700"}`}
@@ -36,19 +36,26 @@ export default function CatCard({gato}) {
 
             <p className="mt-1 text-sm text-stone-600">
                 {gato.sexo === "nao_informado"
-                ? "Sexo não informado"
-            : gato.sexo === "femea"
-                ? "Fêmea"
-                : "Macho"}
+                    ? "Sexo não informado"
+                    : gato.sexo === "femea"
+                        ? "Fêmea"
+                        : "Macho"}
             </p>
 
-            <p className="mt-2 min-h-5 text-sm text-stone-600">
-                {gato.personalidade.map((tag) => `#${tag}`).join(" ")}
-            </p>
+            <div className="mt-2 flex flex-wrap gap-2">
+                {gato.personalidade.map((tag) => (
+                    <span
+                        key={tag}
+                        className="rounded bg-lilas px-3 py-1 text-sm"
+                    >
+                        {tag}
+                    </span>
+                ))}
+            </div>
 
             <Link to={`/gatinhos/${gato.id}/editar`}
-            aria-label={`Editar ${gato.nome}`}
-            className="mt-4 inline-block rounded-lg bg-lilas px-4 py-2 font-medium"
+                aria-label={`Editar ${gato.nome}`}
+                className="mt-4 inline-block rounded-lg bg-lilas px-4 py-2 font-medium"
             >
                 Editar
             </Link>

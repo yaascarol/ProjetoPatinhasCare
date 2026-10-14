@@ -112,7 +112,7 @@ export function statusGeral(registros){
 
     if (estados.includes("vencido")) return "vencido";
     if (estados.includes("a_vencer")) return "a_vencer";
-    if (estados.includes("sem_previsao")) return "sem_previsso";
+    if (estados.includes("sem_previsao")) return "sem_previsao";
 
     return "em_dia"
 }

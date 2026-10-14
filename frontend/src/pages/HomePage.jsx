@@ -5,10 +5,9 @@ import { CatsContext } from "../contexts/cats-context.js"
 import { HealthContext } from "../contexts/health-context";
 
 import {
-    acompanhamentosAtuais,
     statusDoPrazo,
 } from "../utils/health";
-
+import { listarAlertas } from "../utils/alerts";
 
 export default function HomePage() {
     const { gatos } = useContext(CatsContext);
@@ -25,20 +24,7 @@ export default function HomePage() {
 
     const { registros } = useContext(HealthContext);
 
-    const alertasAtivos = gatos.flatMap((gato) => {
-        const registrosDoGato = registros.filter(
-            (registro) => registro.gatoId === gato.id
-        );
-
-        return acompanhamentosAtuais(registrosDoGato)
-            .filter((registro) =>
-                ["vencido", "a_vencer"].includes(statusDoPrazo(registro))
-            )
-            .map((registro) => ({
-                ...registro,
-                nomeGato: gato.nome,
-            }));
-    });
+    const alertasAtivos = listarAlertas(gatos, registros);
 
     const fichasIncompletas = gatos.filter(
         (gato) => !gato.dataNascimento || gato.sexo === "nao_informado"
