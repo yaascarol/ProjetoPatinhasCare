@@ -69,11 +69,15 @@ export default function HomePage() {
                         key={indicador.label}
                         className="flex items-center gap-4 rounded-2xl border border-lima p-6"
                     >
-                        <img
-                            src={indicador.icone}
-                            alt=""
-                            className="h-15 w-15 shrink-0 object-contain bg-violet-500 rounded-4xl"
-                        />
+                        <div
+                            className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-roxo p-2"
+                        >
+                            <img
+                                src={indicador.icone}
+                                alt=""
+                                className="h-full w-full object-contain"
+                            />
+                        </div>
 
                         <div>
                             <p className="text-4xl font-semibold">
