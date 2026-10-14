@@ -83,7 +83,7 @@ export function acompanhamentosAtuais(registros){
 
     const ordenados = [...registros].sort(
         (a, b) =>
-            b.data.locaeCompare(a.data) ||
+            b.data.localeCompare(a.data) ||
         b.criadoEm.localeCompare(a.criadoEm)
     );
 
@@ -110,9 +110,9 @@ export function statusGeral(registros){
 
     const estados = atuais.map((registros) => statusDoPrazo(registros));
 
-    if (estados.includes("vencidos")) return "vencido";
+    if (estados.includes("vencido")) return "vencido";
     if (estados.includes("a_vencer")) return "a_vencer";
-    if (estados.includes("sem_previsso")) return "sem_previsso";
+    if (estados.includes("sem_previsao")) return "sem_previsso";
 
     return "em_dia"
 }

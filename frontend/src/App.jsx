@@ -27,6 +27,11 @@ export default function App() {
             <Route path="gatinhos" element={<CatsPage />} />
             <Route path="gatinhos/novo" element={<CreateCatPage />} />
             <Route path="gatinhos/:id/editar" element={<EditCatPage />} />
+            <Route path="saude" element={<HealthPage />} />
+            <Route
+              path="saude/:id/:aba/:tipo?"
+              element={<HealthDetailPage />}
+            />
 
 
             <Route path="*" element={
@@ -38,13 +43,6 @@ export default function App() {
                 <Link to="/" className="mt4 inline-block underline">
                   Voltar para a página inicial
                 </Link>
-
-                <Route path="saude" element={<HealthPage />} />
-
-                <Route
-                  path="saude/:id/:aba/:tipo?"
-                  element={<HealthDetailPage />}
-                />
 
               </section>
             }

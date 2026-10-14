@@ -23,6 +23,8 @@ export default function HomePage() {
         (gato) => gato.status === "adotado" || gato.status === "adotada"
     ).length;
 
+    const { registros } = useContext(HealthContext);
+
     const alertasAtivos = gatos.flatMap((gato) => {
         const registrosDoGato = registros.filter(
             (registro) => registro.gatoId === gato.id
@@ -64,7 +66,6 @@ export default function HomePage() {
         },
     ];
 
-    const { registros } = useContext(HealthContext);
 
     return (
 

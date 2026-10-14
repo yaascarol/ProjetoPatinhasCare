@@ -22,7 +22,7 @@ export default function Breadcrumbs() {
         if (partes[1] === "novo") {
             itens.push({ label: "Cadastrar" });
         } else if (partes[2] === "editar") {
-            itens.puch({ label: "Editar" });
+            itens.push({ label: "Editar" });
         }
 
         else if (partes[0] === "saude") {
