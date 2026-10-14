@@ -6,7 +6,7 @@ import { HealthContext } from "../contexts/health-context";
 
 import {
     statusDoPrazo,
-} from "../utils/health";
+} from "../utils/health.js";
 import { listarAlertas } from "../utils/alerts";
 
 export default function HomePage() {
