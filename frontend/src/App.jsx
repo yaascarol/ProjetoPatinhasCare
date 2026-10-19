@@ -1,5 +1,7 @@
 import { Link, Route, Routes } from "react-router";
 
+import RequireAuth from "./components/RequireAuth";
+
 import CatsProvider from "./contexts/CatsContext";
 import AppLayout from "./layouts/AppLayout";
 
@@ -25,6 +27,7 @@ export default function App() {
       <HealthProvider>
         <Routes>
           <Route path="/login" element={<LoginPage />} />
+          <Route element={<RequireAuth />} />
           <Route element={<AppLayout />}>
             <Route index element={<HomePage />} />
             <Route path="gatinhos" element={<CatsPage />} />

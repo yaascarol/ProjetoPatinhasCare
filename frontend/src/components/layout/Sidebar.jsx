@@ -1,5 +1,7 @@
 import { NavLink } from "react-router";
 
+import LogoutButton from "../LogoutButton";
+
 const links = [
     { to: "/", label: "Home", icon: "/imagens/icones-patinhascare/HOME.png" },
     { to: "/gatinhos", label: "Gatinhos", icon: "/imagens/icones-patinhascare/GATINHOS.png" },
@@ -45,6 +47,7 @@ export default function Sidebar() {
                 </ul>
 
             </nav>
+            <LogoutButton />
         </aside>
     );
 }
