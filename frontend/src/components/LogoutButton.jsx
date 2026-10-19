@@ -14,7 +14,7 @@ export default function LogoutButton() {
             await api("/auth/logout", { method: "POST" });
             window.location.assign("/login");
         } catch {
-            setErro("Nãpo foi possível sair. Tente de novo.")
+            setErro("Não foi possível sair. Tente de novo.")
             setSaindo(false);
         }
 
