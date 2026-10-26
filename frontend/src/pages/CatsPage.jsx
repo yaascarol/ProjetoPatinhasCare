@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { Link } from "react-router";
 
+import Button from "../components/ui/Button";
 import { CatsContext } from "../contexts/cats-context";
 import CatCard from "../components/cats/CatCard";
 import Input from "../components/ui/Input";
@@ -14,8 +15,8 @@ export default function CatsPage() {
 
     const gatosFiltrados = gatos.filter((gato) => {
         const correspondeNome = gato.nome
-        .toLocaleLowerCase("pt-BR")
-        .includes(busca.trim().toLocaleLowerCase("pt-BR"));
+            .toLocaleLowerCase("pt-BR")
+            .includes(busca.trim().toLocaleLowerCase("pt-BR"));
 
         const correspondeStatus = !status || gato.status === status;
 
@@ -28,21 +29,19 @@ export default function CatsPage() {
                 <h1 className="text-2xl font-semibold">
                     Gatinhos
                 </h1>
-
-                <Link to="/gatinhos/novo"
-                className="rounded-xl bg-roxo px-5 py-3 font-semibold text-white"
-                >
+                
+                <Button to="/gatinhos/novo">
                     Cadastrar gato
-                </Link>
+                </Button>
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2">
                 <Input
-                id="busca"
-                label="Buscar pelo nome"
-                placeholder="Ex: Mimo"
-                value={busca}
-                onChange={(event) => setBusca(event.target.value)}
+                    id="busca"
+                    label="Buscar pelo nome"
+                    placeholder="Ex: Mimo"
+                    value={busca}
+                    onChange={(event) => setBusca(event.target.value)}
                 />
 
                 <div className="flex flex-col gap-2">
@@ -51,10 +50,10 @@ export default function CatsPage() {
                     </label>
 
                     <select
-                    id="filtro-status"
-                    value={status}
-                    onChange={(event) => setStatus(event.target.value)}
-                    className="min-h-11 rounded-xl border border-lima bg-creme px-3"
+                        id="filtro-status"
+                        value={status}
+                        onChange={(event) => setStatus(event.target.value)}
+                        className="min-h-11 rounded-xl border border-lima bg-creme px-3"
                     >
                         <option value="">Todos os status</option>
 
@@ -73,15 +72,15 @@ export default function CatsPage() {
 
             {gatosFiltrados.length === 0 ? (
                 <p className="rounded-2xl border border-lima p-6">
-            Nenhum gatinho corresponde à busca.
-        </p>
-        ) : ( <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-            {gatosFiltrados.map((gato) => (
-                <CatCard key={gato.id} gato={gato} />
-            ))}
-              </div>
-    
-        )}
+                    Nenhum gatinho corresponde à busca.
+                </p>
+            ) : (<div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+                {gatosFiltrados.map((gato) => (
+                    <CatCard key={gato.id} gato={gato} />
+                ))}
+            </div>
+
+            )}
         </div>
     );
 }

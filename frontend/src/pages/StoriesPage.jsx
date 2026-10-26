@@ -1,10 +1,40 @@
+import { useState } from "react";
+
+import Input from "../components/ui/Input";
+import Button from "../components/ui/Button";
+
 import { historiasMock } from "../mocks/stories";
 import { formatarData } from "../utils/health";
 
+function normalizarTexto(texto) {
+  return texto
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLocaleLowerCase("pt-BR")
+    .trim();
+}
+
 export default function StoriesPage() {
-  const historias = [...historiasMock].sort(
-    (a, b) => b.data.localeCompare(a.data)
-  );
+  const [busca, setBusca] = useState("");
+  const [termoAplicado, setTermoAplicado] = useState("");
+
+  const historias = [...historiasMock]
+    .filter((historia) =>
+      normalizarTexto(historia.nomeGato ?? "").includes(
+        normalizarTexto(termoAplicado)
+      )
+    )
+    .sort((a, b) => b.data.localeCompare(a.data));
+
+  function buscar(event) {
+    event.preventDefault();
+    setTermoAplicado(busca);
+  }
+
+  function limparBusca() {
+    setBusca("");
+    setTermoAplicado("");
+  }
 
   return (
     <section className="space-y-6">
@@ -22,9 +52,36 @@ export default function StoriesPage() {
         </p>
       </header>
 
+      <form
+        onSubmit={buscar}
+        className="flex flex-col gap-3 sm:flex-row sm:items-end"
+      >
+        <div className="flex-1">
+          <Input
+            id="buscar-historia"
+            label="Buscar pelo nome do gatinho"
+            placeholder="Ex.: Luna"
+            value={busca}
+            onChange={(event) => setBusca(event.target.value)}
+          />
+        </div>
+
+        <Button type="submit">Buscar</Button>
+
+        <Button variant="secondary" onClick={limparBusca}>
+          Limpar
+        </Button>
+      </form>
+
+      <p role="status" className="text-sm text-stone-600">
+        {historias.length} história(s) encontrada(s)
+      </p>
+
       {historias.length === 0 ? (
         <p className="rounded-2xl border border-lima p-6">
-          Nenhuma história cadastrada.
+          {termoAplicado.trim()
+            ? "Nenhuma história encontrada para esse gatinho."
+            : "Nenhuma história cadastrada."}
         </p>
       ) : (
         <div className="grid gap-6 sm:grid-cols-2">
@@ -39,9 +96,8 @@ export default function StoriesPage() {
                   "/imagens/icones-patinhascare/GATO SEM FOTO.png"
                 }
                 alt=""
-                className={`h-48 w-full bg-lilas/20 ${
-                  historia.fotoUrl ? "object-cover" : "object-contain"
-                }`}
+                className={`h-48 w-full bg-lilas/20 ${historia.fotoUrl ? "object-cover" : "object-contain"
+                  }`}
               />
 
               <div className="flex flex-1 flex-col p-5">

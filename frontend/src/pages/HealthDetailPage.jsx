@@ -4,7 +4,7 @@ import { Link, useParams } from "react-router";
 import { CatsContext } from "../contexts/cats-context";
 import HealthForm from "../components/health/HealthForm";
 import HealthHistory from "../components/health/HealthHistory";
-
+import PersonalityTags from "../components/cats/PersonalityTags";
 import { formatarData, tiposRegistro } from "../utils/health";
 
 const abas = [
@@ -121,14 +121,9 @@ export default function HealthDetailPage() {
 
             <div>
               <h2 className="font-semibold">Personalidade</h2>
-              <div className="mt-2 flex flex-wrap gap-2">
-                {gato.personalidade.length > 0
-                  ? gato.personalidade.map((tag) => (
-                      <span key={tag} className="rounded bg-lilas px-3 py-1">
-                        {tag}
-                      </span>
-                    ))
-                  : "Não informada"}
+
+              <div className="mt-2">
+                <PersonalityTags tags={gato.personalidade} />
               </div>
             </div>
           </div>
@@ -145,9 +140,8 @@ export default function HealthDetailPage() {
                   key={valor}
                   to={`${base}/registro/${valor}`}
                   aria-current={tipo === valor ? "page" : undefined}
-                  className={`rounded-lg border border-lima px-3 py-2 ${
-                    tipo === valor ? "bg-lilas" : ""
-                  }`}
+                  className={`rounded-lg border border-lima px-3 py-2 ${tipo === valor ? "bg-lilas" : ""
+                    }`}
                 >
                   {config.label}
                 </Link>

@@ -1,6 +1,8 @@
 import { Link } from "react-router";
+import Button from "../ui/Button";
 
 import { obterNomeStatus } from "../../utils/catOptions";
+import PersonalityTags from "./PersonalityTags";
 
 const coresStatus = {
     disponivel: "bg-green-200 text-green-900",
@@ -42,23 +44,17 @@ export default function CatCard({ gato }) {
                         : "Macho"}
             </p>
 
-            <div className="mt-2 flex flex-wrap gap-2">
-                {gato.personalidade.map((tag) => (
-                    <span
-                        key={tag}
-                        className="rounded bg-lilas px-3 py-1 text-sm"
-                    >
-                        {tag}
-                    </span>
-                ))}
+            <div className="mt-3">
+                <PersonalityTags tags={gato.personalidade} />
             </div>
 
-            <Link to={`/gatinhos/${gato.id}/editar`}
+            <Button
+                to={`/gatinhos/${gato.id}/editar`}
                 aria-label={`Editar ${gato.nome}`}
-                className="mt-4 inline-block rounded-lg bg-lilas px-4 py-2 font-medium"
+                className="mt-4"
             >
                 Editar
-            </Link>
+            </Button>
         </article>
     )
 }
