@@ -1,13 +1,20 @@
-const API_URL = "http://localhost:4000/api";
+export const API_URL = "http://localhost:4000/api";
 
 export async function api(caminho, opcoes = {}) {
+  const headers = new Headers(opcoes.headers);
+
+  const enviandoArquivo = opcoes.body instanceof FormData;
+
+  if (enviandoArquivo) {
+    headers.delete("Content-Type");
+  } else if (opcoes.body && !headers.has("Content-Type")) {
+    headers.set("Content-Type", "application/json");
+  }
+
   const resposta = await fetch(`${API_URL}${caminho}`, {
     ...opcoes,
     credentials: "include",
-    headers: {
-      ...opcoes.headers,
-      ...(opcoes.body ? { "Content-Type": "application/json" } : {}),
-    },
+    headers,
   });
 
   const dados =

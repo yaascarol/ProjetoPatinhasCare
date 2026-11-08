@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
 
 import Input from "../ui/Input";
@@ -18,6 +18,66 @@ export default function CatForm({
     const [descricao, setDescricao] = useState(initialValues?.descricao ?? "");
     const [erro, setErro] = useState("");
     const [salvando, setSalvando] = useState(false);
+    const [foto, setFoto] = useState(null);
+    const [previewFoto, setPreviewFoto] = useState("");
+    const [removerFoto, setRemoverFoto] = useState(false);
+
+    const inputFotoRef = useRef(null);
+
+    useEffect(() => {
+        if (!previewFoto) return;
+
+        return () => {
+            URL.revokeObjectURL(previewFoto);
+        };
+    }, [previewFoto]);
+
+    const fotoExibida = foto
+        ? previewFoto
+        : removerFoto
+            ? ""
+            : initialValues?.fotoUrl ?? "";
+
+    function selecionarFoto(event) {
+        const arquivo = event.target.files?.[0];
+
+        if (!arquivo) return;
+
+        const tiposPermitidos = [
+            "image/jpeg",
+            "image/png",
+            "image/webp",
+        ];
+
+        if (!tiposPermitidos.includes(arquivo.type)) {
+            setErro("Escolha uma foto JPG, PNG ou WebP.");
+            event.target.value = "";
+            return;
+        }
+
+        if (arquivo.size > 5 * 1024 * 1024) {
+            setErro("A foto deve ter até 5 MB.");
+            event.target.value = "";
+            return;
+        }
+
+        const endereco = URL.createObjectURL(arquivo);
+
+        setErro("");
+        setPreviewFoto(endereco);
+        setFoto(arquivo);
+        setRemoverFoto(false);
+    }
+
+    function retirarFoto() {
+        setFoto(null);
+        setPreviewFoto("");
+        setRemoverFoto(true);
+
+        if (inputFotoRef.current) {
+            inputFotoRef.current.value = "";
+        }
+    }
 
     const agora = new Date();
     const hoje = [
@@ -58,6 +118,8 @@ export default function CatForm({
                 status,
                 personalidade: [...new Set(tags)],
                 descricao: descricao.trim(),
+                foto,
+                removerFoto,
             });
         } catch (falha) {
             setErro(
@@ -76,9 +138,56 @@ export default function CatForm({
         <form onSubmit={handleSubmit} className="mt-6 space-y-5">
             <fieldset disabled={salvando} className="space-y-5">
 
-                <p className="text-sm text-stone-600">
-                    Foto será adicionada na etapa de upload
-                </p>
+                <div className="space-y-3">
+                    <label
+                        htmlFor="foto"
+                        className="block text-sm font-medium"
+                    >
+                        Foto do gatinho
+                    </label>
+
+                    {fotoExibida ? (
+                        <img
+                            src={fotoExibida}
+                            alt={`Prévia da foto de ${nome || "gatinho"}`}
+                            className="h-40 w-40 rounded-2xl border border-lima object-cover"
+                        />
+                    ) : (
+                        <div className="flex h-40 w-40 items-center justify-center rounded-2xl border border-lima bg-roxo/10 text-stone-600">
+                            Sem foto
+                        </div>
+                    )}
+
+                    <input
+                        ref={inputFotoRef}
+                        id="foto"
+                        type="file"
+                        accept="image/jpeg,image/png,image/webp"
+                        onChange={selecionarFoto}
+                        aria-describedby="foto-ajuda"
+                        className="block w-full text-sm file:mr-4 file:rounded-xl file:border-0 file:bg-roxo file:px-4 file:py-2 file:text-white"
+                    />
+
+                    <p id="foto-ajuda" className="text-sm text-stone-600">
+                        JPG, PNG ou WebP, até 5 MB. A foto será enviada ao salvar.
+                    </p>
+
+                    {(foto || (!removerFoto && initialValues?.fotoUrl)) && (
+                        <button
+                            type="button"
+                            onClick={retirarFoto}
+                            className="text-sm text-red-700 underline"
+                        >
+                            Remover foto
+                        </button>
+                    )}
+
+                    {removerFoto && initialValues?.fotoUrl && (
+                        <p className="text-sm text-stone-600">
+                            A foto atual será removida quando você salvar.
+                        </p>
+                    )}
+                </div>
 
                 <div className="grid gap-5 sm:grid-cols-2">
                     <Input

@@ -146,7 +146,7 @@ export default function HomePage() {
                                         {gato.nome}
                                     </Link>
 
-                                    <p className="text-sm text-stone-60">
+                                    <p className="text-sm text-stone-600">
                                         {[
                                             !gato.dataNascimento && "Nascimento não informado",
                                             gato.sexo === "nao_informado" && "Sexo não informado",
