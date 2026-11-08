@@ -12,7 +12,7 @@ nome,
 COALESCE (
 TO_CHAR(data_nascimento, 'YYYY-MM-DD'),
 ''
-) AS dataNascimento,
+) AS "dataNascimento",
  sexo,
  status,
  personalidade,
