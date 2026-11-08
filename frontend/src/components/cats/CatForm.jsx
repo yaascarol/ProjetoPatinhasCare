@@ -74,120 +74,111 @@ export default function CatForm({
 
     return (
         <form onSubmit={handleSubmit} className="mt-6 space-y-5">
-            <p className="text-sm text-stone-600">
-                Foto será adicionada na etapa de upload
-            </p>
+            <fieldset disabled={salvando} className="space-y-5">
 
-            <div className="grid gap-5 sm:grid-cols-2">
-                <Input
-                    id="nome"
-                    label="Nome"
-                    required
-                    maxLength={80}
-                    value={nome}
-                    onChange={(event) => setNome(event.target.value)}
-                />
+                <p className="text-sm text-stone-600">
+                    Foto será adicionada na etapa de upload
+                </p>
 
-                <Input
-                    id="nascimento"
-                    label="Data de nascimento, se souber"
-                    type="date"
-                    max={hoje}
-                    value={dataNascimento}
-                    onChange={(event) => setDataNascimento(event.target.value)}
-                />
+                <div className="grid gap-5 sm:grid-cols-2">
+                    <Input
+                        id="nome"
+                        label="Nome"
+                        required
+                        value={nome}
+                        onChange={(event) => setNome(event.target.value)}
+                    />
 
-                <Input
-                    id="personalidade"
-                    label="Personalidade (separe por vírgula)"
-                    placeholder="Carinhoso, Brincalhão"
-                    value={personalidade}
-                    onChange={(event) => setPersonalidade(event.target.value)}
-                />
+                    <Input
+                        id="nascimento"
+                        label="Data de nascimento, se souber"
+                        type="date"
+                        max={hoje}
+                        value={dataNascimento}
+                        onChange={(event) => setDataNascimento(event.target.value)}
+                    />
+
+                    <Input
+                        id="personalidade"
+                        label="Personalidade (separe por vírgula)"
+                        placeholder="Carinhoso, Brincalhão"
+                        value={personalidade}
+                        onChange={(event) => setPersonalidade(event.target.value)}
+                    />
+
+                    <div className="flex flex-col gap-2">
+                        <label htmlFor="sexo" className="text-sm font-medium">
+                            Sexo
+                        </label>
+
+                        <select
+                            id="sexo"
+                            value={sexo}
+                            onChange={(event) => setSexo(event.target.value)}
+                            className="min-h-11 rounded-xl border border-lima bg-creme px-3"
+                        >
+                            <option value="nao_informado">Não informado</option>
+                            <option value="macho">Macho</option>
+                            <option value="femea">Fêmea</option>
+                        </select>
+                    </div>
+                </div>
 
                 <div className="flex flex-col gap-2">
-                    <label htmlFor="sexo" className="text-sm font-medium">
-                        Sexo
+                    <label htmlFor="descricao" className="text-sm font-medium">
+                        História/descrição
+                    </label>
+
+                    <textarea
+                        id="descricao"
+                        rows={4}
+                        value={descricao}
+                        onChange={(event) => setDescricao(event.target.value)}
+                        className="w-full rounded-xl border border-lima bg-transparent p-3 focus:border-roxo focus:outline-none focus:ring-2 focus:ring-roxo/20"
+                    />
+                </div>
+
+
+                <div className="flex max-w-sm flex-col gap-2">
+                    <label htmlFor="status" className="text-sm font-medium">
+                        Status
                     </label>
 
                     <select
-                        id="sexo"
-                        value={sexo}
-                        onChange={(event) => setSexo(event.target.value)}
+                        id="status"
+                        value={status}
+                        onChange={(event) => setStatus(event.target.value)}
                         className="min-h-11 rounded-xl border border-lima bg-creme px-3"
                     >
-                        <option value="nao_informado">Não informado</option>
-                        <option value="macho">Macho</option>
-                        <option value="femea">Fêmea</option>
+                        {statusOptions.map((opcao) => (
+                            <option key={opcao.value} value={opcao.value}>
+                                {opcao.label}
+                            </option>
+                        ))}
                     </select>
                 </div>
-            </div>
 
-            <div className="flex flex-col gap-2">
-                <label htmlFor="descricao" className="text-sm font-medium">
-                    História/descrição
-                </label>
+                {erro && (
+                    <p role="alert" className="text-sm text-red-700">
+                        {erro}
+                    </p>
+                )}
 
-                <textarea
-                    id="descricao"
-                    rows={4}
-                    value={descricao}
-                    onChange={(event) => setDescricao(event.target.value)}
-                    className="w-full rounded-xl border border-lima bg-transparent p-3 focus:border-roxo focus:outline-none focus:ring-2 focus:ring-roxo/20"
-                />
-            </div>
+                <div className="flex flex-wrap gap-3 pt-3">
+                    {!salvando && (
+                        <Link
+                            to="/gatinhos"
+                            className="rounded-xl border border-lima px-6 py-3"
+                        >
+                            Cancelar
+                        </Link>
+                    )}
 
-
-            <div className="flex max-w-sm flex-col gap-2">
-                <label htmlFor="status" className="text-sm font-medium">
-                    Status
-                </label>
-
-                <select
-                    id="status"
-                    value={status}
-                    onChange={(event) => setStatus(event.target.value)}
-                    className="min-h-11 rounded-xl border border-lima bg-creme px-3"
-                >
-                    {statusOptions.map((opcao) => (
-                        <option key={opcao.value} value={opcao.value}>
-                            {opcao.label}
-                        </option>
-                    ))}
-                </select>
-            </div>
-
-            {erro && (
-                <p role="alert" className="text-sm text-red-700">
-                    {erro}
-                </p>
-            )}
-
-            <div className="flex flex-wrap gap-3 pt-3">
-                <Link to="/gatinhos"
-                    className="rounded-xl border border-lima px-6 py-3">
-                    Cancelar
-                </Link>
-
-                <Button type="submit">
-                    <div className="flex flex-wrap gap-3 pt-3">
-                        {!salvando && (
-                            <Link
-                                to="/gatinhos"
-                                className="rounded-xl border border-lima px-6 py-3"
-                            >
-                                Cancelar
-                            </Link>
-                        )}
-
-                        <Button type="submit" disabled={salvando}>
-                            {salvando ? "Salvando..." : submitLabel}
-                        </Button>
-                    </div>
-                </Button>
-            </div>
-            <fieldset disabled={salvando} className="space-y-5"></fieldset>
+                    <Button type="submit" disabled={salvando}>
+                        {salvando ? "Salvando..." : submitLabel}
+                    </Button>
+                </div>
+            </fieldset>
         </form>
-
     )
 }

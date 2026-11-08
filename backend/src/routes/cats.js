@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { randomUUID } from 'node:crypto';
 
 import { pool } from '../db.js';
-import { validarGato } from "..validator/cat.js";
+import { validarGato } from "../validators/cat.js";
 
 const router = Router();
 
@@ -10,9 +10,9 @@ const campos =  `
 id,
 nome,
 COALESCE (
-TO_CHAR(data_nascimento, 'YYY-MM-DD'),
+TO_CHAR(data_nascimento, 'YYYY-MM-DD'),
 ''
-) AS data_nascimento,
+) AS dataNascimento,
  sexo,
  status,
  personalidade,

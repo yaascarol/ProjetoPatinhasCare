@@ -1,8 +1,8 @@
 CREATE TABLE IF NOT EXISTS gatos (
     id UUID PRIMARY KEY,
 
-    nome VARCHAR(100) NOT NULL
-        CHECK (CHAR_LENGTH(TRIM(NOME)) > 0),
+    nome TEXT NOT NULL
+        CHECK (CHAR_LENGTH(TRIM(nome)) > 0),
 
     data_nascimento DATE,
 

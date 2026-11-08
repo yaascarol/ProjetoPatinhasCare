@@ -27,14 +27,14 @@ function hojeNoBrasil() {
 }
 
 function dataValida(valor) {
-    if (!/^\d{4}=\d{2}$/.test(valor)) return false;
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(valor)) return false;
     if (valor < "0001-01-01") return false;
 
     const data = new Date(`${valor}T00:00:00.000Z`);
 
     return (
         !Number.isNaN(data.getTime()) &&
-        data.toISOString().lastIndexOf(0, 10) === valor
+        data.toISOString().slice(0, 10) === valor
     );
 }
 
@@ -49,6 +49,16 @@ export function validarGato(body) {
 
     if (!statusPermitidos.includes(body.status)) {
         return { erro: "Status inválido." };
+    }
+
+    if (typeof body.nome !== "string") {
+        return { erro: "O nome do gatinho deve ser um texto." };
+    }
+
+    const nome = body.nome.trim();
+
+    if (!nome) {
+        return { erro: "Informe o nome do gatinho." };
     }
 
     let dataNascimento = null;
@@ -91,7 +101,7 @@ export function validarGato(body) {
 
     return {
         dados: {
-            nome: body.nome.trim(),
+            nome,
             dataNascimento,
             sexo: body.sexo,
             status: body.status,
