@@ -60,7 +60,7 @@ export async function prepararCadastro(req, res, next) {
 
     req.body = body;
     req.fotoDados = null;
-    req.aterarFoto = Boolean(req.file) || body.removerFoto === true;
+    req.alterarFoto = Boolean(req.file) || body.removerFoto === true;
 
     if (!req.file) return next();
 
