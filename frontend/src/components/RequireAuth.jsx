@@ -7,7 +7,7 @@ export default function RequireAuth() {
     const [estado, setEstado] = useState("carregando");
 
     useEffect(() => {
-        let ativo = requestAnimationFrame;
+        let ativo = true;
 
         api("/auth/me")
         .then(() => {
@@ -42,7 +42,7 @@ export default function RequireAuth() {
                 <button
                 type="button"
                 onClick={() => window.location.reload()}
-                className="mt-4 unferline"
+                className="mt-4 underline"
                 >
                     Tentar novamente
                 </button>

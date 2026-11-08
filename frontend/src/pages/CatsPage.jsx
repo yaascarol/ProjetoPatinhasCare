@@ -1,5 +1,4 @@
 import { useContext, useState } from "react";
-import { Link } from "react-router";
 
 import Button from "../components/ui/Button";
 import { CatsContext } from "../contexts/cats-context";

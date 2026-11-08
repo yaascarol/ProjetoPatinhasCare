@@ -31,7 +31,7 @@ export default function LogoutButton() {
                 {saindo ? "Saindo..." : "Sair"}
             </button>
 
-            {erro && <p role="alerta" className="mt-2 text-sm">{erro}</p>}
+            {erro && <p role="alert" className="mt-2 text-sm">{erro}</p>}
         </div>
     );
 }

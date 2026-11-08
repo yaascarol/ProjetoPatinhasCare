@@ -5,7 +5,7 @@ import { api } from "../services/api";
 import Button from '../components/ui/Button';
 import Input from '../components/ui/Input';
 
-export default function LoginPace() {
+export default function LoginPage() {
     const navigate = useNavigate();
 
     const [email, setEmail] = useState('');
@@ -48,10 +48,10 @@ export default function LoginPace() {
 
     return (
         <main className="flex min-h-screen items-center justify-center bg-creme p-4">
-            <section aria-label="titulo-login" className="w-full max-w-xl rounded 3xl border border-lima px-6 py-10 sm:px-16 sm:py-12">
+            <section aria-label="Login" className="w-full max-w-xl rounded-3xl border border-lima px-6 py-10 sm:px-16 sm:py-12">
                 <header className="text-center">
                     <div className="flex items-center justify-center gap-3">
-                        <img src="../imagens/icones-patinhascare/LOGO PatinhasCare.png" alt="PatinhasCare" aria-hidden="true" className="h-auto w-50" />
+                        <img src="/imagens/icones-patinhascare/LOGO PatinhasCare.png" alt="PatinhasCare" className="h-auto w-50" />
                     </div>
 
                     <p className="mt-2 text-sm text-stone-600">
@@ -80,7 +80,7 @@ export default function LoginPace() {
                         id="senha"
                         name="senha"
                         label="Senha"
-                        type="Password"
+                        type="password"
                         autoComplete="current-password"
                         required
                         value={senha}

@@ -43,8 +43,20 @@ export default function HealthProvider({ children }) {
         );
     }
 
+    function excluirRegistro(id) {
+        const excluidoEm = new Date().toISOString();
+
+        setTodosRegistros((atuais) =>
+            atuais.map((registro) =>
+                registro.id === id && !registro.excluidoEm
+                    ? { ...registro, excluidoEm }
+                    : registro
+            )
+        );
+    }
+
     return (
-        <HealthContext.Provider value={{ registros, adicionarRegistro }}>
+        <HealthContext.Provider value={{ registros, adicionarRegistro, atualizarRegistro, excluirRegistro }}>
             {children}
         </HealthContext.Provider>
     );

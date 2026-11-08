@@ -4,8 +4,12 @@ import helmet from "helmet";
 import session from "express-session";
 import connectPgSimple from "connect-pg-simple";
 import bcrypt from "bcryptjs";
+
+import catsRouter from "./routes/cats.js";
+
 import { rateLimit } from "express-rate-limit";
 import { randomBytes } from "node:crypto";
+
 
 import { pool } from "./db.js";
 
@@ -24,7 +28,7 @@ const PgSession = connectPgSimple(session);
 const cookieOptions = {
   httpOnly: true,
   sameSite: "lax",
-  secure: false, // Ambiente local com HTTP.
+  secure: false,
   path: "/",
 };
 
@@ -188,6 +192,8 @@ app.post("/api/auth/logout", (req, res, next) => {
     res.status(204).end();
   });
 });
+
+app.use("/api/gatos", exigirLogin, catsRouter);
 
 app.use((req, res) => {
   res.status(404).json({ mensagem: "Endpoint não encontrado." });

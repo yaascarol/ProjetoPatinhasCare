@@ -19,7 +19,7 @@ export default function HomePage() {
     ).length;
 
     const adotados = gatos.filter(
-        (gato) => gato.status === "adotado" || gato.status === "adotada"
+        (gato) => gato.status === "adotado(a)"
     ).length;
 
     const { registros } = useContext(HealthContext);
@@ -31,8 +31,12 @@ export default function HomePage() {
     );
 
     const ultimosCadastros = [...gatos]
-        .sort((a, b) => b.criadoEm.localeCompare(a.criadoEm))
-        .slice(0, 5)
+        .sort(
+            (a, b) =>
+                new Date(b.criadoEm).getTime() -
+                new Date(a.criadoEm).getTime()
+        )
+        .slice(0, 5);
 
     const indicadores = [
         {

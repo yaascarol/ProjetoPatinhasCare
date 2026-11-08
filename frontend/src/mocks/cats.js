@@ -21,7 +21,7 @@ export const gatosMock = [ {
     sexo: "femea",
     personalidade: ["Carinhosa", "Brincalhona"],
     descricao: "Resgatada e acolhido pelo abrigo",
-    status: "adotada",
+    status: "adotado(a)",
     fotoUrl: null,
     dataEntrada: "2026-10-07",
     dataAdocao: null,

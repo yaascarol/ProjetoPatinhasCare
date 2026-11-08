@@ -8,22 +8,25 @@ export default function CreateCatPage() {
     const { criarGato } = useContext(CatsContext);
     const navigate = useNavigate();
 
-    function handleCriar(dados){
+    function handleCriar(dados) {
         criarGato(dados);
         navigate("/gatinhos");
     }
 
-    return(
+    return (
         <section>
             <Link to="/gatinhos" className="text-sm underline">
-            Voltar para gatinhos
+                Voltar para gatinhos
             </Link>
 
             <h1 className="mt-4 text-2xl font-semibold">
                 Cadastrar gato
             </h1>
 
-            <CatForm onSubmit={handleCriar}/>
+            async function handleCriar(dados) {
+                await criarGato(dados);
+            navigate("/gatinhos");
+            }
         </section>
     );
 }

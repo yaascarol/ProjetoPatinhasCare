@@ -12,12 +12,12 @@ export default function EditCatPage() {
 
     const gato = gatos.find((item) => item.id === id);
 
-    function handleAtualizar(dados) {
-        atualizarGato(id, dados);
+    async function handleAtualizar(dados) {
+        await atualizarGato(id, dados);
         navigate("/gatinhos");
     }
 
-    if(!gato){
+    if (!gato) {
         return (
             <section>
                 <h1 className="text-2xl font-semibold">
@@ -25,7 +25,7 @@ export default function EditCatPage() {
                 </h1>
 
                 <Link to="/gatinhos" className="mt-4 inline-block underline">
-                Voltar para a aba de gatinhos
+                    Voltar para a aba de gatinhos
                 </Link>
             </section>
         );
@@ -42,10 +42,10 @@ export default function EditCatPage() {
             </h1>
 
             <CatForm
-            key={gato.id}
-            initialValues={gato}
-            onSubmit={handleAtualizar}
-            submitLabel="Salvar alterações"
+                key={gato.id}
+                initialValues={gato}
+                onSubmit={handleAtualizar}
+                submitLabel="Salvar alterações"
             />
         </section>
     );
