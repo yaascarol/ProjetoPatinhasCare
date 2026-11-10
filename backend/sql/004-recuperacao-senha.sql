@@ -1,0 +1,10 @@
+
+BEGIN;
+CREATE UNIQUE INDEX IF NOT EXISTS usuarios_email_unique ON usuarios(email);
+ALTER TABLE usuarios ADD COLUMN IF NOT EXISTS versao_senha INTEGER NOT NULL DEFAULT 0;
+CREATE TABLE IF NOT EXISTS recuperacoes_senha (
+  usuario_id UUID PRIMARY KEY REFERENCES usuarios(id) ON DELETE CASCADE,
+  token_hash TEXT NOT NULL UNIQUE,
+  expira_em TIMESTAMPTZ NOT NULL
+);
+COMMIT;
