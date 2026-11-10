@@ -43,7 +43,7 @@ export default function LoginPage() {
     }
 
     function handleRecuperarSenha() {
-        setMensagem("A recuperação de senha está indisponível ainda, estamos conectando a autenticação.");
+        navigate("/recuperar-senha");
     }
 
     return (

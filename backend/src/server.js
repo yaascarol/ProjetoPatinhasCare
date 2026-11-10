@@ -6,6 +6,7 @@ import connectPgSimple from "connect-pg-simple";
 import bcrypt from "bcryptjs";
 
 import catsRouter from "./routes/cats.js";
+import passwordResetRouter from "./routes/password-reset.js";
 
 import { rateLimit } from "express-rate-limit";
 import { randomBytes } from "node:crypto";
@@ -79,6 +80,8 @@ app.use(
   })
 );
 
+app.use("/api/auth", passwordResetRouter);
+
 const limitarLogin = rateLimit({
   windowMs: 15 * 60 * 1000,
   limit: 10,
@@ -107,7 +110,7 @@ app.post("/api/auth/login", limitarLogin, async (req, res, next) => {
 
     const resultado = await pool.query(
       `
-        SELECT id, nome, email, senha_hash, papel, ativo
+        SELECT id, nome, email, senha_hash, papel, ativo, versao_senha
         FROM usuarios
         WHERE email = $1
       `,
@@ -131,6 +134,7 @@ app.post("/api/auth/login", limitarLogin, async (req, res, next) => {
       if (erro) return next(erro);
 
       req.session.usuarioId = usuario.id;
+      req.session.versaoSenha = usuario.versao_senha;
 
       req.session.save((erroSalvar) => {
         if (erroSalvar) return next(erroSalvar);
@@ -160,14 +164,14 @@ async function exigirLogin(req, res, next) {
 
     const resultado = await pool.query(
       `
-        SELECT id, nome, email, papel
+        SELECT id, nome, email, papel, versao_senha
         FROM usuarios
         WHERE id = $1 AND ativo = TRUE
       `,
       [req.session.usuarioId]
     );
 
-    if (!resultado.rows[0]) {
+    if (!resultado.rows[0] || req.session.versaoSenha !== resultado.rows[0].versao_senha) {
       return res.status(401).json({
         mensagem: "Sessão inválida.",
       });

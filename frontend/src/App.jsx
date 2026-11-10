@@ -6,6 +6,7 @@ import HealthProvider from "./contexts/HealthProvider";
 import AppLayout from "./layouts/AppLayout";
 
 import LoginPage from "./pages/LoginPage";
+import PasswordResetPage from "./pages/PasswordResetPage";
 import HomePage from "./pages/HomePage";
 import CatsPage from "./pages/CatsPage";
 import CreateCatPage from "./pages/CreateCatPage";
@@ -20,6 +21,8 @@ export default function App() {
   return (
     <Routes>
       <Route path="/login" element={<LoginPage />} />
+      <Route path="/recuperar-senha" element={<PasswordResetPage key="solicitar" />} />
+      <Route path="/redefinir-senha" element={<PasswordResetPage key="redefinir" redefinir />} />
 
       <Route element={<RequireAuth />}>
         <Route
