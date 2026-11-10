@@ -198,4 +198,15 @@ router.put(
   }
 );
 
+router.delete("/:id", async (req, res) => {
+  try {
+    const resultado = await pool.query("DELETE FROM gatos WHERE id = $1 RETURNING id", [req.params.id]);
+    if (!resultado.rowCount) return res.status(404).json({ mensagem: "Gatinho não encontrado." });
+    res.status(204).end();
+  } catch (erro) {
+    if (erro.code === "23503") return res.status(409).json({ mensagem: "Este gatinho possui registros vinculados e não pode ser excluído." });
+    throw erro;
+  }
+});
+
 export default router;

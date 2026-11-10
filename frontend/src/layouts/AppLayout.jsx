@@ -3,6 +3,7 @@ import { Outlet } from "react-router";
 import Header from "../components/layout/Header";
 import Sidebar from "../components/layout/Sidebar";
 import Breadcrumbs from "../components/layout/Breadcrumbs";
+import LegalLinks from "../components/LegalLinks";
 
 export default function AppLayout() {
     return (
@@ -16,6 +17,7 @@ export default function AppLayout() {
                     <div className="mx-auto max-w-6xl">
                         <Breadcrumbs />
                         <Outlet />
+                        <LegalLinks />
                     </div>
                 </main>
             </div>

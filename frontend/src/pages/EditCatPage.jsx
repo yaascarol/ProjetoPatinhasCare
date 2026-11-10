@@ -8,13 +8,18 @@ export default function EditCatPage() {
     const { id } = useParams();
     const navigate = useNavigate();
 
-    const { gatos, atualizarGato } = useContext(CatsContext);
+    const { gatos, atualizarGato, removerGato } = useContext(CatsContext);
 
     const gato = gatos.find((item) => item.id === id);
 
     async function handleAtualizar(dados) {
         await atualizarGato(id, dados);
         navigate("/gatinhos");
+    }
+
+    async function handleExcluir() {
+        await removerGato(id);
+        navigate("/gatinhos", { replace: true });
     }
 
     if (!gato) {
@@ -45,6 +50,7 @@ export default function EditCatPage() {
                 key={gato.id}
                 initialValues={gato}
                 onSubmit={handleAtualizar}
+                onDelete={handleExcluir}
                 submitLabel="Salvar alterações"
             />
         </section>

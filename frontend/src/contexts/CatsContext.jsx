@@ -6,6 +6,7 @@ import {
   listarGatos,
   cadastrarGato,
   editarGato,
+  excluirGato,
 } from "../services/catService";
 
 export default function CatsProvider({ children }) {
@@ -69,6 +70,11 @@ export default function CatsProvider({ children }) {
     setTentativa((valor) => valor + 1);
   }
 
+  async function removerGato(id) {
+    await excluirGato(id);
+    setGatos((atuais) => atuais.filter((gato) => gato.id !== id));
+  }
+
   if (estado === "carregando") {
     return <p className="p-6">Carregando os cadastros...</p>;
   }
@@ -95,7 +101,7 @@ export default function CatsProvider({ children }) {
 
   return (
     <CatsContext.Provider
-      value={{ gatos, criarGato, atualizarGato }}
+      value={{ gatos, criarGato, atualizarGato, removerGato }}
     >
       {children}
     </CatsContext.Provider>

@@ -6,6 +6,7 @@ import HealthProvider from "./contexts/HealthProvider";
 import AppLayout from "./layouts/AppLayout";
 
 import LoginPage from "./pages/LoginPage";
+import LegalPage from "./pages/LegalPage";
 import PasswordResetPage from "./pages/PasswordResetPage";
 import HomePage from "./pages/HomePage";
 import CatsPage from "./pages/CatsPage";
@@ -20,6 +21,8 @@ import TeamPage from "./pages/TeamPage";
 export default function App() {
   return (
     <Routes>
+      <Route path="/termos-de-uso" element={<LegalPage tipo="termos" />} />
+      <Route path="/politica-de-privacidade" element={<LegalPage tipo="privacidade" />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/recuperar-senha" element={<PasswordResetPage key="solicitar" />} />
       <Route path="/redefinir-senha" element={<PasswordResetPage key="redefinir" redefinir />} />
