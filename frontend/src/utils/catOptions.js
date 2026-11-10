@@ -3,7 +3,6 @@ export const statusOptions = [
     { value: "indisponivel", label: "Indisponível" },
     { value: "em_observacao", label: "Em Observação" },
     { value: "adotado(a)", label: "Adotado(a)" },
-    { value: "nao_informado", label: "Não informado" },
 ];
 
 export function obterNomeStatus(status) {

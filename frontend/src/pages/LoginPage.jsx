@@ -4,6 +4,7 @@ import { api } from "../services/api";
 
 import Button from '../components/ui/Button';
 import Input from '../components/ui/Input';
+import LegalLinks from '../components/LegalLinks';
 
 export default function LoginPage() {
     const navigate = useNavigate();
@@ -55,12 +56,12 @@ export default function LoginPage() {
                     </div>
 
                     <p className="mt-2 text-sm text-stone-600">
-                        Sistema de gestão integrada para seu abrigo
+                        Protótipo acadêmico de gestão de abrigos
                     </p>
                 </header>
 
                 <p className="mt-8 text-center text-sm text-stone-600">
-                    Acesso restrito à equipe do abrigo.
+                    Acesso restrito à equipe do projeto e convidados para testes.
                 </p>
 
                 <form onSubmit={handleSubmit} className="mt-8 space-y-5">
@@ -113,8 +114,9 @@ export default function LoginPage() {
                 </form>
 
                 <p className="mt-6 text-center text-xs text-stone-600">
-                    Acesso exclusivo aos integrantes autorizados do abrigo.
+                    PatinhasCare · Versão acadêmica para testes.
                 </p>
+                <LegalLinks />
 
             </section>
         </main>

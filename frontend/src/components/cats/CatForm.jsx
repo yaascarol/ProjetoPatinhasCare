@@ -8,16 +8,18 @@ import { statusOptions } from "../../utils/catOptions";
 export default function CatForm({
     initialValues,
     onSubmit,
+    onDelete,
     submitLabel = "Salvar gato",
 }) {
     const [nome, setNome] = useState(initialValues?.nome ?? "");
     const [dataNascimento, setDataNascimento] = useState(initialValues?.dataNascimento ?? "");
-    const [sexo, setSexo] = useState(initialValues?.sexo ?? "nao_informado");
-    const [status, setStatus] = useState(initialValues?.status ?? "disponivel");
+    const [sexo, setSexo] = useState(["macho", "femea"].includes(initialValues?.sexo) ? initialValues.sexo : "");
+    const [status, setStatus] = useState(statusOptions.some((opcao) => opcao.value === initialValues?.status) ? initialValues.status : "");
     const [personalidade, setPersonalidade] = useState(initialValues?.personalidade.join(", ") ?? "");
     const [descricao, setDescricao] = useState(initialValues?.descricao ?? "");
     const [erro, setErro] = useState("");
     const [salvando, setSalvando] = useState(false);
+    const [excluindo, setExcluindo] = useState(false);
     const [foto, setFoto] = useState(null);
     const [previewFoto, setPreviewFoto] = useState("");
     const [removerFoto, setRemoverFoto] = useState(false);
@@ -89,7 +91,7 @@ export default function CatForm({
     async function handleSubmit(event) {
         event.preventDefault();
 
-        if (salvando) return;
+        if (salvando || excluindo) return;
 
         setErro("");
 
@@ -107,6 +109,19 @@ export default function CatForm({
             .split(",")
             .map((tag) => tag.trim())
             .filter(Boolean);
+
+        if (!tags.length) {
+            setErro("Informe pelo menos uma característica de personalidade.");
+            return;
+        }
+        if (!["macho", "femea"].includes(sexo)) {
+            setErro("Selecione o sexo do gatinho.");
+            return;
+        }
+        if (!statusOptions.some((opcao) => opcao.value === status)) {
+            setErro("Selecione o status do gatinho.");
+            return;
+        }
 
         setSalvando(true);
 
@@ -134,9 +149,24 @@ export default function CatForm({
         }
     }
 
+    async function handleExcluir() {
+        if (salvando || excluindo || !onDelete) return;
+        if (!window.confirm(`Excluir a ficha de "${initialValues?.nome}"? O cadastro e a foto serão apagados permanentemente. Esta ação não pode ser desfeita.`)) return;
+        setErro("");
+        setExcluindo(true);
+        try {
+            await onDelete();
+        } catch (falha) {
+            setErro(falha.status === 401
+                ? "Sua sessão expirou. Faça login novamente antes de excluir."
+                : falha instanceof TypeError ? "Não foi possível conectar à API. Confira o backend." : falha.message);
+        } finally { setExcluindo(false); }
+    }
+
     return (
         <form onSubmit={handleSubmit} className="mt-6 space-y-5">
-            <fieldset disabled={salvando} className="space-y-5">
+            <p className="text-sm text-stone-600"><span className="text-red-700" aria-hidden="true">*</span> Campos obrigatórios.</p>
+            <fieldset disabled={salvando || excluindo} className="space-y-5">
 
                 <div className="space-y-3">
                     <label
@@ -192,7 +222,7 @@ export default function CatForm({
                 <div className="grid gap-5 sm:grid-cols-2">
                     <Input
                         id="nome"
-                        label="Nome"
+                        label={<>Nome <span className="text-red-700" aria-hidden="true">*</span></>}
                         required
                         value={nome}
                         onChange={(event) => setNome(event.target.value)}
@@ -209,7 +239,8 @@ export default function CatForm({
 
                     <Input
                         id="personalidade"
-                        label="Personalidade (separe por vírgula)"
+                        label={<>Personalidade (separe por vírgula) <span className="text-red-700" aria-hidden="true">*</span></>}
+                        required
                         placeholder="Carinhoso, Brincalhão"
                         value={personalidade}
                         onChange={(event) => setPersonalidade(event.target.value)}
@@ -217,16 +248,17 @@ export default function CatForm({
 
                     <div className="flex flex-col gap-2">
                         <label htmlFor="sexo" className="text-sm font-medium">
-                            Sexo
+                            Sexo <span className="text-red-700" aria-hidden="true">*</span>
                         </label>
 
                         <select
                             id="sexo"
+                            required
                             value={sexo}
                             onChange={(event) => setSexo(event.target.value)}
                             className="min-h-11 rounded-xl border border-lima bg-creme px-3"
                         >
-                            <option value="nao_informado">Não informado</option>
+                            <option value="" disabled>Selecione o sexo</option>
                             <option value="macho">Macho</option>
                             <option value="femea">Fêmea</option>
                         </select>
@@ -250,15 +282,17 @@ export default function CatForm({
 
                 <div className="flex max-w-sm flex-col gap-2">
                     <label htmlFor="status" className="text-sm font-medium">
-                        Status
+                        Status <span className="text-red-700" aria-hidden="true">*</span>
                     </label>
 
                     <select
                         id="status"
+                        required
                         value={status}
                         onChange={(event) => setStatus(event.target.value)}
                         className="min-h-11 rounded-xl border border-lima bg-creme px-3"
                     >
+                        <option value="" disabled>Selecione o status</option>
                         {statusOptions.map((opcao) => (
                             <option key={opcao.value} value={opcao.value}>
                                 {opcao.label}
@@ -274,7 +308,7 @@ export default function CatForm({
                 )}
 
                 <div className="flex flex-wrap gap-3 pt-3">
-                    {!salvando && (
+                    {!salvando && !excluindo && (
                         <Link
                             to="/gatinhos"
                             className="rounded-xl border border-lima px-6 py-3"
@@ -283,9 +317,15 @@ export default function CatForm({
                         </Link>
                     )}
 
-                    <Button type="submit" disabled={salvando}>
+                    <Button type="submit" disabled={salvando || excluindo}>
                         {salvando ? "Salvando..." : submitLabel}
                     </Button>
+                    {onDelete && (
+                        <button type="button" onClick={handleExcluir} disabled={salvando || excluindo}
+                            className="min-h-11 rounded-xl border border-red-700 px-5 py-2.5 text-sm font-semibold text-red-700 hover:bg-red-50 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red-700 disabled:cursor-not-allowed disabled:opacity-50 sm:ml-auto">
+                            {excluindo ? "Excluindo..." : "Excluir gatinho"}
+                        </button>
+                    )}
                 </div>
             </fieldset>
         </form>

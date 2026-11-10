@@ -1,5 +1,9 @@
 import { api, API_URL } from "./api";
 
+export async function excluirGato(id) {
+  await api(`/gatos/${encodeURIComponent(id)}`, { method: "DELETE" });
+}
+
 function prepararGato(gato) {
   return {
     ...gato,

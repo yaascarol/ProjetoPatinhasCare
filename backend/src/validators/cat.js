@@ -1,7 +1,6 @@
 const sexosPermitidos = [
     "macho",
     "femea",
-    "nao_informado",
 ];
 
 const statusPermitidos = [
@@ -9,7 +8,6 @@ const statusPermitidos = [
     "indisponivel",
     "em_observacao",
     "adotado(a)",
-    "nao_informado",
 ];
 
 function hojeNoBrasil() {
@@ -44,11 +42,11 @@ export function validarGato(body) {
     }
 
     if (!sexosPermitidos.includes(body.sexo)) {
-        return { erro: "Sexo inválido." };
+        return { erro: "Selecione o sexo do gatinho." };
     }
 
     if (!statusPermitidos.includes(body.status)) {
-        return { erro: "Status inválido." };
+        return { erro: "Selecione um status válido para o gatinho." };
     }
 
     if (typeof body.nome !== "string") {
@@ -79,6 +77,10 @@ export function validarGato(body) {
     }
 
     const personalidade = body.personalidade ?? [];
+
+    if (Array.isArray(personalidade) && personalidade.length === 0) {
+        return { erro: "Informe pelo menos uma característica de personalidade." };
+    }
 
     if (
         !Array.isArray(personalidade) ||
