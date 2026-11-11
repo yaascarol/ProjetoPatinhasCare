@@ -98,8 +98,12 @@ export default function HealthDetailPage() {
               </div>
 
               <div>
-                <dt className="font-semibold">Data de entrada</dt>
-                <dd>{formatarData(gato.dataEntrada)}</dd>
+                <dt className="font-semibold">Cadastrado em</dt>
+                <dd>
+                  {gato.criadoEm
+                    ? new Date(gato.criadoEm).toLocaleDateString("pt-BR")
+                    : "Não informado"}
+                </dd>
               </div>
 
               <div>

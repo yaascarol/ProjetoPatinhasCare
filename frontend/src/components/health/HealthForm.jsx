@@ -2,10 +2,15 @@ import { useContext, useRef, useState } from "react";
 import { useNavigate } from "react-router";
 
 import { HealthContext } from "../../contexts/health-context";
-import { dataHoje, tiposRegistro } from "../../utils/health";
+import { dataHoje, normalizarNome, tiposRegistro } from "../../utils/health";
 
 import Input from "../ui/Input";
 import Button from "../ui/Button";
+
+// Valor interno da opção "Outro/Outra" no select. Não colide com nomes reais.
+const OUTRO = "__outro__";
+
+const tiposAnexoPermitidos = ["application/pdf", "image/jpeg", "image/png"];
 
 export default function HealthForm({
   gatoId,
@@ -16,36 +21,31 @@ export default function HealthForm({
 }) {
   const config = tiposRegistro[tipo];
   const editando = Boolean(registroInicial);
+  const temOpcoes = Boolean(config.outro);
 
-  const { adicionarRegistro, atualizarRegistro } =
+  const { tipos, adicionarRegistro, atualizarRegistro } =
     useContext(HealthContext);
 
   const navigate = useNavigate();
   const inputArquivo = useRef(null);
 
-  const opcaoOutro = config.opcoes?.find(
-    (opcao) => opcao === "Outro" || opcao === "Outra"
-  );
-
+  const opcoes = tipos[tipo] ?? [];
   const tituloInicial = registroInicial?.titulo ?? "";
 
-  const selecaoInicial = config.opcoes
-    ? registroInicial?.opcao ??
-      (config.opcoes.includes(tituloInicial)
+  // Em edição: se o título salvo estiver na lista, seleciona-o;
+  // caso contrário, abre "Outro" já preenchido.
+  const selecaoInicial = !temOpcoes
+    ? tituloInicial
+    : !tituloInicial
+      ? ""
+      : opcoes.includes(tituloInicial)
         ? tituloInicial
-        : tituloInicial
-          ? opcaoOutro
-          : "")
-    : tituloInicial;
+        : OUTRO;
 
   const [titulo, setTitulo] = useState(selecaoInicial);
-
   const [outroTitulo, setOutroTitulo] = useState(
-    selecaoInicial === opcaoOutro && tituloInicial !== opcaoOutro
-      ? tituloInicial
-      : ""
+    selecaoInicial === OUTRO ? tituloInicial : ""
   );
-
   const [data, setData] = useState(registroInicial?.data ?? "");
   const [proximaData, setProximaData] = useState(
     registroInicial?.proximaData ?? ""
@@ -53,18 +53,25 @@ export default function HealthForm({
   const [observacoes, setObservacoes] = useState(
     registroInicial?.observacoes ?? ""
   );
-  const [anexo, setAnexo] = useState(
-    registroInicial?.anexo ?? null
-  );
+  const [novoAnexo, setNovoAnexo] = useState(null);
+  const [removerAnexoAtual, setRemoverAnexoAtual] = useState(false);
   const [erro, setErro] = useState("");
+  const [salvando, setSalvando] = useState(false);
 
-  const mostrarOutro = Boolean(opcaoOutro) && titulo === opcaoOutro;
+  const mostrarOutro = temOpcoes && titulo === OUTRO;
 
-  const campoOutro = {
-    vacina: "Informe qual vacina",
-    exame: "Informe qual exame",
-    procedimento: "Informe qual procedimento",
-  };
+  // Avisa quando o nome digitado já existe com outra grafia.
+  const opcaoExistente =
+    mostrarOutro && outroTitulo.trim()
+      ? opcoes.find(
+        (opcao) => normalizarNome(opcao) === normalizarNome(outroTitulo)
+      )
+      : undefined;
+
+  const anexoAtual =
+    editando && registroInicial.anexoUrl && !removerAnexoAtual
+      ? registroInicial.anexoNome
+      : "";
 
   const campo =
     "min-h-11 w-full rounded-xl border border-lima bg-creme px-3 py-2";
@@ -74,14 +81,8 @@ export default function HealthForm({
 
     if (!arquivo) return;
 
-    const tiposPermitidos = [
-      "application/pdf",
-      "image/jpeg",
-      "image/png",
-    ];
-
     if (
-      !tiposPermitidos.includes(arquivo.type) ||
+      !tiposAnexoPermitidos.includes(arquivo.type) ||
       arquivo.size > 5 * 1024 * 1024
     ) {
       setErro("Selecione um PDF, JPG ou PNG de até 5 MB.");
@@ -90,31 +91,27 @@ export default function HealthForm({
     }
 
     setErro("");
-    setAnexo(arquivo);
+    setNovoAnexo(arquivo);
   }
 
-  function removerAnexo() {
-    setAnexo(null);
+  function descartarNovoAnexo() {
+    setNovoAnexo(null);
 
     if (inputArquivo.current) {
       inputArquivo.current.value = "";
     }
   }
 
-  function cancelar() {
-    if (onCancel) {
-      onCancel();
-    } else {
-      navigate(`/saude/${gatoId}/historico`);
-    }
+  function voltar() {
+    navigate(`/saude/${gatoId}/historico`);
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
 
-    const tituloFinal = (
-      mostrarOutro ? outroTitulo : titulo
-    ).trim();
+    if (salvando) return;
+
+    const tituloFinal = (mostrarOutro ? outroTitulo : titulo).trim();
 
     if (!tituloFinal || !data) {
       setErro("Preencha a identificação e a data do registro.");
@@ -122,12 +119,12 @@ export default function HealthForm({
     }
 
     if (data > dataHoje()) {
-      setErro("A data do atendimento não pode estar no futuro.");
+      setErro("A data do registro não pode estar no futuro.");
       return;
     }
 
     if (proximaData && proximaData < data) {
-      setErro("A próxima data não pode ser anterior ao atendimento.");
+      setErro("A próxima data não pode ser anterior à data do registro.");
       return;
     }
 
@@ -140,23 +137,32 @@ export default function HealthForm({
       gatoId,
       tipo,
       titulo: tituloFinal,
-      opcao: config.opcoes ? titulo : "",
       data,
       proximaData: config.proxima ? proximaData : "",
       observacoes: observacoes.trim(),
-      anexo,
+      removerAnexo: editando && removerAnexoAtual && !novoAnexo,
+      anexo: novoAnexo,
     };
 
-    if (editando) {
-      atualizarRegistro(registroInicial.id, dados);
-    } else {
-      adicionarRegistro(dados);
+    setErro("");
+    setSalvando(true);
+
+    try {
+      if (editando) {
+        await atualizarRegistro(registroInicial.id, dados);
+      } else {
+        await adicionarRegistro(dados);
+      }
+    } catch (falha) {
+      setErro(falha.message);
+      setSalvando(false);
+      return;
     }
 
     if (onSaved) {
       onSaved();
     } else {
-      navigate(`/saude/${gatoId}/historico`);
+      voltar();
     }
   }
 
@@ -171,7 +177,7 @@ export default function HealthForm({
         <div className="flex flex-col gap-2">
           <label htmlFor="identificacao">{config.campo}</label>
 
-          {config.opcoes ? (
+          {temOpcoes ? (
             <select
               id="identificacao"
               required
@@ -181,16 +187,19 @@ export default function HealthForm({
             >
               <option value="">Selecione</option>
 
-              {config.opcoes.map((opcao) => (
+              {opcoes.map((opcao) => (
                 <option key={opcao} value={opcao}>
                   {opcao}
                 </option>
               ))}
+
+              <option value={OUTRO}>{config.outro}</option>
             </select>
           ) : (
             <input
               id="identificacao"
               required
+              maxLength={120}
               value={titulo}
               onChange={(event) => setTitulo(event.target.value)}
               className={campo}
@@ -198,20 +207,99 @@ export default function HealthForm({
           )}
 
           {mostrarOutro && (
-            <Input
-              id="outro-titulo"
-              label={campoOutro[tipo] ?? "Especifique"}
-              required
-              maxLength={120}
-              value={outroTitulo}
-              onChange={(event) => setOutroTitulo(event.target.value)}
-            />
+            <>
+              <Input
+                id="outro-titulo"
+                label={config.campoOutro}
+                required
+                maxLength={120}
+                value={outroTitulo}
+                onChange={(event) => setOutroTitulo(event.target.value)}
+                aria-describedby="outro-titulo-ajuda"
+              />
+
+              <p id="outro-titulo-ajuda" className="text-xs text-stone-600">
+                {opcaoExistente
+                  ? `Já existe a opção "${opcaoExistente}". Ela será usada.`
+                  : "O nome informado vira uma opção para os próximos registros."}
+              </p>
+            </>
           )}
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <label htmlFor="anexo">{config.anexo}</label>
+
+          <input
+            ref={inputArquivo}
+            id="anexo"
+            type="file"
+            accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png"
+            onChange={selecionarAnexo}
+            aria-describedby="anexo-ajuda"
+            className={campo}
+          />
+
+          {novoAnexo && (
+            <div className="text-sm">
+              <p>Novo arquivo: {novoAnexo.name}</p>
+
+              <button
+                type="button"
+                onClick={descartarNovoAnexo}
+                className="mt-1 text-red-700 underline"
+              >
+                Descartar arquivo selecionado
+              </button>
+            </div>
+          )}
+
+          {!novoAnexo && anexoAtual && (
+            <div className="text-sm">
+              <p>
+                Arquivo atual:{" "}
+                <a
+                  href={registroInicial.anexoUrl}
+                  className="underline"
+                  rel="noopener"
+                >
+                  {anexoAtual}
+                </a>
+              </p>
+
+              <button
+                type="button"
+                onClick={() => setRemoverAnexoAtual(true)}
+                className="mt-1 text-red-700 underline"
+              >
+                Remover anexo
+              </button>
+            </div>
+          )}
+
+          {!novoAnexo && editando && removerAnexoAtual && (
+            <div className="text-sm">
+              <p>O anexo será removido ao salvar.</p>
+
+              <button
+                type="button"
+                onClick={() => setRemoverAnexoAtual(false)}
+                className="mt-1 underline"
+              >
+                Manter anexo
+              </button>
+            </div>
+          )}
+
+          <p id="anexo-ajuda" className="text-xs text-stone-600">
+            Opcional. PDF, JPG ou PNG, até 5 MB.
+            {anexoAtual && " Selecionar outro arquivo substitui o atual."}
+          </p>
         </div>
 
         <Input
           id="data-registro"
-          label="Data do atendimento / aplicação"
+          label={config.data}
           type="date"
           required
           max={dataHoje()}
@@ -222,56 +310,24 @@ export default function HealthForm({
         {config.proxima && (
           <Input
             id="proxima-data"
-            label={`${config.proxima} — se informada`}
+            label={`${config.proxima} (opcional)`}
             type="date"
             min={data || undefined}
             value={proximaData}
             onChange={(event) => setProximaData(event.target.value)}
           />
         )}
-
-        <div className="flex flex-col gap-2">
-          <label htmlFor="anexo">
-            {anexo ? "Substituir anexo" : "Anexo opcional"}
-          </label>
-
-          <input
-            ref={inputArquivo}
-            id="anexo"
-            type="file"
-            accept=".pdf,.jpg,.jpeg,.png"
-            onChange={selecionarAnexo}
-            className={campo}
-          />
-
-          {anexo && (
-            <div className="text-sm">
-              <p>Arquivo: {anexo.name}</p>
-
-              <button
-                type="button"
-                onClick={removerAnexo}
-                className="mt-1 text-red-700 underline"
-              >
-                Remover anexo
-              </button>
-            </div>
-          )}
-
-          <p className="text-xs text-stone-600">
-            PDF, JPG ou PNG, até 5 MB. Disponível somente nesta sessão.
-          </p>
-        </div>
       </div>
 
       <div className="flex flex-col gap-2">
         <label htmlFor="observacoes">
-          {config.observacao ?? "Observações"}
+          {config.observacao ?? "Observações (opcional)"}
         </label>
 
         <textarea
           id="observacoes"
           rows={4}
+          maxLength={2000}
           required={tipo === "consulta"}
           value={observacoes}
           onChange={(event) => setObservacoes(event.target.value)}
@@ -288,16 +344,19 @@ export default function HealthForm({
       <div className="flex flex-wrap gap-3">
         <button
           type="button"
-          onClick={cancelar}
-          className="rounded-xl border border-lima px-6 py-3"
+          onClick={onCancel ?? voltar}
+          disabled={salvando}
+          className="rounded-xl border border-lima px-6 py-3 disabled:opacity-50"
         >
           Cancelar
         </button>
 
-        <Button type="submit">
-          {editando
-            ? "Salvar alteração"
-            : `Salvar ${config.label.toLocaleLowerCase("pt-BR")}`}
+        <Button type="submit" disabled={salvando}>
+          {salvando
+            ? "Salvando..."
+            : editando
+              ? "Salvar alteração"
+              : `Salvar ${config.label.toLocaleLowerCase("pt-BR")}`}
         </Button>
       </div>
     </form>

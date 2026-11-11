@@ -1,35 +1,61 @@
+// As opções de vacina, exame e procedimento vêm da API (/saude/tipos).
+// "outro" é o rótulo da opção que abre o campo para digitar um nome novo;
+// o nome digitado é salvo no banco e vira opção nos próximos registros.
 export const tiposRegistro = {
     consulta: {
         label: "Consulta",
         campo: "Nome do(a) médico(a)",
-        observacao: "Motivo da consulta: ",
+        data: "Data da consulta",
+        anexo: "Anexar comprovante",
+        observacao: "Motivo da consulta",
     },
-    
+
     vacina: {
         label: "Vacina",
         campo: "Tipo de vacina",
-        opcoes: ["Antirrábica", "V3", "V4", "V5", "Outra"],
+        outro: "Outra",
+        campoOutro: "Informe qual vacina",
+        data: "Data da vacina",
+        anexo: "Anexar comprovante da vacina",
         proxima: "Data da próxima dose",
     },
 
     vermifugo: {
         label: "Vermífugo",
         campo: "Produto",
+        data: "Data de aplicação",
+        anexo: "Anexar comprovante",
         proxima: "Data da reaplicação",
     },
 
     exame: {
         label: "Exame",
         campo: "Tipo de exame",
-        opcoes: ["Hemograma", "Ultrassom", "FIV/FeLV", "Outro"],
+        outro: "Outro",
+        campoOutro: "Informe qual exame",
+        data: "Data do exame",
+        anexo: "Anexar exame",
     },
 
     procedimento: {
         label: "Procedimento",
         campo: "Tipo de procedimento",
-        opcoes: ["Castração", "Curativo", "Cirurgia", "Outro"],
+        outro: "Outro",
+        campoOutro: "Informe qual procedimento",
+        data: "Data do procedimento",
+        anexo: "Anexar comprovante",
     },
 };
+
+// Mesma regra do backend: ignora acento, maiúsculas e espaços repetidos.
+export function normalizarNome(nome) {
+    return nome
+        .normalize("NFD")
+        .replace(/\p{Diacritic}/gu, "")
+        .toLocaleLowerCase("pt-BR")
+        .replace(/\s+/g, " ")
+        .trim();
+}
 
 export const nomeStatus = {
     vencido: "Vencido",

@@ -32,26 +32,14 @@ const secoes = [
   },
 ];
 
-function baixarAnexo(arquivo) {
-  const url = URL.createObjectURL(arquivo);
-  const link = document.createElement("a");
-
-  link.href = url;
-  link.download = arquivo.name;
-
-  document.body.appendChild(link);
-  link.click();
-  link.remove();
-
-  setTimeout(() => URL.revokeObjectURL(url), 1000);
-}
-
 export default function HealthHistory({ gatoId }) {
   const { registros, excluirRegistro } = useContext(HealthContext);
   const { gatos } = useContext(CatsContext);
 
   const [editandoId, setEditandoId] = useState(null);
   const [mensagem, setMensagem] = useState("");
+  const [erro, setErro] = useState("");
+  const [excluindoId, setExcluindoId] = useState(null);
 
   const gato = gatos.find((item) => item.id === gatoId);
 
@@ -67,7 +55,7 @@ export default function HealthHistory({ gatoId }) {
     (registro) => registro.id === editandoId
   );
 
-  function confirmarExclusao(registro) {
+  async function confirmarExclusao(registro) {
     const confirmado = window.confirm(
       `Excluir "${registro.titulo}", de ${formatarData(registro.data)}, ` +
       `da ficha de ${gato?.nome ?? "este gato"}?`
@@ -75,8 +63,18 @@ export default function HealthHistory({ gatoId }) {
 
     if (!confirmado) return;
 
-    excluirRegistro(registro.id);
-    setMensagem("Registro excluído.");
+    setMensagem("");
+    setErro("");
+    setExcluindoId(registro.id);
+
+    try {
+      await excluirRegistro(registro.id);
+      setMensagem("Registro excluído.");
+    } catch (falha) {
+      setErro(falha.message);
+    } finally {
+      setExcluindoId(null);
+    }
   }
 
   if (registroEmEdicao) {
@@ -100,6 +98,12 @@ export default function HealthHistory({ gatoId }) {
       <p role="status" className="text-sm text-stone-700">
         {mensagem}
       </p>
+
+      {erro && (
+        <p role="alert" className="text-red-700">
+          {erro}
+        </p>
+      )}
 
       {secoes.map((secao) => {
         const grupo = historico.filter((registro) =>
@@ -168,14 +172,15 @@ export default function HealthHistory({ gatoId }) {
                         )}
 
                         <td className="p-2">
-                          {registro.anexo ? (
-                            <button
-                              type="button"
-                              onClick={() => baixarAnexo(registro.anexo)}
-                              className="underline"
+                          {registro.anexoUrl ? (
+                            <a
+                              href={registro.anexoUrl}
+                              className="break-all underline"
+                              rel="noopener"
+                              aria-label={`Baixar anexo ${registro.anexoNome}`}
                             >
-                              {registro.anexo.name}
-                            </button>
+                              {registro.anexoNome}
+                            </a>
                           ) : (
                             "Sem anexo"
                           )}
@@ -187,6 +192,7 @@ export default function HealthHistory({ gatoId }) {
                               type="button"
                               onClick={() => {
                                 setMensagem("");
+                                setErro("");
                                 setEditandoId(registro.id);
                               }}
                               aria-label={`Editar ${registro.titulo}`}
@@ -198,10 +204,11 @@ export default function HealthHistory({ gatoId }) {
                             <button
                               type="button"
                               onClick={() => confirmarExclusao(registro)}
+                              disabled={excluindoId === registro.id}
                               aria-label={`Excluir ${registro.titulo}`}
-                              className="rounded-lg border border-red-300 px-3 py-2 text-red-700"
+                              className="rounded-lg border border-red-300 px-3 py-2 text-red-700 disabled:opacity-50"
                             >
-                              Excluir
+                              {excluindoId === registro.id ? "Excluindo..." : "Excluir"}
                             </button>
                           </div>
                         </td>
