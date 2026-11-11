@@ -6,6 +6,7 @@ import connectPgSimple from "connect-pg-simple";
 import bcrypt from "bcryptjs";
 
 import catsRouter from "./routes/cats.js";
+import healthRouter from "./routes/health.js";
 import passwordResetRouter from "./routes/password-reset.js";
 
 import { rateLimit } from "express-rate-limit";
@@ -198,6 +199,7 @@ app.post("/api/auth/logout", (req, res, next) => {
 });
 
 app.use("/api/gatos", exigirLogin, catsRouter);
+app.use("/api/saude", exigirLogin, healthRouter);
 
 app.use((req, res) => {
   res.status(404).json({ mensagem: "Endpoint não encontrado." });

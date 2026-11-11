@@ -10,7 +10,7 @@ const statusPermitidos = [
     "adotado(a)",
 ];
 
-function hojeNoBrasil() {
+export function hojeNoBrasil() {
     const partes = new Intl.DateTimeFormat("en-US", {
         timeZone: "America/Sao_Paulo",
         year: "numeric",
@@ -24,7 +24,7 @@ function hojeNoBrasil() {
     return `${obter("year")}-${obter("month")}-${obter("day")}`;
 }
 
-function dataValida(valor) {
+export function dataValida(valor) {
     if (!/^\d{4}-\d{2}-\d{2}$/.test(valor)) return false;
     if (valor < "0001-01-01") return false;
 

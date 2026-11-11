@@ -10,8 +10,10 @@
     "seed:admin": "node scripts/seed-admin.js",
     "db:cats": "node scripts/init-cats.js",
     "db:password-reset": "node scripts/init-password-reset.js",
+    "db:health": "node scripts/init-health.js",
     "email:verify": "node scripts/verify-email.js",
-    "test:email": "node --test tests/password-email.test.js"
+    "test:email": "node --test tests/password-email.test.js",
+    "test:health": "node --test tests/health-validation.test.js"
   },
   "keywords": [],
   "author": "",
