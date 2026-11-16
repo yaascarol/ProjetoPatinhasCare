@@ -2,16 +2,21 @@ import { useEffect, useState } from "react";
 import { Navigate, Outlet } from "react-router";
 
 import { api } from "../services/api";
+import { SessionContext } from "../contexts/session-context";
 
 export default function RequireAuth() {
     const [estado, setEstado] = useState("carregando");
+    const [usuario, setUsuario] = useState(null);
 
     useEffect(() => {
         let ativo = true;
 
         api("/auth/me")
-        .then(() => {
-            if(ativo) setEstado("autorizado");
+        .then((dados) => {
+            if(ativo) {
+                setUsuario(dados.usuario);
+                setEstado("autorizado");
+            }
         })
         .catch((erro) => {
             if (!ativo) return;
@@ -50,5 +55,5 @@ export default function RequireAuth() {
         );
     }
 
-    return <Outlet />;
+    return <SessionContext.Provider value={usuario}><Outlet /></SessionContext.Provider>;
 }

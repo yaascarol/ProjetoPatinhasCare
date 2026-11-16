@@ -2,11 +2,13 @@ import { useContext } from "react";
 import { Link, useNavigate, useParams } from "react-router";
 
 import { CatsContext } from "../contexts/cats-context";
+import { SessionContext } from "../contexts/session-context";
 import CatForm from "../components/cats/CatForm"
 
 export default function EditCatPage() {
     const { id } = useParams();
     const navigate = useNavigate();
+    const usuario = useContext(SessionContext);
 
     const { gatos, atualizarGato, removerGato } = useContext(CatsContext);
 
@@ -50,7 +52,7 @@ export default function EditCatPage() {
                 key={gato.id}
                 initialValues={gato}
                 onSubmit={handleAtualizar}
-                onDelete={handleExcluir}
+                onDelete={usuario?.papel === "responsavel" ? handleExcluir : undefined}
                 submitLabel="Salvar alterações"
             />
         </section>

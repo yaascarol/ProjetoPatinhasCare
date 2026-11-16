@@ -26,29 +26,29 @@ export function criarTransporte(config) {
   });
 }
 
-export function mensagemRecuperacao(user, destinatario, link) {
+export function mensagemRecuperacao(user, destinatario, link, primeiroAcesso = false) {
   return {
     from: { name: "PatinhasCare", address: user },
     to: { address: destinatario },
-    subject: "Redefina sua senha — PatinhasCare",
+    subject: primeiroAcesso ? "Defina sua senha de acesso — PatinhasCare" : "Redefina sua senha — PatinhasCare",
     text: [
-      "Olá! Recebemos uma solicitação para redefinir sua senha no PatinhasCare.",
+      primeiroAcesso ? "Olá! Você foi cadastrado na equipe do PatinhasCare. Defina sua senha para acessar o sistema." : "Olá! Recebemos uma solicitação para redefinir sua senha no PatinhasCare.",
       "Abra o link abaixo para escolher uma nova senha:", link,
       "O link vale por 15 minutos e só pode ser usado uma vez.",
-      "Se você não solicitou a recuperação, ignore este e-mail. Sua senha continua a mesma.",
+      primeiroAcesso ? "Se você não reconhece este convite, ignore a mensagem e contate quem o convidou." : "Se você não solicitou a recuperação, ignore este e-mail. Sua senha continua a mesma.",
       "Equipe PatinhasCare",
     ].join("\n\n"),
   };
 }
 
-export async function enviarRecuperacao(config, email, link) {
+export async function enviarRecuperacao(config, email, link, primeiroAcesso = false) {
   if (config.local) {
     console.log("[RECUPERAÇÃO LOCAL — válido por 15 minutos] " + link);
     return;
   }
   const transporter = criarTransporte(config);
   try {
-    const info = await transporter.sendMail(mensagemRecuperacao(config.user, email, link));
+    const info = await transporter.sendMail(mensagemRecuperacao(config.user, email, link, primeiroAcesso));
     if (!info.accepted?.length) throw new Error("Destinatário não aceito.");
     console.log("[RECUPERAÇÃO] E-mail aceito pelo servidor do Gmail.");
   } finally { transporter.close(); }

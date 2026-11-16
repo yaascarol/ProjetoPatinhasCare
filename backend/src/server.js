@@ -7,6 +7,7 @@ import bcrypt from "bcryptjs";
 
 import catsRouter from "./routes/cats.js";
 import healthRouter from "./routes/health.js";
+import teamRouter from "./routes/team.js";
 import passwordResetRouter from "./routes/password-reset.js";
 
 import { rateLimit } from "express-rate-limit";
@@ -111,7 +112,7 @@ app.post("/api/auth/login", limitarLogin, async (req, res, next) => {
 
     const resultado = await pool.query(
       `
-        SELECT id, nome, email, senha_hash, papel, ativo, versao_senha
+        SELECT id, nome, email, senha_hash, papel, ativo, versao_senha, senha_definida
         FROM usuarios
         WHERE email = $1
       `,
@@ -125,7 +126,7 @@ app.post("/api/auth/login", limitarLogin, async (req, res, next) => {
       usuario?.senha_hash ?? hashSemUsuario
     );
 
-    if (!usuario || !usuario.ativo || !senhaCorreta) {
+    if (!usuario || !usuario.ativo || !usuario.senha_definida || !senhaCorreta) {
       return res.status(401).json({
         mensagem: "E-mail ou senha inválidos.",
       });
@@ -200,6 +201,7 @@ app.post("/api/auth/logout", (req, res, next) => {
 
 app.use("/api/gatos", exigirLogin, catsRouter);
 app.use("/api/saude", exigirLogin, healthRouter);
+app.use("/api/equipe", exigirLogin, teamRouter);
 
 app.use((req, res) => {
   res.status(404).json({ mensagem: "Endpoint não encontrado." });

@@ -199,6 +199,7 @@ router.put(
 );
 
 router.delete("/:id", async (req, res) => {
+  if (req.usuario?.papel !== "responsavel") return res.status(403).json({ mensagem: "Somente responsáveis podem excluir gatinhos." });
   try {
     const resultado = await pool.query("DELETE FROM gatos WHERE id = $1 RETURNING id", [req.params.id]);
     if (!resultado.rowCount) return res.status(404).json({ mensagem: "Gatinho não encontrado." });
