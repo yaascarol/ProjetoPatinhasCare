@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 
 import { CatsContext } from "../../contexts/cats-context";
 import { HealthContext } from "../../contexts/health-context";
+import { SessionContext } from "../../contexts/session-context";
 import { formatarData, tiposRegistro } from "../../utils/health";
 import HealthForm from "./HealthForm";
 
@@ -33,6 +34,7 @@ const secoes = [
 ];
 
 export default function HealthHistory({ gatoId }) {
+  const usuario = useContext(SessionContext);
   const { registros, excluirRegistro } = useContext(HealthContext);
   const { gatos } = useContext(CatsContext);
 
@@ -201,7 +203,7 @@ export default function HealthHistory({ gatoId }) {
                               Editar
                             </button>
 
-                            <button
+                            {usuario?.papel === "responsavel" && <button
                               type="button"
                               onClick={() => confirmarExclusao(registro)}
                               disabled={excluindoId === registro.id}
@@ -209,7 +211,7 @@ export default function HealthHistory({ gatoId }) {
                               className="rounded-lg border border-red-300 px-3 py-2 text-red-700 disabled:opacity-50"
                             >
                               {excluindoId === registro.id ? "Excluindo..." : "Excluir"}
-                            </button>
+                            </button>}
                           </div>
                         </td>
                       </tr>

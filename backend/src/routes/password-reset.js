@@ -79,7 +79,7 @@ router.post("/reset-password", limite(), async (req, res, next) => {
       await client.query("ROLLBACK");
       return res.status(400).json(invalido);
     }
-    await client.query("UPDATE usuarios SET senha_hash=$1, versao_senha=versao_senha+1 WHERE id=$2", [senhaHash,rows[0].id]);
+    await client.query("UPDATE usuarios SET senha_hash=$1, senha_definida=TRUE, versao_senha=versao_senha+1 WHERE id=$2", [senhaHash,rows[0].id]);
     await client.query("COMMIT");
     return res.json({ mensagem: "Senha atualizada! Entre com sua nova senha." });
   } catch (error) {

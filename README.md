@@ -10,7 +10,8 @@ Sistema de gestão para o projeto independente Entre Lares, que resgata gatos e 
 - Gatinhos: consulta, cadastro, edição, filtros e upload, substituição e remoção de foto implementados. Validar os fluxos abaixo no ambiente de quem assumir.
 - Home: contadores dos gatos, informações pendentes e cinco últimos cadastros ligados aos dados da API. A ordem é da criação mais recente para a mais antiga; editar não muda a data de criação.
 - Saúde: registro de consulta, vacina, vermífugo, exame e procedimento, histórico com edição e exclusão, e anexos (PDF, JPG ou PNG até 5 MB) salvos no banco. Os alertas da Home e a tela de Alertas usam esses registros.
-- Mural e Equipe ficam para a próxima etapa de integração. A existência de uma tela não significa que sua integração com o banco esteja concluída.
+- Equipe: responsáveis podem listar e cadastrar integrantes, enviar links de definição de senha, editar papéis e desativar/reativar contas. O último responsável ativo com senha definida é protegido. Veja [EQUIPE.md](EQUIPE.md).
+- Mural fica para a próxima etapa de integração. A existência de uma tela não significa que sua integração com o banco esteja concluída.
 - Publicação e configurações de produção ainda precisam ser revisadas. Este guia descreve o desenvolvimento local.
 
 O frontend usa JavaScript, React, Vite e Tailwind. O backend atual usa **JavaScript com Node.js e Express**, com PostgreSQL. Não há compilação TypeScript no backend atual.
@@ -162,9 +163,11 @@ Depois, ainda no terminal do backend, prepare a recuperação de senha e as tabe
 ```powershell
 npm run db:password-reset
 npm run db:health
+npm run db:team
 ```
 
 - `db:password-reset` executa `sql/004-recuperacao-senha.sql`.
+- `db:team` executa `sql/006-equipe.sql` e preserva as contas existentes. Execute depois das migrações anteriores.
 - `db:health` executa `sql/005-saude.sql`: cria `registros_saude` (consultas, vacinas, vermífugos, exames e procedimentos, com anexo opcional) e `tipos_saude` (opções de vacina, exame e procedimento). Um nome digitado em "Outro" vira opção, sem duplicar grafias como "antirrabica" e "Antirrábica".
 
 Por fim, crie o acesso inicial:
