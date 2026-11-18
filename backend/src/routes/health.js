@@ -284,6 +284,7 @@ router.put(
 );
 
 router.delete("/registros/:id", async (req, res) => {
+    if (req.usuario?.papel !== "responsavel") return res.status(403).json({ mensagem: "Somente responsáveis podem excluir registros de saúde." });
     const resultado = await pool.query(
         "DELETE FROM registros_saude WHERE id = $1 RETURNING id",
         [req.params.id]

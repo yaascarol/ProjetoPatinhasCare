@@ -1,4 +1,6 @@
 import { NavLink } from "react-router";
+import { useContext } from "react";
+import { SessionContext } from "../../contexts/session-context";
 
 import LogoutButton from "../LogoutButton";
 
@@ -28,11 +30,12 @@ const links = [
 ];
 
 export default function Sidebar() {
+    const usuario = useContext(SessionContext);
     return (
         <aside className="border-b-2 border-roxo p-4 md:w-56 md:shrink-0 md:border-b-0 md:border-r-4">
             <nav aria-label="Menu principal">
                 <ul className="flex flex-wrap gap-2 md:flex-col">
-                    {links.map((link) => (
+                    {links.filter((link) => link.to !== "/equipe" || usuario?.papel === "responsavel").map((link) => (
                         <li key={link.to}>
                             <NavLink to={link.to} end={link.to === "/"} className={({ isActive }) =>
                                 `flex items-center gap-3 rounded-full px-4 py-3

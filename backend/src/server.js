@@ -7,8 +7,9 @@ import bcrypt from "bcryptjs";
 
 import catsRouter from "./routes/cats.js";
 import healthRouter from "./routes/health.js";
-import passwordResetRouter from "./routes/password-reset.js";
+import teamRouter from "./routes/team.js";
 import storiesRouter from "./routes/stories.js";
+import passwordResetRouter from "./routes/password-reset.js";
 
 import { rateLimit } from "express-rate-limit";
 import { randomBytes } from "node:crypto";
@@ -112,7 +113,7 @@ app.post("/api/auth/login", limitarLogin, async (req, res, next) => {
 
     const resultado = await pool.query(
       `
-        SELECT id, nome, email, senha_hash, papel, ativo, versao_senha
+        SELECT id, nome, email, senha_hash, papel, ativo, versao_senha, senha_definida
         FROM usuarios
         WHERE email = $1
       `,
@@ -126,7 +127,7 @@ app.post("/api/auth/login", limitarLogin, async (req, res, next) => {
       usuario?.senha_hash ?? hashSemUsuario
     );
 
-    if (!usuario || !usuario.ativo || !senhaCorreta) {
+    if (!usuario || !usuario.ativo || !usuario.senha_definida || !senhaCorreta) {
       return res.status(401).json({
         mensagem: "E-mail ou senha inválidos.",
       });
@@ -173,56 +174,4 @@ async function exigirLogin(req, res, next) {
       [req.session.usuarioId]
     );
 
-    if (!resultado.rows[0] || req.session.versaoSenha !== resultado.rows[0].versao_senha) {
-      return res.status(401).json({
-        mensagem: "Sessão inválida.",
-      });
-    }
-
-    req.usuario = resultado.rows[0];
-    next();
-  } catch (erro) {
-    next(erro);
-  }
-}
-
-app.get("/api/auth/me", exigirLogin, (req, res) => {
-  res.json({ usuario: req.usuario });
-});
-
-app.post("/api/auth/logout", (req, res, next) => {
-  req.session.destroy((erro) => {
-    if (erro) return next(erro);
-
-    res.clearCookie("patinhas.sid", cookieOptions);
-    res.status(204).end();
-  });
-});
-
-app.use("/api/gatos", exigirLogin, catsRouter);
-app.use("/api/saude", exigirLogin, healthRouter);
-app.use("/api/historias", exigirLogin, storiesRouter);
-
-app.use((req, res) => {
-  res.status(404).json({ mensagem: "Endpoint não encontrado." });
-});
-
-app.use((erro, req, res, next) => {
-  if (res.headersSent) return next(erro);
-
-  if (erro.type === "entity.parse.failed") {
-    return res.status(400).json({ mensagem: "JSON inválido." });
-  }
-
-  console.error("Falha na API:", erro.code || erro.name);
-
-  res.status(500).json({
-    mensagem: "Não foi possível concluir a operação.",
-  });
-});
-
-await pool.query("SELECT 1");
-
-app.listen(port, "127.0.0.1", () => {
-  console.log(`API local disponível em http://localhost:${port}`);
-});
+    if
