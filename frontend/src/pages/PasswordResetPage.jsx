@@ -39,7 +39,9 @@ export default function PasswordResetPage({ redefinir = false }) {
       <section className="w-full max-w-xl rounded-3xl border border-lima px-6 py-10 sm:px-16 sm:py-12">
         <img src="/imagens/icones-patinhascare/LOGO PatinhasCare.png" alt="PatinhasCare" className="mx-auto h-auto w-50" />
         <h1 className="mt-8 text-center text-2xl font-semibold">{redefinir ? "Definir nova senha" : "Recuperar senha"}</h1>
-        <p className="mt-3 text-center text-sm text-stone-600">{redefinir ? "Escolha uma senha com pelo menos 12 caracteres." : "Informe o e-mail usado para acessar o PatinhasCare."}</p>
+        {!concluido && (
+          <p className="mt-3 text-center text-sm text-stone-600">{redefinir ? "Escolha uma senha com pelo menos 12 caracteres." : "Informe o e-mail usado para acessar o PatinhasCare."}</p>
+        )}
         {redefinir && !tokenValido ? <p role="alert" className="mt-6">Link inválido. Solicite uma nova recuperação.</p> : !concluido && (
           <form onSubmit={enviar} className="mt-8 space-y-5">
             {redefinir ? <>
