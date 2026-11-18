@@ -4,7 +4,7 @@ import Input from "../components/ui/Input";
 import Button from "../components/ui/Button";
 
 import { CatsContext } from "../contexts/cats-context";
-import { api } from "../services/api";
+import { SessionContext } from "../contexts/session-context";
 import {
   listarHistorias,
   cadastrarHistoria,
@@ -236,7 +236,7 @@ function FormularioHistoria({
 export default function StoriesPage() {
   const { gatos } = useContext(CatsContext);
 
-  const [usuario, setUsuario] = useState(null);
+  const usuario = useContext(SessionContext);
   const [lista, setLista] = useState([]);
   const [estado, setEstado] = useState("carregando");
   const [erroCarga, setErroCarga] = useState("");
@@ -252,13 +252,9 @@ export default function StoriesPage() {
   useEffect(() => {
     const controller = new AbortController();
 
-    Promise.all([
-      listarHistorias(controller.signal),
-      api("/auth/me", { signal: controller.signal }),
-    ])
-      .then(([historias, resposta]) => {
+    listarHistorias(controller.signal)
+      .then((historias) => {
         setLista(historias);
-        setUsuario(resposta.usuario);
         setEstado("pronto");
       })
       .catch((erro) => {

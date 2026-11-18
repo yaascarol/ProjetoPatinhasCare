@@ -19,7 +19,7 @@ test("Equipe: autorização, persistência, primeiro acesso e proteção do últ
     await adminPool.query(`CREATE SCHEMA ${schema}`);
     criado = true;
     assert.equal((await pool.query("SELECT current_schema() AS nome")).rows[0].nome, schema);
-    for (const arquivo of ["001-usuarios.sql", "002-gatos.sql", "003-fotos-gatos.sql", "004-recuperacao-senha.sql", "005-saude.sql", "006-equipe.sql"]) {
+    for (const arquivo of ["001-usuarios.sql", "002-gatos.sql", "003-fotos-gatos.sql", "004-recuperacao-senha.sql", "005-saude.sql", "006-historias.sql", "007-equipe.sql"]) {
       await pool.query(await readFile(new URL(`../sql/${arquivo}`, import.meta.url), "utf8"));
     }
     const senha = "SenhaTesteEquipe123!";
