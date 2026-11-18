@@ -8,6 +8,7 @@ import bcrypt from "bcryptjs";
 import catsRouter from "./routes/cats.js";
 import healthRouter from "./routes/health.js";
 import passwordResetRouter from "./routes/password-reset.js";
+import storiesRouter from "./routes/stories.js";
 
 import { rateLimit } from "express-rate-limit";
 import { randomBytes } from "node:crypto";
@@ -200,6 +201,7 @@ app.post("/api/auth/logout", (req, res, next) => {
 
 app.use("/api/gatos", exigirLogin, catsRouter);
 app.use("/api/saude", exigirLogin, healthRouter);
+app.use("/api/historias", exigirLogin, storiesRouter);
 
 app.use((req, res) => {
   res.status(404).json({ mensagem: "Endpoint não encontrado." });
