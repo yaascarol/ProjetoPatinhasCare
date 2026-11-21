@@ -167,7 +167,7 @@ npm run db:team
 ```
 
 - `db:password-reset` executa `sql/004-recuperacao-senha.sql`.
-- `db:team` executa `sql/006-equipe.sql` e preserva as contas existentes. Execute depois das migrações anteriores.
+- `db:team` executa `sql/007-equipe.sql` e preserva as contas existentes. Execute depois das migrações anteriores.
 - `db:health` executa `sql/005-saude.sql`: cria `registros_saude` (consultas, vacinas, vermífugos, exames e procedimentos, com anexo opcional) e `tipos_saude` (opções de vacina, exame e procedimento). Um nome digitado em "Outro" vira opção, sem duplicar grafias como "antirrabica" e "Antirrábica".
 - "db:stories": "node scripts/init-stories.js",
 - "test:stories": "node --test tests/story-validation.test.js",
