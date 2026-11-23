@@ -1,4 +1,6 @@
-export const API_URL = "http://localhost:4000/api";
+export const API_URL = import.meta.env.DEV
+  ? "http://localhost:4000/api"
+  : new URL("/api", window.location.origin).href;
 
 export async function api(caminho, opcoes = {}) {
   const headers = new Headers(opcoes.headers);

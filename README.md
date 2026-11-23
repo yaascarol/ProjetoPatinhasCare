@@ -1,5 +1,7 @@
 # PatinhasCare
 
+Para hospedar a versão de teste gratuitamente, siga [PUBLICACAO.md](PUBLICACAO.md). O arquivo `render.yaml` automatiza a configuração do serviço no Render; o banco Neon e a conta de envio Brevo precisam ser configurados nos respectivos painéis.
+
 Sistema de gestão para o projeto independente Entre Lares, que resgata gatos e oferece lar temporário até a adoção.
 
 [Protótipo no Figma](https://www.figma.com/site/oU0AbwP6LuoGaypKpuvnRa/SistemaPatinhasCare--Copy-?node-id=0-1&t=GMxHgQxilP3klnN5-1)

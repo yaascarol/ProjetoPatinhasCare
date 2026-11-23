@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: patinhascare-teste
+    runtime: node
+    plan: free
+    buildCommand: npm --prefix backend ci && npm --prefix frontend ci --include=dev && npm --prefix frontend run lint && npm --prefix frontend run build
+    startCommand: npm --prefix backend start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: 24.19.0
+      - key: NODE_ENV
+        value: production
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: DATABASE_URL
+        sync: false
+      - key: EMAIL_PROVIDER
+        value: brevo
+      - key: RECUPERACAO_LOCAL
+        value: "false"
+      - key: BREVO_API_KEY
+        sync: false
+      - key: EMAIL_FROM
+        sync: false

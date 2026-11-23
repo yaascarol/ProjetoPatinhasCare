@@ -12,14 +12,17 @@ import passwordResetRouter from "./routes/password-reset.js";
 
 import { rateLimit } from "express-rate-limit";
 import { randomBytes } from "node:crypto";
+import { fileURLToPath } from "node:url";
 
 
 import { pool } from "./db.js";
 
 const app = express();
+const producao = process.env.NODE_ENV === "production";
+if (producao) app.set("trust proxy", 1);
 
 const port = Number(process.env.PORT || 4000);
-const origin = process.env.FRONTEND_ORIGIN;
+const origin = process.env.FRONTEND_ORIGIN || (producao ? process.env.RENDER_EXTERNAL_URL : undefined);
 const secret = process.env.SESSION_SECRET;
 
 if (!origin || !secret || secret.length < 32) {
@@ -31,7 +34,7 @@ const PgSession = connectPgSimple(session);
 const cookieOptions = {
   httpOnly: true,
   sameSite: "lax",
-  secure: false,
+  secure: producao,
   path: "/",
 };
 
@@ -40,7 +43,16 @@ const hashSemUsuario = await bcrypt.hash(
   12
 );
 
-app.use(helmet());
+app.use(helmet({ contentSecurityPolicy: { directives: {
+  imgSrc: ["'self'", "data:", "blob:"],
+} } }));
+
+app.get("/api/health", async (req, res, next) => {
+  try {
+    await pool.query("SELECT 1");
+    res.json({ status: "ok" });
+  } catch (erro) { next(erro); }
+});
 
 app.use(
   cors({
@@ -203,9 +215,18 @@ app.use("/api/gatos", exigirLogin, catsRouter);
 app.use("/api/saude", exigirLogin, healthRouter);
 app.use("/api/equipe", exigirLogin, teamRouter);
 
-app.use((req, res) => {
+app.use("/api", (req, res) => {
   res.status(404).json({ mensagem: "Endpoint não encontrado." });
 });
+
+if (producao) {
+  const pasta = fileURLToPath(new URL("../../frontend/dist/", import.meta.url));
+  const index = fileURLToPath(new URL("../../frontend/dist/index.html", import.meta.url));
+  app.use(express.static(pasta));
+  app.get("/{*caminho}", (req, res) => res.sendFile(index));
+}
+
+app.use((req, res) => res.status(404).json({ mensagem: "Página não encontrada." }));
 
 app.use((erro, req, res, next) => {
   if (res.headersSent) return next(erro);
@@ -223,6 +244,6 @@ app.use((erro, req, res, next) => {
 
 await pool.query("SELECT 1");
 
-app.listen(port, "127.0.0.1", () => {
-  console.log(`API local disponível em http://localhost:${port}`);
+app.listen(port, producao ? "0.0.0.0" : "127.0.0.1", () => {
+  console.log(`Servidor disponível na porta ${port}.`);
 });

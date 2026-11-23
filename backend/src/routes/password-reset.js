@@ -46,7 +46,7 @@ router.post("/forgot-password", limite(), async (req, res, next) => {
       try { await enviarRecuperacao(config, email.trim().toLowerCase(), link.href); }
       catch {
         // Não revelar a existência da conta nem registrar link, senha ou endereço.
-        console.error("[RECUPERAÇÃO] Falha no envio. Execute npm run email:verify para conferir o Gmail.");
+        console.error("[RECUPERAÇÃO] Falha no envio. Execute npm run email:verify para conferir o provedor.");
         await pool.query("DELETE FROM recuperacoes_senha WHERE usuario_id=$1 AND token_hash=$2", [rows[0].id, hash(new URLSearchParams(link.hash.slice(1)).get("token"))]);
       }
     }

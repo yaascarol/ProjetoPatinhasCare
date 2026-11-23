@@ -1,7 +1,7 @@
 import nodemailer from "nodemailer";
 
 export function configuracaoEmail(env = process.env) {
-  const origin = new URL(env.FRONTEND_ORIGIN);
+  const origin = new URL(env.FRONTEND_ORIGIN || (env.NODE_ENV === "production" ? env.RENDER_EXTERNAL_URL : undefined));
   const local = env.RECUPERACAO_LOCAL === "true";
   if (local) {
     if (env.NODE_ENV === "production" || !["localhost","127.0.0.1"].includes(origin.hostname)) {
@@ -12,6 +12,13 @@ export function configuracaoEmail(env = process.env) {
   if (env.NODE_ENV === "production" && (origin.protocol !== "https:" || ["localhost","127.0.0.1"].includes(origin.hostname))) {
     throw new Error("Configure FRONTEND_ORIGIN com o endereço público HTTPS.");
   }
+  if (env.EMAIL_PROVIDER === "brevo") {
+    if (!env.BREVO_API_KEY?.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(env.EMAIL_FROM?.trim() || "")) {
+      throw new Error("Configure BREVO_API_KEY e EMAIL_FROM.");
+    }
+    return { local: false, provider: "brevo", origin, apiKey: env.BREVO_API_KEY.trim(), user: env.EMAIL_FROM.trim() };
+  }
+  if (env.EMAIL_PROVIDER && env.EMAIL_PROVIDER !== "gmail") throw new Error("Provedor de email inválido.");
   if (!env.SMTP_USER || !env.SMTP_PASSWORD) throw new Error("Configure SMTP_USER e SMTP_PASSWORD no .env.");
   return { local: false, origin, user: env.SMTP_USER.trim(), password: env.SMTP_PASSWORD.replace(/\s/g, "") };
 }
@@ -41,9 +48,24 @@ export function mensagemRecuperacao(user, destinatario, link, primeiroAcesso = f
   };
 }
 
-export async function enviarRecuperacao(config, email, link, primeiroAcesso = false) {
+export async function enviarRecuperacao(config, email, link, primeiroAcesso = false, requisitar = fetch) {
   if (config.local) {
     console.log("[RECUPERAÇÃO LOCAL — válido por 15 minutos] " + link);
+    return;
+  }
+  if (config.provider === "brevo") {
+    const mensagem = mensagemRecuperacao(config.user, email, link, primeiroAcesso);
+    const resposta = await requisitar("https://api.brevo.com/v3/smtp/email", {
+      method: "POST",
+      headers: { "api-key": config.apiKey, "Content-Type": "application/json", accept: "application/json" },
+      body: JSON.stringify({
+        sender: { name: "PatinhasCare", email: config.user },
+        to: [{ email }], subject: mensagem.subject, textContent: mensagem.text,
+      }),
+      signal: AbortSignal.timeout(15000),
+    });
+    if (!resposta.ok) throw new Error(`Provedor recusou envio (HTTP ${resposta.status}).`);
+    console.log("[RECUPERAÇÃO] E-mail aceito pela API de envio.");
     return;
   }
   const transporter = criarTransporte(config);
