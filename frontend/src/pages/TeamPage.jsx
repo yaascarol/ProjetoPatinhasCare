@@ -4,6 +4,7 @@ import { SessionContext } from "../contexts/session-context";
 import { api } from "../services/api";
 import Input from "../components/ui/Input";
 import Button from "../components/ui/Button";
+import ActionsDropdown from "../components/ui/ActionsDropdown";
 
 export default function TeamPage() {
   const usuario = useContext(SessionContext);
@@ -157,13 +158,13 @@ export default function TeamPage() {
             <td className="break-all p-3">{pessoa.email}</td>
             <td className="p-3">{pessoa.papel === "responsavel" ? "Responsável" : "Voluntário"}</td>
             <td className="p-3"><span className="whitespace-nowrap">{!pessoa.ativo ? "Desativado" : !pessoa.senhaDefinida ? "Senha pendente" : "Ativo"}</span></td>
-            <td className="p-3"><div className="flex min-w-40 flex-col items-start gap-3">
-              <button type="button" disabled={ocupado} className="rounded underline disabled:opacity-50" onClick={() => { setEditando(pessoa.id); setNovoPapel(pessoa.papel); setNovo(false); setErro(""); setMensagem(""); }}>Editar papel</button>
-              <button type="button" disabled={ocupado || !pessoa.ativo} className="rounded underline disabled:opacity-50" onClick={() => enviarLink(pessoa)}>{pessoa.senhaDefinida ? "Redefinir senha" : "Enviar acesso"}</button>
-              <button type="button" disabled={ocupado || ultimoResponsavel(pessoa)} className="rounded text-red-700 underline disabled:opacity-50" onClick={() => alternarAcesso(pessoa)}>{pessoa.ativo ? "Desativar acesso" : "Reativar acesso"}</button>
-              <button type="button" disabled={ocupado || ultimoResponsavel(pessoa)} className="rounded text-red-700 underline disabled:opacity-50" onClick={() => excluirIntegrante(pessoa)}>Excluir integrante</button>
-              {ultimoResponsavel(pessoa) && <span className="text-xs text-stone-600">Último responsável com acesso configurado.</span>}
-            </div></td>
+            <td className="p-3"><ActionsDropdown nome={pessoa.nome} disabled={ocupado}>
+              <button type="button" disabled={ocupado} className="block min-h-11 w-full rounded-lg px-3 py-2 text-left transition-colors hover:bg-lilas/25 focus-visible:outline-purple-700 disabled:cursor-not-allowed disabled:opacity-50" onClick={() => { setEditando(pessoa.id); setNovoPapel(pessoa.papel); setNovo(false); setErro(""); setMensagem(""); }}>Editar papel</button>
+              <button type="button" disabled={ocupado || !pessoa.ativo} className="block min-h-11 w-full rounded-lg px-3 py-2 text-left transition-colors hover:bg-lilas/25 focus-visible:outline-purple-700 disabled:cursor-not-allowed disabled:opacity-50" onClick={() => enviarLink(pessoa)}>{pessoa.senhaDefinida ? "Redefinir senha" : "Enviar acesso"}</button>
+              <button type="button" disabled={ocupado || ultimoResponsavel(pessoa)} className="block min-h-11 w-full rounded-lg px-3 py-2 text-left text-red-700 transition-colors hover:bg-red-50 focus-visible:outline-purple-700 disabled:cursor-not-allowed disabled:opacity-50" onClick={() => alternarAcesso(pessoa)}>{pessoa.ativo ? "Desativar acesso" : "Reativar acesso"}</button>
+              <button type="button" disabled={ocupado || ultimoResponsavel(pessoa)} className="block min-h-11 w-full rounded-lg px-3 py-2 text-left text-red-700 transition-colors hover:bg-red-50 focus-visible:outline-purple-700 disabled:cursor-not-allowed disabled:opacity-50" onClick={() => excluirIntegrante(pessoa)}>Excluir integrante</button>
+              {ultimoResponsavel(pessoa) && <span className="mt-2 block border-t border-lilas/40 px-3 pt-3 pb-1 text-xs text-stone-600">Último responsável com acesso configurado.</span>}
+            </ActionsDropdown></td>
           </tr>)}</tbody>
         </table>
         {!equipe.length && <p className="p-4">Nenhum integrante encontrado.</p>}
