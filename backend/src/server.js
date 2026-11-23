@@ -246,12 +246,6 @@ app.use((erro, req, res, next) => {
 
 await pool.query("SELECT 1");
 
-<<<<<<< HEAD
 app.listen(port, producao ? "0.0.0.0" : "127.0.0.1", () => {
   console.log(`Servidor disponível na porta ${port}.`);
 });
-=======
-app.listen(port, "127.0.0.1", () => {
-  console.log(`API local disponível em http://localhost:${port}`);
-});
->>>>>>> 3cc0a3a844be2440030213fecf6ec18b989d2513
