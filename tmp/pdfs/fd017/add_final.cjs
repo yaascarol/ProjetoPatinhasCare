@@ -1,0 +1,12 @@
+const fs=require('fs');const file='tmp/pdfs/fd017/report_revised.cjs';let s=fs.readFileSync(file,'utf8');
+const section=`start('Considerações finais');
+p('A análise do arquivo amostra-forense-pdf.pdf no VirusTotal apresentou resultados diferentes entre a verificação dos antivírus e os ambientes de análise de comportamento. Na reanálise concluída em 20/11/2026, nenhum fornecedor da aba Detection sinalizou o arquivo como malicioso. Alguns mecanismos não conseguiram processar o formato e um apresentou falha, portanto nem todas as verificações tiveram um resultado válido.');
+h('Principais achados');
+p('Na aba Behavior, o DOCGuard classificou a amostra como MALWARE. Essa indicação merece atenção e precisa ser considerada junto ao resultado dos antivírus. A ausência de detecções na tela principal não elimina o alerta apresentado por esse ambiente.');
+p('O Jujubox registrou a mensagem “FD-017 — alerta de abertura do laboratório.” e a indicação de uma janela JavaScript. Também foram exibidos uma consulta DNS para acroipm2.adobe.com e tráfego UDP para 8.8.8.8 na porta 53. Os endereços de inventário e de edição do guia apareceram como padrões em memória no DOCGuard, o que não confirma que tenham sido acessados.');
+p('O CAPE registrou a abertura do documento no Acrobat, processos relacionados ao tratamento de falhas do Adobe e atividades de serviços do Windows. O VirusTotal também apresentou etiquetas relacionadas a JavaScript, ações automáticas, arquivos incorporados, formulário e WMI. Esses registros mostram o que foi identificado pelo serviço, mas não permitem atribuir automaticamente toda a atividade observada ao PDF.');
+h('Como interpretar os resultados');
+p('O conjunto dos resultados exige uma avaliação cuidadosa: há um alerta de comportamento e registros de interação com JavaScript, mesmo sem detecções na aba de antivírus. Com as informações consultadas, não é possível garantir que o arquivo seja seguro nem afirmar que ele tenha comprometido um computador.');
+p('Este relatório se limita aos dados e às capturas consultados no VirusTotal. Não houve teste em uma VM local, e a nova data de análise do arquivo não confirma a renovação de todos os relatórios de comportamento. Para esclarecer a classificação do DOCGuard e a origem das atividades registradas, seria necessário complementar a investigação em um ambiente isolado.');
+`;
+s=s.replace("doc.setTitle(",section+"\ndoc.setTitle(");fs.writeFileSync(file,s);

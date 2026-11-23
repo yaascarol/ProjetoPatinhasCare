@@ -3,8 +3,7 @@
 ## Preparação
 
 Na pasta backend, execute `npm run db:team` e reinicie `npm run dev`.
-A migração 006 acrescenta senha_definida aos usuários. Contas existentes são preservadas.
-São pré-requisitos as migrações anteriores, especialmente 004 (recuperação).
+A migração 007 acrescenta senha_definida aos usuários. Contas existentes são preservadas.São pré-requisitos as migrações anteriores, especialmente 004 (recuperação).
 
 ## Uso
 

@@ -1,0 +1,5 @@
+REGISTRO SINTETICO FD-017
+Fonte descrita: Windows Management Instrumentation (WMI)
+Namespace de referencia: root/CIMV2
+Consulta WQL de exemplo: SELECT Caption, Version FROM Win32_OperatingSystem
+Estado: consulta documentada para leitura; nenhuma coleta foi executada.

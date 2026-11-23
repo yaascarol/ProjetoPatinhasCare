@@ -8,6 +8,7 @@ import bcrypt from "bcryptjs";
 import catsRouter from "./routes/cats.js";
 import healthRouter from "./routes/health.js";
 import teamRouter from "./routes/team.js";
+import storiesRouter from "./routes/stories.js";
 import passwordResetRouter from "./routes/password-reset.js";
 
 import { rateLimit } from "express-rate-limit";
@@ -213,6 +214,7 @@ app.post("/api/auth/logout", (req, res, next) => {
 
 app.use("/api/gatos", exigirLogin, catsRouter);
 app.use("/api/saude", exigirLogin, healthRouter);
+app.use("/api/historias", exigirLogin, storiesRouter);
 app.use("/api/equipe", exigirLogin, teamRouter);
 
 app.use("/api", (req, res) => {
@@ -244,6 +246,12 @@ app.use((erro, req, res, next) => {
 
 await pool.query("SELECT 1");
 
+<<<<<<< HEAD
 app.listen(port, producao ? "0.0.0.0" : "127.0.0.1", () => {
   console.log(`Servidor disponível na porta ${port}.`);
 });
+=======
+app.listen(port, "127.0.0.1", () => {
+  console.log(`API local disponível em http://localhost:${port}`);
+});
+>>>>>>> 3cc0a3a844be2440030213fecf6ec18b989d2513

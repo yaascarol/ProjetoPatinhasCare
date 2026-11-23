@@ -1,0 +1,12 @@
+const fs=require('fs'); const file='tmp/pdfs/fd017/report_revised.cjs';let s=fs.readFileSync(file,'utf8');
+s=s.replace("if(sub)p(sub,{size:10,lead:14,color:muted,gap:17});",'y-=12;');
+s=s.replace("text('Análise do arquivo • 20 de novembro de 2026',50,27,8,regular,muted);",'');
+s=s.replace("text('SEGURANÇA DIGITAL  /  FD-017',50,795,9,bold,green);",'');
+s=s.replace(/p\('Figura [123]\.[^\n]*?\);/g,'');
+s=s.replace(/^p\('Referências[^\n]*\r?\n/gm,'');
+s=s.replace(/h\('Identificações diferentes'\);\r?\np\([^\n]*\);\r?\n/,'');
+s=s.replace(/h\('Origem das evidências'\);[\s\S]*?(?=doc.setTitle)/,'');
+s=s.replace("h('Uma nota em camada desligada');","p('A inspeção encontrou frases que estão salvas no PDF, mas não aparecem ao abrir as páginas normalmente. Isso acontece de duas formas: uma parte do conteúdo está com a exibição desativada; outra foi escrita na mesma cor do fundo.');\nh('Texto com exibição desativada');");
+s=s.replace('Ela pertence à camada “Nota editorial”, inicialmente desligada. A frase está nos dados do documento, mas não aparece na visualização padrão.','Ela está em uma camada chamada “Nota editorial”. Uma camada é uma parte do conteúdo cuja exibição pode ser ativada ou desativada no leitor. Neste arquivo, ela começa desativada, por isso a frase não aparece na leitura normal.');
+s=s.replace('Os bytes da frase antiga permanecem no arquivo, mas a versão atual do objeto usa o texto citado acima. Há ainda um objeto sem vínculo com as páginas contendo','A frase antiga continua armazenada no histórico do arquivo, mas foi substituída no conteúdo atual. Também foi encontrado um texto salvo internamente, sem ligação com as páginas exibidas:');
+fs.writeFileSync(file,s);

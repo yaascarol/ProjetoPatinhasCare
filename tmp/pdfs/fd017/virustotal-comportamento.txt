@@ -1,0 +1,1232 @@
+Browser tab: 1, Title: "VirusTotal - File - 2080f63126d077ade7a7df46b494647d5c76845ecbf06861c414c2fac5a56163", URL: "https://www.virustotal.com/gui/file/2080f63126d077ade7a7df46b494647d5c76845ecbf06861c414c2fac5a56163/behavior".
+0 AXWebArea VirusTotal - File - 2080f63126d077ade7a7df46b494647d5c76845ecbf06861c414c2fac5a56163, URL: virustotal.com/gui/file/2080f63126d077ade7a7df46b494647d5c76845ecbf06861c414c2fac5a56163/behavior
+	1 container view-container
+		2 container
+			3 button Description: Menu, ID: hamburguer
+				4 image
+			5 link virustotal.com/
+			6 button Search
+				7 image
+			8 button (collapsed) More actions Unread notifications, Secondary Actions: Expand
+				9 image
+				10 text More actions
+				11 text Unread notifications
+			12 button Apps
+				13 image
+			14 container searchBar
+				15 button Close search
+					16 image
+				17 text field (settable) Description: Search, ID: searchInput
+				18 button Submit search
+					19 image
+		20 container
+			21 text No security vendors flagged this file as malicious
+			22 button Reanalyze, ID: reanalize
+			23 container main
+				24 button (collapsed) Similar, Secondary Actions: Expand
+			25 container main
+				26 button (collapsed) More, Secondary Actions: Expand
+			27 text 2080f63126d077ade7a7df46b494647d5c76845ecbf06861c414c2fac5a56163
+			28 text amostra-forense-pdf.pdf
+			29 text Size
+			30 text 105.16 KB
+			31 text Last Analysis Date
+			32 container Fri Nov 20 2026 20:12:03 GMT-0300 (Horário Padrão de Brasília)
+				33 text a moment ago
+			34 link Description: pdf, Value: virustotal.com/gui/search?query=entity%3Afile%20tag%3Apdf
+			35 link Description: js-embedded, Value: virustotal.com/gui/search?query=entity%3Afile%20tag%3Ajs-embedded
+			36 link Description: detect-debug-environment, Value: virustotal.com/gui/search?query=entity%3Afile%20tag%3Adetect-debug-environment
+			37 link Description: file-embedded, Value: virustotal.com/gui/search?query=entity%3Afile%20tag%3Afile-embedded
+			38 link Description: autoaction, Value: virustotal.com/gui/search?query=entity%3Afile%20tag%3Aautoaction
+			39 link Description: calls-wmi, Value: virustotal.com/gui/search?query=entity%3Afile%20tag%3Acalls-wmi
+			40 link Description: obfuscated, Value: virustotal.com/gui/search?query=entity%3Afile%20tag%3Aobfuscated
+			41 link Description: acroform, Value: virustotal.com/gui/search?query=entity%3Afile%20tag%3Aacroform
+			42 link Description: idle, Value: virustotal.com/gui/search?query=entity%3Afile%20tag%3Aidle
+			43 tab group
+				44 tab (selectable, settable, boolean) DETECTION, Value: 0, ID: report-tab-detection
+				45 tab (selectable, settable, boolean) DETAILS, Value: 0, ID: report-tab-details
+				46 tab (selectable, settable, boolean) RELATIONS, Value: 0, ID: report-tab-relations
+				47 tab (selected, settable, boolean) BEHAVIOR, Value: 1, ID: report-tab-behavior
+				48 tab (selectable, settable, boolean) COMMUNITY, Value: 0, ID: report-tab-community
+			49 link Description: Join our Community, Value: virustotal.com/gui/join-us
+			50 text  and enjoy additional community insights and crowdsourced detections, plus an API key to 
+			51 link Description: automate checks., Value: docs.virustotal.com/reference/overview
+			52 container behaviourtab
+				53 checkbox (settable, integer) Description: Display grouped sandbox reports, Value: 1, ID: sandbox-grouped-reports
+				54 checkbox (settable, integer) Description: CAPE Sandbox, Value: 1, ID: behaviour-2080f63126d077ade7a7df46b494647d5c76845ecbf06861c414c2fac5a56163_CAPE Sandbox
+				55 button CAPE Sandbox
+					56 text CAPE Sandbox
+				57 button 0
+					58 image
+					59 text 0
+				60 button 7
+					61 image
+					62 text 7
+				63 button 0
+					64 image
+					65 text 0
+				66 button 0
+					67 image
+					68 text 0
+				69 button 6
+					70 image
+					71 text 6
+				72 button 0
+					73 image
+					74 text 0
+				75 checkbox (settable, integer) Description: DOCGuard, Value: 1, ID: behaviour-2080f63126d077ade7a7df46b494647d5c76845ecbf06861c414c2fac5a56163_DOCGuard
+				76 button DOCGuard
+					77 text DOCGuard
+				78 button 1
+					79 image
+					80 text 1
+				81 button 0
+					82 image
+					83 text 0
+				84 button 0
+					85 image
+					86 text 0
+				87 button 0
+					88 image
+					89 text 0
+				90 button 0
+					91 image
+					92 text 0
+				93 button 0
+					94 image
+					95 text 0
+				96 checkbox (settable, integer) Description: VirusTotal Jujubox, Value: 1, ID: behaviour-2080f63126d077ade7a7df46b494647d5c76845ecbf06861c414c2fac5a56163_VirusTotal Jujubox
+				97 button VirusTotal Jujubox
+					98 text VirusTotal Jujubox
+				99 button 0
+					100 image
+					101 text 0
+				102 button 0
+					103 image
+					104 text 0
+				105 button 0
+					106 image
+					107 text 0
+				108 button 0
+					109 image
+					110 text 0
+				111 button 9
+					112 image
+					113 text 9
+				114 button 2
+					115 image
+					116 text 2
+				117 checkbox (settable, integer) Description: Yomi Hunter, Value: 1, ID: behaviour-2080f63126d077ade7a7df46b494647d5c76845ecbf06861c414c2fac5a56163_Yomi Hunter
+				118 button Yomi Hunter
+					119 text Yomi Hunter
+				120 button 0
+					121 image
+					122 text 0
+				123 button 2
+					124 image
+					125 text 2
+				126 button 0
+					127 image
+					128 text 0
+				129 button 0
+					130 image
+					131 text 0
+				132 button 0
+					133 image
+					134 text 0
+				135 button 0
+					136 image
+					137 text 0
+				138 checkbox (settable, integer) Description: Zenbox, Value: 1, ID: behaviour-2080f63126d077ade7a7df46b494647d5c76845ecbf06861c414c2fac5a56163_Zenbox
+				139 button Zenbox
+					140 text Zenbox
+				141 button 0
+					142 image
+					143 text 0
+				144 button 1
+					145 image
+					146 text 1
+				147 button 0
+					148 image
+					149 text 0
+				150 button 0
+					151 image
+					152 text 0
+				153 button 0
+					154 image
+					155 text 0
+				156 button 0
+					157 image
+					158 text 0
+				159 container
+					160 heading Activity Summary, Value: 3
+						161 text Activity Summary
+					162 button (collapsed) Download Artifacts, Secondary Actions: Expand
+					163 button (collapsed) Full Reports, Secondary Actions: Expand
+					164 container helpMenu
+						165 button (collapsed) Help, Secondary Actions: Expand
+				166 button Detections
+					167 image
+					168 text Detections
+				169 container
+					170 text 1 MALWARE
+				171 button Mitre Signatures
+					172 image
+					173 text Mitre Signatures
+				174 container
+					175 container MEDIUM
+						176 text 16 MEDIUM
+					177 container LOW
+						178 text 22 LOW
+					179 container INFO
+						180 text 6 INFO
+				181 button IDS Rules
+					182 image
+					183 text IDS Rules
+				184 text NOT FOUND
+				185 button Sigma Rules
+					186 image
+					187 text Sigma Rules
+				188 text NOT FOUND
+				189 button Dropped Files
+					190 image
+					191 text Dropped Files
+				192 container OTHER
+					193 text 14 OTHER
+				194 button Network comms
+					195 image
+					196 text Network comms
+				197 container
+					198 container DNS
+						199 text 1 DNS
+					200 container IP
+						201 text 1 IP
+				202 container
+					203 container behaviour-tags
+						204 container
+							205 text Behavior Tags
+							206 button Description: More information, ID: info
+							207 button (expanded) Description: Toggle Behavior Tags, Secondary Actions: Collapse
+								208 image
+						209 container
+							210 link Description: calls-wmi, ID: chip-0
+								211 text calls-wmi
+							212 link Description: detect-debug-environment, ID: chip-1
+								213 text detect-debug-environment
+							214 link Description: idle, ID: chip-2
+								215 text idle
+							216 link Description: obfuscated, ID: chip-3
+								217 text obfuscated
+					218 container
+						219 text Dynamic Analysis Sandbox Detections
+						220 button Description: More information, ID: info
+						221 button (expanded) Description: Toggle Dynamic Analysis Sandbox Detections, Secondary Actions: Collapse
+							222 image
+					223 container
+						224 image
+						225 text The sandbox  DOCGuard  flags this file as:  MALWARE
+					226 text MITRE ATT&CK Tactics and Techniques
+					227 button (expanded) Description: Toggle MITRE ATT&CK Tactics and Techniques, Secondary Actions: Collapse
+						228 image
+					229 text field (settable) searchInput
+					230 button Expand MITRE ATT&CK matrix
+						231 image
+					232 button None
+					233 button Info
+					234 button Low
+					235 button Medium
+					236 container
+						237 link Description: Initial Access, Value: virustotal.com/gui/search?query=attack_tactic%3ATA0001
+						238 button TA0001
+							239 text TA0001
+						240 text 3  Techniques
+						241 container Yomi Hunter
+							242 image
+						243 link Description: Spearphishing Link, Value: virustotal.com/gui/search?query=attack_technique%3AT1192
+						244 button 1
+						245 button T1192
+							246 text T1192
+						247 container Zenbox
+							248 image
+						249 link Description: Phishing, Value: virustotal.com/gui/search?query=attack_technique%3AT1566
+						250 button Toggle subtechniques
+							251 image
+						252 button T1566
+							253 text T1566
+						254 link Description: Execution, Value: virustotal.com/gui/search?query=attack_tactic%3ATA0002
+						255 button TA0002
+							256 text TA0002
+						257 text 3  Techniques
+						258 container CAPE Sandbox
+							259 image
+						260 link Description: Windows Management Instrumentation, Value: virustotal.com/gui/search?query=attack_technique%3AT1047
+						261 button 1
+						262 button T1047
+							263 text T1047
+						264 container CAPE Sandbox
+							265 image
+						266 link Description: Native API, Value: virustotal.com/gui/search?query=attack_technique%3AT1106
+						267 button 1
+						268 button T1106
+							269 text T1106
+						270 container CAPE Sandbox
+							271 image
+						272 link Description: Hijack Execution Flow, Value: virustotal.com/gui/search?query=attack_technique%3AT1574
+						273 button 1
+						274 button T1574
+							275 text T1574
+						276 link Description: Privilege Escalation, Value: virustotal.com/gui/search?query=attack_tactic%3ATA0004
+						277 button TA0004
+							278 text TA0004
+						279 text 1  Techniques
+						280 container CAPE Sandbox
+							281 image
+						282 link Description: Process Injection, Value: virustotal.com/gui/search?query=attack_technique%3AT1055
+						283 button 2
+						284 button T1055
+							285 text T1055
+						286 link Description: Stealth, Value: virustotal.com/gui/search?query=attack_tactic%3ATA0005
+						287 button TA0005
+							288 text TA0005
+						289 text 8  Techniques
+						290 container CAPE Sandbox
+							291 image
+						292 link Description: Obfuscated Files or Information, Value: virustotal.com/gui/search?query=attack_technique%3AT1027
+						293 button 1
+						294 button T1027
+							295 text T1027
+						296 container CAPE Sandbox
+							297 image
+						298 link Description: Process Injection, Value: virustotal.com/gui/search?query=attack_technique%3AT1055
+						299 button 2
+						300 button T1055
+							301 text T1055
+						302 container Yomi Hunter
+							303 image
+						304 link Description: Disabling Security Tools, Value: virustotal.com/gui/search?query=attack_technique%3AT1089
+						305 button 1
+						306 button T1089
+							307 text T1089
+						308 container CAPE Sandbox
+							309 image
+						310 link Description: Virtualization/Sandbox Evasion, Value: virustotal.com/gui/search?query=attack_technique%3AT1497
+						311 button 3
+						312 button T1497
+							313 text T1497
+						314 container CAPE Sandbox
+							315 image
+						316 link Description: Impair Defenses, Value: virustotal.com/gui/search?query=attack_technique%3AT1562
+						317 button 1
+						318 button T1562
+							319 text T1562
+						320 container CAPE Sandbox
+							321 image
+						322 link Description: Hide Artifacts, Value: virustotal.com/gui/search?query=attack_technique%3AT1564
+						323 button 1
+						324 button Toggle subtechniques
+							325 image
+						326 button T1564
+							327 text T1564
+						328 container CAPE Sandbox
+							329 image
+						330 link Description: Hijack Execution Flow, Value: virustotal.com/gui/search?query=attack_technique%3AT1574
+						331 button 1
+						332 button T1574
+							333 text T1574
+						334 link Description: Credential Access, Value: virustotal.com/gui/search?query=attack_tactic%3ATA0006
+						335 button TA0006
+							336 text TA0006
+						337 text 1  Techniques
+						338 container CAPE Sandbox
+							339 image
+						340 link Description: OS Credential Dumping, Value: virustotal.com/gui/search?query=attack_technique%3AT1003
+						341 button 1
+						342 button T1003
+							343 text T1003
+						344 link Description: Discovery, Value: virustotal.com/gui/search?query=attack_tactic%3ATA0007
+						345 button TA0007
+							346 text TA0007
+						347 text 6  Techniques
+						348 container CAPE Sandbox
+							349 image
+						350 link Description: Query Registry, Value: virustotal.com/gui/search?query=attack_technique%3AT1012
+						351 button 1
+						352 button T1012
+							353 text T1012
+						354 container CAPE Sandbox
+							355 image
+						356 link Description: System Owner/User Discovery, Value: virustotal.com/gui/search?query=attack_technique%3AT1033
+						357 button 1
+						358 button T1033
+							359 text T1033
+						360 container CAPE Sandbox
+							361 image
+						362 link Description: Permission Groups Discovery, Value: virustotal.com/gui/search?query=attack_technique%3AT1069
+						363 button 1
+						364 button T1069
+							365 text T1069
+						366 container CAPE Sandbox
+							367 image
+						368 link Description: System Information Discovery, Value: virustotal.com/gui/search?query=attack_technique%3AT1082
+						369 button 12
+						370 button T1082
+							371 text T1082
+						372 container CAPE Sandbox
+							373 image
+						374 link Description: Virtualization/Sandbox Evasion, Value: virustotal.com/gui/search?query=attack_technique%3AT1497
+						375 button 3
+						376 button T1497
+							377 text T1497
+						378 container CAPE Sandbox
+							379 image
+						380 link Description: Software Discovery, Value: virustotal.com/gui/search?query=attack_technique%3AT1518
+						381 button 1
+						382 button T1518
+							383 text T1518
+						384 link Description: Command and Control, Value: virustotal.com/gui/search?query=attack_tactic%3ATA0011
+						385 button TA0011
+							386 text TA0011
+						387 text 2  Techniques
+						388 container CAPE Sandbox
+							389 image
+						390 link Description: Application Layer Protocol, Value: virustotal.com/gui/search?query=attack_technique%3AT1071
+						391 button 5
+						392 button T1071
+							393 text T1071
+						394 container CAPE Sandbox
+							395 image
+						396 link Description: Encrypted Channel, Value: virustotal.com/gui/search?query=attack_technique%3AT1573
+						397 button 1
+						398 button T1573
+							399 text T1573
+						400 link Description: Impact, Value: virustotal.com/gui/search?query=attack_tactic%3ATA0040
+						401 button TA0040
+							402 text TA0040
+						403 text 1  Techniques
+						404 container CAPE Sandbox
+							405 image
+						406 link Description: Data Destruction, Value: virustotal.com/gui/search?query=attack_technique%3AT1485
+						407 button 2
+						408 button T1485
+							409 text T1485
+					410 text Malware Behavior Catalog Tree
+					411 button (expanded) Description: Toggle Malware Behavior Catalog Tree, Secondary Actions: Collapse
+						412 image
+					413 container
+						414 button (collapsed) Expand
+							415 image
+						416 heading Anti-Behavioral Analysis OB0001, Value: 5
+							417 link Description: Anti-Behavioral Analysis, Value: virustotal.com/gui/search?query=mbc%3AOB0001
+							418 button OB0001
+						419 button (collapsed) Expand
+							420 image
+						421 heading Collection OB0003, Value: 5
+							422 link Description: Collection, Value: virustotal.com/gui/search?query=mbc%3AOB0003
+							423 button OB0003
+						424 button (collapsed) Expand
+							425 image
+						426 heading Credential Access OB0005, Value: 5
+							427 link Description: Credential Access, Value: virustotal.com/gui/search?query=mbc%3AOB0005
+							428 button OB0005
+						429 button (collapsed) Expand
+							430 image
+						431 heading Defense Evasion OB0006, Value: 5
+							432 link Description: Defense Evasion, Value: virustotal.com/gui/search?query=mbc%3AOB0006
+							433 button OB0006
+						434 button (collapsed) Expand
+							435 image
+						436 heading Discovery OB0007, Value: 5
+							437 link Description: Discovery, Value: virustotal.com/gui/search?query=mbc%3AOB0007
+							438 button OB0007
+						439 button (collapsed) Expand
+							440 image
+						441 heading Impact OB0008, Value: 5
+							442 link Description: Impact, Value: virustotal.com/gui/search?query=mbc%3AOB0008
+							443 button OB0008
+						444 button (collapsed) Expand
+							445 image
+						446 heading Execution OB0009, Value: 5
+							447 link Description: Execution, Value: virustotal.com/gui/search?query=mbc%3AOB0009
+							448 button OB0009
+						449 button (collapsed) Expand
+							450 image
+						451 heading Exfiltration OB0010, Value: 5
+							452 link Description: Exfiltration, Value: virustotal.com/gui/search?query=mbc%3AOB0010
+							453 button OB0010
+						454 button (collapsed) Expand
+							455 image
+						456 heading Persistence OB0012, Value: 5
+							457 link Description: Persistence, Value: virustotal.com/gui/search?query=mbc%3AOB0012
+							458 button OB0012
+						459 button (collapsed) Expand
+							460 image
+						461 heading Privilege Escalation OB0013, Value: 5
+							462 link Description: Privilege Escalation, Value: virustotal.com/gui/search?query=mbc%3AOB0013
+							463 button OB0013
+						464 button (collapsed) Expand
+							465 image
+						466 heading File System OC0001, Value: 5
+							467 link Description: File System, Value: virustotal.com/gui/search?query=mbc%3AOC0001
+							468 button OC0001
+						469 button (collapsed) Expand
+							470 image
+						471 heading Memory OC0002, Value: 5
+							472 link Description: Memory, Value: virustotal.com/gui/search?query=mbc%3AOC0002
+							473 button OC0002
+						474 button (collapsed) Expand
+							475 image
+						476 heading Process OC0003, Value: 5
+							477 link Description: Process, Value: virustotal.com/gui/search?query=mbc%3AOC0003
+							478 button OC0003
+						479 button (collapsed) Expand
+							480 image
+						481 heading Communication OC0006, Value: 5
+							482 link Description: Communication, Value: virustotal.com/gui/search?query=mbc%3AOC0006
+							483 button OC0006
+						484 button (collapsed) Expand
+							485 image
+						486 heading Operating System OC0008, Value: 5
+							487 link Description: Operating System, Value: virustotal.com/gui/search?query=mbc%3AOC0008
+							488 button OC0008
+					489 container
+						490 text Network Communication
+						491 button Description: More information, ID: info
+						492 button (expanded) Description: Toggle Network Communication, Secondary Actions: Collapse
+							493 image
+					494 container
+						495 heading DNS Resolutions, Value: 4, ID: section-title
+							496 text DNS Resolutions
+						497 container label
+							498 container VirusTotal Jujubox
+								499 image
+							500 text acroipm2.adobe.com
+					501 container
+						502 heading IP Traffic, Value: 4, ID: section-title
+							503 text IP Traffic
+						504 content list
+							505 container
+								506 container VirusTotal Jujubox
+									507 image
+								508 text UDP 8.8.8.8:53
+					509 container
+						510 heading Memory Pattern Domains, Value: 4, ID: section-title
+							511 text Memory Pattern Domains
+						512 content list
+							513 container
+								514 container DOCGuard
+									515 image
+								516 text inventario.example.invalid
+							517 container
+								518 container DOCGuard
+									519 image
+								520 text materiais-fd017.example.invalid
+					521 container
+						522 heading Memory Pattern Urls, Value: 4, ID: section-title
+							523 text Memory Pattern Urls
+						524 content list
+							525 container
+								526 container DOCGuard
+									527 image
+								528 text https://inventario.example.invalid/registro/FD-017
+							529 container
+								530 container DOCGuard
+									531 image
+								532 text https://materiais-fd017.example.invalid/edicao-atual
+					533 container behashes
+						534 container
+							535 text Behavior Similarity Hashes
+							536 button Description: More information, ID: info
+							537 button (expanded) Description: Toggle Behavior Similarity Hashes, Secondary Actions: Collapse
+								538 image
+						539 container
+							540 text CAPE Sandbox
+							541 link Description: 34f4ec1d1685084bdc02b2a3f703ec3d, Value: virustotal.com/gui/search?query=behash%3A34f4ec1d1685084bdc02b2a3f703ec3d
+							542 text DOCGuard
+							543 link Description: bca60c64b1d6bf98322c77a9a301bc9e, Value: virustotal.com/gui/search?query=behash%3Abca60c64b1d6bf98322c77a9a301bc9e
+							544 text VirusTotal Jujubox
+							545 link Description: e64c04fac8c872976fcead0cd6e6bf8a, Value: virustotal.com/gui/search?query=behash%3Ae64c04fac8c872976fcead0cd6e6bf8a
+							546 text Yomi Hunter
+							547 link Description: 50c3f3885a65cbcbd700ae12ead54926, Value: virustotal.com/gui/search?query=behash%3A50c3f3885a65cbcbd700ae12ead54926
+							548 text Zenbox
+							549 link Description: 19354b6c0c9b9324c436e541918262b0, Value: virustotal.com/gui/search?query=behash%3A19354b6c0c9b9324c436e541918262b0
+					550 container
+						551 text File system actions
+						552 button Description: More information, ID: info
+						553 button (expanded) Description: Toggle File system actions, Secondary Actions: Collapse
+							554 image
+					555 container
+						556 heading Files Opened, Value: 4, ID: section-title
+							557 text Files Opened
+						558 content list
+							559 container
+								560 container CAPE Sandbox
+									561 image
+								562 text C:\Program Files\Adobe
+							563 container
+								564 container CAPE Sandbox
+									565 image
+								566 text C:\Program Files\Common Files\Adobe
+							567 container
+								568 container CAPE Sandbox
+									569 image
+								570 text C:\Program Files\Windows Defender\MpOAV.dll
+							571 container
+								572 container CAPE Sandbox
+									573 image
+								574 text C:\ProgramData
+							575 container
+								576 container CAPE Sandbox
+									577 image
+								578 text C:\ProgramData\
+							579 container
+								580 container CAPE Sandbox
+									581 image
+								582 text C:\ProgramData\Microsoft
+							583 container
+								584 container CAPE Sandbox
+									585 image
+								586 text C:\ProgramData\Microsoft\
+							587 container
+								588 container CAPE Sandbox
+									589 image
+								590 text C:\ProgramData\Microsoft\MapData\diskcache
+							591 container
+								592 container CAPE Sandbox
+									593 image
+								594 text C:\ProgramData\Microsoft\MapData\mapscache
+							595 container
+								596 container CAPE Sandbox
+									597 image
+								598 text C:\ProgramData\Microsoft\Network
+						599 button (collapsed) Show 282 more, Secondary Actions: Expand
+							600 image
+							601 text Show 282 more
+					602 container
+						603 heading Files Written, Value: 4, ID: section-title
+							604 text Files Written
+						605 button (collapsed) Description: C:\Users\<USER>\AppData\Local\Temp\A9876cbd_18ffpgp_2yk.tmp, Secondary Actions: Expand
+							606 image
+						607 text C:\Users\<USER>\AppData\Local\Temp\A9876cbd_18ffpgp_2yk.tmp
+						608 button (collapsed) Description: C:\Users\<USER>\AppData\Local\Temp\A9ez0bmk_18ffpgq_2yk.tmp, Secondary Actions: Expand
+							609 image
+						610 text C:\Users\<USER>\AppData\Local\Temp\A9ez0bmk_18ffpgq_2yk.tmp
+						611 button (collapsed) Description: C:\Users\<USER>\AppData\Local\Temp\NGL\, Secondary Actions: Expand
+							612 image
+						613 text C:\Users\<USER>\AppData\Local\Temp\NGL\
+						614 button (collapsed) Description: C:\Users\<USER>\AppData\Local\Temp\TmpB5EE.tmp, Secondary Actions: Expand
+							615 image
+						616 text C:\Users\<USER>\AppData\Local\Temp\TmpB5EE.tmp
+						617 button (collapsed) Description: C:\Users\<USER>\AppData\Local\Temp\acroNGLLog.txt, Secondary Actions: Expand
+							618 image
+						619 text C:\Users\<USER>\AppData\Local\Temp\acroNGLLog.txt
+						620 button (collapsed) Description: C:\Windows\Logs\CBS\CBS.log, Secondary Actions: Expand
+							621 image
+						622 text C:\Windows\Logs\CBS\CBS.log
+						623 button (collapsed) Description: C:\Windows\ServiceProfiles\LocalService\AppData\Local\FontCache\Fonts\Download-1.tmp, Secondary Actions: Expand
+							624 image
+						625 text C:\Windows\ServiceProfiles\LocalService\AppData\Local\FontCache\Fonts\Download-1.tmp
+						626 button (collapsed) Description: C:\Windows\System32\wbem\repository\INDEX.BTR, Secondary Actions: Expand
+							627 image
+						628 text C:\Windows\System32\wbem\repository\INDEX.BTR
+						629 button (collapsed) Description: C:\Windows\System32\wbem\repository\MAPPING1.MAP, Secondary Actions: Expand
+							630 image
+						631 text C:\Windows\System32\wbem\repository\MAPPING1.MAP
+						632 button (collapsed) Description: C:\Windows\System32\wbem\repository\MAPPING2.MAP, Secondary Actions: Expand
+							633 image
+						634 text C:\Windows\System32\wbem\repository\MAPPING2.MAP
+						635 button (collapsed) Show 49 more, Secondary Actions: Expand
+							636 image
+							637 text Show 49 more
+					638 container
+						639 heading Files Deleted, Value: 4, ID: section-title
+							640 text Files Deleted
+						641 button (collapsed) Description: C:\Users\<USER>\AppData\Local\Microsoft\GameDVR\KnownGameList.update, Secondary Actions: Expand
+							642 image
+						643 text C:\Users\<USER>\AppData\Local\Microsoft\GameDVR\KnownGameList.update
+						644 button (collapsed) Secondary Actions: Expand, Description: C:\Users\<USER>\AppData\Local\Packages\Microsoft.XboxGamingOverlay_8wekyb3d8bbwe\LocalCache\KnownGameList.bin
+							645 image
+						646 text C:\Users\<USER>\AppData\Local\Packages\Microsoft.XboxGamingOverlay_8wekyb3d8bbwe\LocalCache\KnownGameList.bin
+						647 button (collapsed) Description: C:\Users\<USER>\AppData\Roaming\Adobe\Acrobat\DC\JSCache\GlobSettings, Secondary Actions: Expand
+							648 image
+						649 text C:\Users\<USER>\AppData\Roaming\Adobe\Acrobat\DC\JSCache\GlobSettings
+						650 button (collapsed) Description: C:\Users\<USER>\AppData\LocalLow\Adobe\Acrobat\DC\ReaderMessages-journal, Secondary Actions: Expand
+							651 image
+						652 text C:\Users\<USER>\AppData\LocalLow\Adobe\Acrobat\DC\ReaderMessages-journal
+						653 button (collapsed) Description: C:\Users\<USER>\AppData\Local\Adobe\Acrobat\DC\SOPHIA\Reader\Files\ACROBAT_READER_MASTER_SURFACEID, Secondary Actions: Expand
+							654 image
+						655 text C:\Users\<USER>\AppData\Local\Adobe\Acrobat\DC\SOPHIA\Reader\Files\ACROBAT_READER_MASTER_SURFACEID
+						656 button (collapsed) Description: C:\Users\<USER>\AppData\Local\Adobe\Acrobat\DC\SOPHIA\Reader\Files\DC_READER_LAUNCH_CARD, Secondary Actions: Expand
+							657 image
+						658 text C:\Users\<USER>\AppData\Local\Adobe\Acrobat\DC\SOPHIA\Reader\Files\DC_READER_LAUNCH_CARD
+						659 button (collapsed) Description: C:\Users\<USER>\AppData\Local\Temp\A91k60dge_wf68cd_1w4.tmp, Secondary Actions: Expand
+							660 image
+						661 text C:\Users\<USER>\AppData\Local\Temp\A91k60dge_wf68cd_1w4.tmp
+						662 button (collapsed) Description: C:\Users\<USER>\AppData\Local\Temp\A91x9zo51_wf68cb_1w4.tmp, Secondary Actions: Expand
+							663 image
+						664 text C:\Users\<USER>\AppData\Local\Temp\A91x9zo51_wf68cb_1w4.tmp
+						665 button (collapsed) Description: C:\Users\<USER>\AppData\Local\Temp\A91yujwuc_wf68cc_1w4.tmp, Secondary Actions: Expand
+							666 image
+						667 text C:\Users\<USER>\AppData\Local\Temp\A91yujwuc_wf68cc_1w4.tmp
+						668 button (collapsed) Description: C:\Users\<USER>\AppData\Local\Temp\A9hr49nx_wf68ce_1w4.tmp, Secondary Actions: Expand
+							669 image
+						670 text C:\Users\<USER>\AppData\Local\Temp\A9hr49nx_wf68ce_1w4.tmp
+						671 button (collapsed) Show 4 more, Secondary Actions: Expand
+							672 image
+							673 text Show 4 more
+					674 container
+						675 heading Files Copied, Value: 4, ID: section-title
+							676 text Files Copied
+						677 button (collapsed) Description: C:\Users\<USER>\AppData\Local\Adobe\Acrobat\DC\AdobeFnt23.lst.2452, Secondary Actions: Expand
+							678 image
+						679 container label
+							680 container VirusTotal Jujubox
+								681 image
+							682 text C:\Users\<USER>\AppData\Local\Adobe\Acrobat\DC\AdobeFnt23.lst.2452
+						683 button (collapsed) Description: C:\Users\<USER>\AppData\Local\Adobe\Acrobat\DC\Cache\AdobeFnt23.lst.2452, Secondary Actions: Expand
+							684 image
+						685 container label
+							686 container VirusTotal Jujubox
+								687 image
+							688 text C:\Users\<USER>\AppData\Local\Adobe\Acrobat\DC\Cache\AdobeFnt23.lst.2452
+					689 container
+						690 heading Files Dropped, Value: 4, ID: section-title
+							691 text Files Dropped
+						692 button (collapsed) Description: CBS.log, Secondary Actions: Expand
+							693 image
+						694 text CBS.log
+						695 button (collapsed) Description: TmpB409.tmp, Secondary Actions: Expand
+							696 image
+						697 text TmpB409.tmp
+						698 button (collapsed) Description: TmpB5EE.tmp, Secondary Actions: Expand
+							699 image
+						700 text TmpB5EE.tmp
+						701 button (collapsed) Description: acrofnt23.lst, Secondary Actions: Expand
+							702 image
+						703 text acrofnt23.lst
+						704 button (collapsed) Description: adobecmapfnt23.lst, Secondary Actions: Expand
+							705 image
+						706 text adobecmapfnt23.lst
+						707 button (collapsed) Description: adobesysfnt23.lst, Secondary Actions: Expand
+							708 image
+						709 text adobesysfnt23.lst
+						710 button (collapsed) Description: C:\Users\<USER>\AppData\LocalLow\Adobe\Acrobat\DC\ConnectorIcons\icon-261112232050Z-717.bmp, Secondary Actions: Expand
+							711 image
+						712 text C:\Users\<USER>\AppData\LocalLow\Adobe\Acrobat\DC\ConnectorIcons\icon-261112232050Z-717.bmp
+						713 button (collapsed) Description: C:\Users\<USER>\AppData\Local\Adobe\Acrobat\DC\SOPHIA\Reader\Files\TESTING, Secondary Actions: Expand
+							714 image
+						715 text C:\Users\<USER>\AppData\Local\Adobe\Acrobat\DC\SOPHIA\Reader\Files\TESTING
+						716 button (collapsed) Description: C:\Users\<USER>\AppData\Local\Adobe\Acrobat\DC\SOPHIA\Reader\SOPHIA.json, Secondary Actions: Expand
+							717 image
+						718 text C:\Users\<USER>\AppData\Local\Adobe\Acrobat\DC\SOPHIA\Reader\SOPHIA.json
+						719 button (collapsed) Description: C:\Users\<USER>\AppData\Local\Adobe\Acrobat\DC\UserCache.bin, Secondary Actions: Expand
+							720 image
+						721 text C:\Users\<USER>\AppData\Local\Adobe\Acrobat\DC\UserCache.bin
+						722 button (collapsed) Show 4 more, Secondary Actions: Expand
+							723 image
+							724 text Show 4 more
+					725 container
+						726 text Registry actions
+						727 button Description: More information, ID: info
+						728 button (expanded) Description: Toggle Registry actions, Secondary Actions: Collapse
+							729 image
+					730 container
+						731 heading Registry Keys Opened, Value: 4, ID: section-title
+							732 text Registry Keys Opened
+						733 content list
+							734 container
+								735 container CAPE Sandbox
+									736 image
+								737 text HKEY_CURRENT_USER\Keyboard Layout\Preload
+							738 container
+								739 container CAPE Sandbox
+									740 image
+								741 text HKEY_CURRENT_USER\Keyboard Layout\Preload\1
+							742 container
+								743 container CAPE Sandbox
+									744 image
+								745 text HKEY_CURRENT_USER\Software\Classes
+							746 container
+								747 container CAPE Sandbox
+									748 image
+								749 text HKEY_LOCAL_MACHINE\SOFTWARE\Classes\AppID\TrustedInstaller.exe
+							750 container
+								751 container CAPE Sandbox
+									752 image
+								753 text HKEY_LOCAL_MACHINE\SOFTWARE\Classes\AppID\TrustedInstaller.exe\AppID
+							754 container
+								755 container CAPE Sandbox
+									756 image
+								757 text HKEY_LOCAL_MACHINE\SOFTWARE\Classes\AppID\{752073A2-23F2-4396-85F0-8FDB879ED0ED}
+							758 container
+								759 container CAPE Sandbox
+									760 image
+								761 text HKEY_LOCAL_MACHINE\SOFTWARE\Classes\AppID\{752073A2-23F2-4396-85F0-8FDB879ED0ED}\AccessPermission
+							762 container
+								763 container CAPE Sandbox
+									764 image
+								765 text HKEY_LOCAL_MACHINE\SOFTWARE\Classes\AppID\{752073A2-23F2-4396-85F0-8FDB879ED0ED}\AuthenticationLevel
+							766 container
+								767 container CAPE Sandbox
+									768 image
+								769 text HKEY_LOCAL_MACHINE\SOFTWARE\Classes\CLSID\{3C6859CE-230B-48A4-BE6C-932C0C202048}
+							770 container
+								771 container CAPE Sandbox
+									772 image
+								773 text HKEY_LOCAL_MACHINE\SOFTWARE\Classes\CLSID\{3c6859ce-230b-48a4-be6c-932c0c202048}\(Default)
+						774 button (collapsed) Show 395 more, Secondary Actions: Expand
+							775 image
+							776 text Show 395 more
+					777 container
+						778 heading Registry Keys Set, Value: 4, ID: section-title
+							779 text Registry Keys Set
+						780 heading Gemini Summary Toggle Gemini Summary, Value: 6
+							781 image
+							782 text Gemini Summary
+							783 button (collapsed) Description: Toggle Gemini Summary, Secondary Actions: Expand
+								784 image
+						785 button (collapsed) Secondary Actions: Expand, Description: HKEY_CURRENT_USER\Software\Classes\Local Settings\MuiCache\7b\52C64B7E\@%SystemRoot%\System32\CertCA.dll,-304
+							786 image
+						787 container label
+							788 container CAPE Sandbox
+								789 image
+							790 text HKEY_CURRENT_USER\Software\Classes\Local Settings\MuiCache\7b\52C64B7E\@%SystemRoot%\System32\CertCA.dll,-304
+						791 button (collapsed) Secondary Actions: Expand, Description: HKEY_CURRENT_USER\Software\Classes\Local Settings\MuiCache\7b\52C64B7E\@%SystemRoot%\System32\CertCA.dll,-305
+							792 image
+						793 container label
+							794 container CAPE Sandbox
+								795 image
+							796 text HKEY_CURRENT_USER\Software\Classes\Local Settings\MuiCache\7b\52C64B7E\@%SystemRoot%\System32\CertCA.dll,-305
+						797 button (collapsed) Secondary Actions: Expand, Description: HKEY_CURRENT_USER\Software\Classes\Local Settings\MuiCache\7b\52C64B7E\@%SystemRoot%\System32\SessEnv.dll,-101
+							798 image
+						799 container label
+							800 container CAPE Sandbox
+								801 image
+							802 text HKEY_CURRENT_USER\Software\Classes\Local Settings\MuiCache\7b\52C64B7E\@%SystemRoot%\System32\SessEnv.dll,-101
+						803 button (collapsed) Secondary Actions: Expand, Description: HKEY_CURRENT_USER\Software\Classes\Local Settings\MuiCache\7b\52C64B7E\@%systemroot%\system32\wsdapi.dll,-200
+							804 image
+						805 container label
+							806 container CAPE Sandbox
+								807 image
+							808 text HKEY_CURRENT_USER\Software\Classes\Local Settings\MuiCache\7b\52C64B7E\@%systemroot%\system32\wsdapi.dll,-200
+						809 button (collapsed) Secondary Actions: Expand, Description: HKEY_CURRENT_USER\Software\Classes\Local Settings\MuiCache\7b\52C64B7E\@C:\Windows\System32\AppxPackaging.dll,-1001
+							810 image
+						811 container label
+							812 container CAPE Sandbox
+								813 image
+							814 text HKEY_CURRENT_USER\Software\Classes\Local Settings\MuiCache\7b\52C64B7E\@C:\Windows\System32\AppxPackaging.dll,-1001
+						815 button (collapsed) Description: SOFTWARE\Adobe\Acrobat Reader\DC\DLLInjection\bBlockDLLInjection, Secondary Actions: Expand
+							816 image
+						817 container label
+							818 container VirusTotal Jujubox
+								819 image
+							820 text SOFTWARE\Adobe\Acrobat Reader\DC\DLLInjection\bBlockDLLInjection
+						821 button (collapsed) Description: Software\Adobe\Acrobat Reader\DC\ExitSection\bLastExitNormal, Secondary Actions: Expand
+							822 image
+						823 container label
+							824 container VirusTotal Jujubox
+								825 image
+							826 text Software\Adobe\Acrobat Reader\DC\ExitSection\bLastExitNormal
+						827 button (collapsed) Description: Software\Adobe\Acrobat Reader\DC\SessionManagement\bNormalExit, Secondary Actions: Expand
+							828 image
+						829 container label
+							830 container VirusTotal Jujubox
+								831 image
+							832 text Software\Adobe\Acrobat Reader\DC\SessionManagement\bNormalExit
+						833 button (collapsed) Description: Software\Adobe\Adobe Acrobat\DC\DiskCabs\bForms_AdhocWorkflowBackup, Secondary Actions: Expand
+							834 image
+						835 container label
+							836 container VirusTotal Jujubox
+								837 image
+							838 text Software\Adobe\Adobe Acrobat\DC\DiskCabs\bForms_AdhocWorkflowBackup
+						839 button (collapsed) Description: Software\Adobe\Adobe Acrobat\DC\DiskCabs\bJSCache_GlobData, Secondary Actions: Expand
+							840 image
+						841 container label
+							842 container VirusTotal Jujubox
+								843 image
+							844 text Software\Adobe\Adobe Acrobat\DC\DiskCabs\bJSCache_GlobData
+						845 button (collapsed) Show 25 more, Secondary Actions: Expand
+							846 image
+							847 text Show 25 more
+					848 container
+						849 heading Registry Keys Deleted, Value: 4, ID: section-title
+							850 text Registry Keys Deleted
+						851 content list
+							852 container
+								853 container CAPE Sandbox
+									854 image
+								855 text HKEY_CURRENT_USER\SOFTWARE\Adobe\Adobe Acrobat\DC\AVGeneral\cAcrobatUpsellTracking\tTrackingParam
+							856 container
+								857 container CAPE Sandbox
+									858 image
+								859 text HKEY_CURRENT_USER\SOFTWARE\Adobe\Adobe Acrobat\DC\AdobeViewer\ProductInfoCache
+							860 container
+								861 container VirusTotal Jujubox
+									862 image
+								863 text HKEY_LOCAL_MACHINE\System\Acrobatviewercpp473
+							864 container
+								865 container Zenbox
+									866 image
+								867 text HKEY_LOCAL_MACHINE\SYSTEM\Acrobatbrokerserverdispatchercpp789
+					868 container
+						869 text Process and service actions
+						870 button Description: More information, ID: info
+						871 button (expanded) Description: Toggle Process and service actions, Secondary Actions: Collapse
+							872 image
+					873 container
+						874 heading Processes Created, Value: 4, ID: section-title
+							875 text Processes Created
+						876 content list
+							877 container
+								878 container CAPE Sandbox
+									879 image
+								880 text "C:\Program Files\Adobe\Acrobat DC\Acrobat\Acrobat.exe" "C:\Users\<USER>\Desktop\manual.pdf"
+							881 container
+								882 container CAPE Sandbox
+									883 image
+								884 text "C:\Program Files\Adobe\Acrobat DC\Acrobat\Adobe Crash Processor.exe"
+							885 container
+								886 container CAPE Sandbox
+									887 image
+								888 text "C:\Program Files\Adobe\Acrobat DC\Acrobat\CRLogTransport.exe" "C:\Program Files\Adobe\Acrobat DC\Acrobat" "C:\Users\<USER>\AppData\LocalLow\Adobe\CRLogs\crashlogs"
+							889 container
+								890 container CAPE Sandbox
+									891 image
+								892 text "C:\Program Files\Adobe\Acrobat DC\Acrobat\CRLogTransport.exe" "C:\Program Files\Adobe\Acrobat DC\Acrobat" "C:\Users\<USER>\AppData\LocalLow\Adobe\CRLogs\dumps"
+							893 container
+								894 container CAPE Sandbox
+									895 image
+								896 text "C:\Program Files\Adobe\Acrobat DC\Acrobat\CRWindowsClientService.exe" "C:\Program Files\Adobe\Acrobat DC\Acrobat" updatepvbpreference 7b4cd756-70a0-45d5-bcff-f3a0c5d66fae 0 0
+							897 container
+								898 container CAPE Sandbox
+									899 image
+								900 text C:\Windows\Explorer.EXE
+							901 container
+								902 container CAPE Sandbox
+									903 image
+								904 text C:\Windows\System32\svchost.exe -k NetworkService -p
+							905 container
+								906 container CAPE Sandbox
+									907 image
+								908 text C:\Windows\servicing\TrustedInstaller.exe
+							909 container
+								910 container CAPE Sandbox
+									911 image
+								912 text C:\Windows\system32\lsass.exe
+							913 container
+								914 container CAPE Sandbox
+									915 image
+								916 text C:\Windows\system32\services.exe
+						917 button (collapsed) Show 4 more, Secondary Actions: Expand
+							918 image
+							919 text Show 4 more
+					920 container
+						921 heading Shell Commands, Value: 4, ID: section-title
+							922 text Shell Commands
+						923 content list
+							924 container
+								925 container CAPE Sandbox
+									926 image
+								927 text "C:\Program Files (x86)\Microsoft\EdgeUpdate\MicrosoftEdgeUpdate.exe" /svc
+							928 container
+								929 container CAPE Sandbox
+									930 image
+								931 text "C:\Program Files\Adobe\Acrobat DC\Acrobat\Adobe Crash Processor.exe"
+							932 container
+								933 container CAPE Sandbox
+									934 image
+								935 text "C:\Program Files\Adobe\Acrobat DC\Acrobat\Adobe Crash Processor.exe"
+							936 container
+								937 container CAPE Sandbox
+									938 image
+								939 text "C:\Program Files\Adobe\Acrobat DC\Acrobat\CRLogTransport.exe" "C:\Program Files\Adobe\Acrobat DC\Acrobat" "C:\Users\<USER>\AppData\LocalLow\Adobe\CRLogs\crashlogs"
+							940 container
+								941 container CAPE Sandbox
+									942 image
+								943 text "C:\Program Files\Adobe\Acrobat DC\Acrobat\CRLogTransport.exe" "C:\Program Files\Adobe\Acrobat DC\Acrobat" "C:\Users\<USER>\AppData\LocalLow\Adobe\CRLogs\dumps"
+							944 container
+								945 container CAPE Sandbox
+									946 image
+								947 text "C:\Program Files\Adobe\Acrobat DC\Acrobat\CRWindowsClientService.exe" "C:\Program Files\Adobe\Acrobat DC\Acrobat" updatepvbpreference 7b4cd756-70a0-45d5-bcff-f3a0c5d66fae 0 0
+							948 container
+								949 container CAPE Sandbox
+									950 image
+								951 text C:\Windows\System32\svchost.exe -k NetworkService -p
+							952 container
+								953 container CAPE Sandbox
+									954 image
+								955 text C:\Windows\System32\svchost.exe -k netsvcs -p
+							956 container
+								957 container CAPE Sandbox
+									958 image
+								959 text C:\Windows\servicing\TrustedInstaller.exe
+							960 container
+								961 container CAPE Sandbox
+									962 image
+								963 text C:\Windows\system32\lsass.exe
+						964 button (collapsed) Show 6 more, Secondary Actions: Expand
+							965 image
+							966 text Show 6 more
+					967 container
+						968 heading Processes Terminated, Value: 4, ID: section-title
+							969 text Processes Terminated
+						970 content list
+							971 container
+								972 container VirusTotal Jujubox
+									973 image
+								974 text c:\program files (x86)\adobe\acrobat reader dc\reader\acrocef_1\RdrCEF.exe --backgroundcolor=16514043
+					975 container
+						976 heading Services Opened, Value: 4, ID: section-title
+							977 text Services Opened
+						978 content list
+							979 container
+								980 container CAPE Sandbox
+									981 image
+								982 text TrustedInstaller
+							983 container
+								984 container CAPE Sandbox
+									985 image
+								986 text VaultSvc
+							987 container
+								988 container CAPE Sandbox
+									989 image
+								990 text wscsvc
+					991 container
+						992 heading Services Started, Value: 4, ID: section-title
+							993 text Services Started
+						994 content list
+							995 container
+								996 container CAPE Sandbox
+									997 image
+								998 text BITS
+							999 container
+								1000 container CAPE Sandbox
+									1001 image
+								1002 text TrustedInstaller
+							1003 container
+								1004 container CAPE Sandbox
+									1005 image
+								1006 text WSearch
+							1007 container
+								1008 container CAPE Sandbox
+									1009 image
+								1010 text msiserver
+					1011 container
+						1012 heading Processes Tree, Value: 4, ID: section-title
+							1013 text Processes Tree
+						1014 container CAPE Sandbox
+							1015 image
+						1016 text 4240  -  C:\Windows\Explorer.EXE
+						1017 container CAPE Sandbox
+							1018 image
+						1019 image
+						1020 text 3836  -  "C:\Program Files\Adobe\Acrobat DC\Acrobat\Acrobat.exe" "C:\Users\<USER>\Desktop\manual.pdf"
+						1021 container CAPE Sandbox
+							1022 image
+						1023 image
+						1024 text 4784  -  "C:\Program Files\Adobe\Acrobat DC\Acrobat\Adobe Crash Processor.exe"
+						1025 container CAPE Sandbox
+							1026 image
+						1027 image
+						1028 text 1256  -  "C:\Program Files\Adobe\Acrobat DC\Acrobat\CRWindowsClientService.exe" "C:\Program Files\Adobe\Acrobat DC\Acrobat" updatepvbpreference 7b4cd756-70a0-45d5-bcff-f3a0c5d66fae 0 0
+						1029 container CAPE Sandbox
+							1030 image
+						1031 image
+						1032 text 1816  -  "C:\Program Files\Adobe\Acrobat DC\Acrobat\CRLogTransport.exe" "C:\Program Files\Adobe\Acrobat DC\Acrobat" "C:\Users\<USER>\AppData\LocalLow\Adobe\CRLogs\crashlogs"
+						1033 container CAPE Sandbox
+							1034 image
+						1035 image
+						1036 text 4056  -  "C:\Program Files\Adobe\Acrobat DC\Acrobat\CRLogTransport.exe" "C:\Program Files\Adobe\Acrobat DC\Acrobat" "C:\Users\<USER>\AppData\LocalLow\Adobe\CRLogs\dumps"
+						1037 container CAPE Sandbox
+							1038 image
+						1039 text 660  -  C:\Windows\system32\services.exe
+						1040 container CAPE Sandbox
+							1041 image
+						1042 image
+						1043 text 1560  -  C:\Windows\servicing\TrustedInstaller.exe
+						1044 container CAPE Sandbox
+							1045 image
+						1046 image
+						1047 text 800  -  C:\Windows\system32\svchost.exe -k DcomLaunch -p
+						1048 container CAPE Sandbox
+							1049 image
+						1050 image
+						1051 text 4700  -  C:\Windows\system32\wbem\wmiprvse.exe -secured -Embedding
+						1052 button (collapsed) Show 15 more, Secondary Actions: Expand
+							1053 image
+							1054 text Show 15 more
+					1055 container
+						1056 text Synchronization mechanisms & Signals
+						1057 button Description: More information, ID: info
+						1058 button (expanded) Description: Toggle Synchronization mechanisms & Signals, Secondary Actions: Collapse
+							1059 image
+					1060 container
+						1061 heading Mutexes Opened, Value: 4, ID: section-title
+							1062 text Mutexes Opened
+						1063 content list
+							1064 container
+								1065 container VirusTotal Jujubox
+									1066 image
+								1067 text Global\ARM Update Mutex
+							1068 container
+								1069 container VirusTotal Jujubox
+									1070 image
+								1071 text Global\Acro Update Mutex
+					1072 container
+						1073 heading Mutexes Created, Value: 4, ID: section-title
+							1074 text Mutexes Created
+						1075 content list
+							1076 container
+								1077 container CAPE Sandbox
+									1078 image
+								1079 text Global\AdobeCrashProcessorLocalLowLock
+							1080 container
+								1081 container CAPE Sandbox
+									1082 image
+								1083 text Global\MSILOG_2e7604571dd73f8GOL.c38c1ISM_pmeT_lacoL_ataDppA_onurB_sresU_:C
+							1084 container
+								1085 container CAPE Sandbox
+									1086 image
+								1087 text Global\SetupLog
+							1088 container
+								1089 container CAPE Sandbox
+									1090 image
+								1091 text Global\WdsSetupLogInit
+							1092 container
+								1093 container CAPE Sandbox
+									1094 image
+								1095 text Global\_MSIExecute
+							1096 container
+								1097 container Zenbox
+									1098 image
+								1099 text \Sessions\1\BaseNamedObjects\Local\Acrobat Instance Mutex
+							1100 container
+								1101 container Zenbox
+									1102 image
+								1103 text \Sessions\1\BaseNamedObjects\Local\{100184D2-BDC3-477a-B8D3-65548B67914C}_5204
+							1104 container
+								1105 container Zenbox
+									1106 image
+								1107 text \Sessions\1\BaseNamedObjects\{100184D2-BDC3-477a-B8D3-65548B67914C}_5916
+					1108 container
+						1109 text Modules loaded
+						1110 button Description: More information, ID: info
+						1111 button (expanded) Description: Toggle Modules loaded, Secondary Actions: Collapse
+							1112 image
+					1113 container
+						1114 heading Runtime Modules, Value: 4, ID: section-title
+							1115 text Runtime Modules
+						1116 content list
+							1117 container
+								1118 container VirusTotal Jujubox
+									1119 image
+								1120 text ADVAPI32.dll
+							1121 container
+								1122 container VirusTotal Jujubox
+									1123 image
+								1124 text API-MS-WIN-Service-Management-L1-1-0.dll
+							1125 container
+								1126 container VirusTotal Jujubox
+									1127 image
+								1128 text API-MS-WIN-Service-Management-L2-1-0.dll
+							1129 container
+								1130 container VirusTotal Jujubox
+									1131 image
+								1132 text API-MS-WIN-Service-winsvc-L1-1-0.dll
+							1133 container
+								1134 container VirusTotal Jujubox
+									1135 image
+								1136 text API-MS-Win-Core-LocalRegistry-L1-1-0.dll
+							1137 container
+								1138 container VirusTotal Jujubox
+									1139 image
+								1140 text API-MS-Win-Security-LSALookup-L1-1-0.dll
+							1141 container
+								1142 container VirusTotal Jujubox
+									1143 image
+								1144 text API-MS-Win-Security-SDDL-L1-1-0.dll
+							1145 container
+								1146 container VirusTotal Jujubox
+									1147 image
+								1148 text AXE8SharedExpat.dll
+							1149 container
+								1150 container VirusTotal Jujubox
+									1151 image
+								1152 text BIBUtils.dll
+							1153 container
+								1154 container VirusTotal Jujubox
+									1155 image
+								1156 text C:\Windows\system32\cryptnet.dll
+						1157 button (collapsed) Show 76 more, Secondary Actions: Expand
+							1158 image
+							1159 text Show 76 more
+					1160 container
+						1161 text Highlighted actions
+						1162 button Description: More information, ID: info
+						1163 button (expanded) Description: Toggle Highlighted actions, Secondary Actions: Collapse
+							1164 image
+					1165 container
+						1166 heading Calls Highlighted, Value: 4, ID: section-title
+							1167 text Calls Highlighted
+						1168 content list
+							1169 container
+								1170 container VirusTotal Jujubox
+									1171 image
+								1172 text GetAdaptersAddresses
+							1173 container
+								1174 container VirusTotal Jujubox
+									1175 image
+								1176 text GetSystemMetrics
+							1177 container
+								1178 container VirusTotal Jujubox
+									1179 image
+								1180 text GetTickCount
+							1181 container
+								1182 container VirusTotal Jujubox
+									1183 image
+								1184 text GetTickCount64
+							1185 container
+								1186 container VirusTotal Jujubox
+									1187 image
+								1188 text IsDebuggerPresent
+							1189 container
+								1190 container VirusTotal Jujubox
+									1191 image
+								1192 text Sleep
+							1193 container
+								1194 container Yomi Hunter
+									1195 image
+								1196 text "C:\Program Files (x86)\Adobe\Reader 11.0\Reader\AcroRd32.exe" --channel=2880.0.1091373792 --type=renderer "C:\Users\RA491~1.VUL\AppData\Local\Temp\f14c3e3a7ad450a0ed2af26739bd0595.pdf"
+					1197 container
+						1198 heading Highlighted Text, Value: 4, ID: section-title
+							1199 text Highlighted Text
+						1200 content list
+							1201 container
+								1202 container VirusTotal Jujubox
+									1203 image
+								1204 text "1"
+							1205 container
+								1206 container VirusTotal Jujubox
+									1207 image
+								1208 text "2080f63126d077ade7a7df46b494647d5c76845ecbf06861c414c2fac5a56163.pdf - Adobe Acrobat Reader (32-bit)"
+							1209 container
+								1210 container VirusTotal Jujubox
+									1211 image
+								1212 text "5.83 x 8.26 in"
+							1213 container
+								1214 container VirusTotal Jujubox
+									1215 image
+								1216 text "63%"
+							1217 container
+								1218 container VirusTotal Jujubox
+									1219 image
+								1220 text "79.2%"
+							1221 container
+								1222 container VirusTotal Jujubox
+									1223 image
+								1224 text "FD-017 — alerta de abertura do laboratório."
+							1225 container
+								1226 container VirusTotal Jujubox
+									1227 image
+								1228 text "Warning: JavaScript Window - "
+
+The focused UI element is 47 tab (selected, settable, boolean) BEHAVIOR, Value: 1, ID: report-tab-behavior

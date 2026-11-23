@@ -4,9 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+<<<<<<< HEAD
     "start": "node src/server.js",
     "db:setup": "node scripts/setup-db.js",
     "test": "echo \"Error: no test specified\" && exit 1",
+=======
+    "test": "node --test tests/*.test.js",
+>>>>>>> 3cc0a3a844be2440030213fecf6ec18b989d2513
     "dev": "node --watch src/server.js",
     "db:init": "node scripts/init-db.js",
     "seed:admin": "node scripts/seed-admin.js",
@@ -15,9 +19,12 @@
     "db:health": "node scripts/init-health.js",
     "email:verify": "node scripts/verify-email.js",
     "test:email": "node --test tests/password-email.test.js",
+    "test:cats": "node --test tests/cat-validation.test.js",
     "test:health": "node --test tests/health-validation.test.js",
     "db:team": "node scripts/init-team.js",
+    "db:stories": "node scripts/init-stories.js",
     "test:team": "node --test tests/team-validation.test.js",
+    "test:stories": "node --test tests/story-validation.test.js",
     "test:team:integration": "node --test tests/team.integration.js"
   },
   "keywords": [],
