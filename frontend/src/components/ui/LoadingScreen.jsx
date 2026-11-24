@@ -1,4 +1,4 @@
-export default function LoadingScreen({ message = "Carregando seu abrigo…", fullScreen = true }) {
+export default function LoadingScreen({ message = "Carregando informações do Entre Lares", fullScreen = true }) {
   return (
     <div
       role="status"
