@@ -36,7 +36,14 @@ export function dataValida(valor) {
     );
 }
 
-export function validarGato(body) {
+export function nascimentoMinimo(hoje) {
+    const [ano, mes, dia] = hoje.split("-").map(Number);
+    const anoMinimo = ano - 30;
+    const ultimoDia = new Date(Date.UTC(anoMinimo, mes, 0)).getUTCDate();
+    return `${anoMinimo}-${String(mes).padStart(2, "0")}-${String(Math.min(dia, ultimoDia)).padStart(2, "0")}`;
+}
+
+export function validarGato(body, hoje = hojeNoBrasil()) {
     if (!body || typeof body !== "object" || Array.isArray(body)) {
         return { erro: "Envie os dados do gatinho." };
     }
@@ -69,8 +76,12 @@ export function validarGato(body) {
             return { erro: "Informe uma data de nascimento válida." };
         }
 
-        if (body.dataNascimento > hojeNoBrasil()) {
+        if (body.dataNascimento > hoje) {
             return { erro: "A data de nascimento não pode ser maior que a data atual." };
+        }
+
+        if (body.dataNascimento < nascimentoMinimo(hoje)) {
+            return { erro: "Informe uma data de nascimento nos últimos 30 anos. Se não souber, deixe o campo vazio." };
         }
 
         dataNascimento = body.dataNascimento;

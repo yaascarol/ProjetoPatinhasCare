@@ -1,9 +1,24 @@
 import test from "node:test";
 
 import assert from "node:assert/strict";
-import { validarGato } from "../src/validators/cat.js";
+import { validarGato, nascimentoMinimo } from "../src/validators/cat.js";
 
 const valido = { nome: "Luna", personalidade: ["Carinhosa"], sexo: "femea", status: "disponivel" };
+
+test("nascimento limita os últimos 30 anos sem exigir preenchimento", () => {
+  const hoje = "2026-11-24";
+  for (const dataNascimento of ["1996-11-24", "2005-09-15", hoje, "", null]) {
+    assert.equal(validarGato({ ...valido, dataNascimento }, hoje).erro, undefined);
+  }
+  for (const dataNascimento of ["1900-01-01", "1996-11-23", "2026-11-25", "2026-02-30", "invalida"]) {
+    assert.ok(validarGato({ ...valido, dataNascimento }, hoje).erro);
+  }
+});
+
+test("limite de nascimento trata ano bissexto sem gerar data inexistente", () => {
+  assert.equal(nascimentoMinimo("2028-02-29"), "1998-02-28");
+  assert.equal(nascimentoMinimo("2026-11-24"), "1996-11-24");
+});
 
 test("aceita cadastro sem data de nascimento nem descrição", () => {
   const resultado = validarGato(valido);

@@ -24,12 +24,14 @@ export default function CatForm({
     const [foto, setFoto] = useState(null);
     const [removerFoto, setRemoverFoto] = useState(false);
 
-    const agora = new Date();
-    const hoje = [
-        agora.getFullYear(),
-        String(agora.getMonth() + 1).padStart(2, "0"),
-        String(agora.getDate()).padStart(2, "0"),
-    ].join("-");
+    const partes = new Intl.DateTimeFormat("en-US", {
+        timeZone: "America/Sao_Paulo", year: "numeric", month: "2-digit", day: "2-digit",
+    }).formatToParts(new Date());
+    const parte = (tipo) => partes.find((item) => item.type === tipo).value;
+    const hoje = `${parte("year")}-${parte("month")}-${parte("day")}`;
+    const anoMinimo = Number(parte("year")) - 30;
+    const ultimoDia = new Date(Date.UTC(anoMinimo, Number(parte("month")), 0)).getUTCDate();
+    const nascimentoMinimo = `${anoMinimo}-${parte("month")}-${String(Math.min(Number(parte("day")), ultimoDia)).padStart(2, "0")}`;
 
     async function handleSubmit(event) {
         event.preventDefault();
@@ -45,6 +47,11 @@ export default function CatForm({
 
         if (dataNascimento && dataNascimento > hoje) {
             setErro("A data de nascimento não pode estar no futuro.");
+            return;
+        }
+
+        if (dataNascimento && dataNascimento < nascimentoMinimo) {
+            setErro("Informe uma data de nascimento nos últimos 30 anos. Se não souber, deixe o campo vazio.");
             return;
         }
 
@@ -123,14 +130,21 @@ export default function CatForm({
                         onChange={(event) => setNome(event.target.value)}
                     />
 
+                    <div>
                     <Input
                         id="nascimento"
                         label="Data de nascimento, se souber"
                         type="date"
                         max={hoje}
+                        min={nascimentoMinimo}
+                        aria-describedby="nascimento-ajuda"
                         value={dataNascimento}
                         onChange={(event) => setDataNascimento(event.target.value)}
                     />
+                    <p id="nascimento-ajuda" className="mt-2 text-sm text-stone-600">
+                        Opcional. Informe uma data nos últimos 30 anos, até hoje. Se não souber, deixe em branco.
+                    </p>
+                    </div>
 
                     <Input
                         id="personalidade"
