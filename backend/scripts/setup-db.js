@@ -4,7 +4,7 @@ import { pool } from "../src/db.js";
 // Preparação explícita: não é executada automaticamente durante o deploy.
 const arquivos = [
   "001-usuarios.sql", "002-gatos.sql", "003-fotos-gatos.sql",
-  "004-recuperacao-senha.sql", "005-saude.sql", "006-equipe.sql",
+  "004-recuperacao-senha.sql", "005-saude.sql", "006-historias.sql", "007-equipe.sql",
 ];
 const cliente = await pool.connect();
 try {

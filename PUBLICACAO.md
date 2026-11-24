@@ -29,7 +29,7 @@ node --env-file=.env.neon scripts/setup-db.js
 node --env-file=.env.neon scripts/seed-admin.js
 ```
 
-Confirme a origem da connection string antes de executar: estes comandos criam a estrutura e a responsável no banco indicado. A senha inicial tem limite de 72 bytes. O seed não muda a senha de um e-mail já existente. Não execute `db:setup` supondo que ele usa o Neon sem configurar `DATABASE_URL`; sem ela, a conexão continua local. O setup aplica os seis SQLs atuais em ordem e pode ser repetido; não substitui um sistema completo de migrações futuras.
+Confirme a origem da connection string antes de executar: estes comandos criam a estrutura e a responsável no banco indicado. A senha inicial tem limite de 72 bytes. O seed não muda a senha de um e-mail já existente. Não execute `db:setup` supondo que ele usa o Neon sem configurar `DATABASE_URL`; sem ela, a conexão continua local. O setup aplica os sete SQLs atuais em ordem e pode ser repetido; não substitui um sistema completo de migrações futuras.
 
 Se quiser levar os cadastros reais existentes, pare aqui e planeje backup/restauração em vez de criar dados de teste. As fotos e anexos estão no PostgreSQL e consomem a cota do banco.
 
