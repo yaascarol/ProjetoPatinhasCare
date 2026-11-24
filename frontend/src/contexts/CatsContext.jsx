@@ -1,3 +1,4 @@
+import LoadingScreen from "../components/ui/LoadingScreen";
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router";
 
@@ -76,7 +77,7 @@ export default function CatsProvider({ children }) {
   }
 
   if (estado === "carregando") {
-    return <p className="p-6">Carregando os cadastros...</p>;
+    return <LoadingScreen />;
   }
 
   if (estado === "sem_sessao") {

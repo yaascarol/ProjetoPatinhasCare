@@ -1,3 +1,4 @@
+import LoadingScreen from "../components/ui/LoadingScreen";
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { api } from "../services/api";
@@ -46,6 +47,8 @@ export default function LoginPage() {
     function handleRecuperarSenha() {
         navigate("/recuperar-senha");
     }
+
+    if (enviando) return <LoadingScreen />;
 
     return (
         <main className="flex min-h-screen items-center justify-center bg-creme p-4">

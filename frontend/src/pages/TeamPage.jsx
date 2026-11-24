@@ -1,3 +1,4 @@
+import LoadingScreen from "../components/ui/LoadingScreen";
 import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { SessionContext } from "../contexts/session-context";
@@ -109,7 +110,7 @@ export default function TeamPage() {
   }
 
   if (!autorizado || estado === "negado") return <section className="space-y-4"><h1 className="text-2xl font-semibold">Equipe</h1><p role="alert">Somente responsáveis podem administrar a equipe.</p><Link to="/" className="underline">Voltar para Home</Link></section>;
-  if (estado === "carregando") return <p role="status">Carregando integrantes...</p>;
+  if (estado === "carregando") return <LoadingScreen fullScreen={false} message="Carregando equipe…" />;
   if (estado === "erro") return <section className="space-y-4"><p role="alert">Não foi possível carregar a equipe.</p><Button onClick={() => { setEstado("carregando"); setTentativa(valor => valor + 1); }}>Tentar novamente</Button></section>;
 
   return (

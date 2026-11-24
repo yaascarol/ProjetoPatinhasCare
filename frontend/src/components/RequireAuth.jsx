@@ -1,3 +1,4 @@
+import LoadingScreen from "./ui/LoadingScreen";
 import { useEffect, useState } from "react";
 import { Navigate, Outlet } from "react-router";
 
@@ -32,7 +33,7 @@ export default function RequireAuth() {
     }, []);
 
     if (estado === "carregando") {
-        return <p className="p-6">Verificando acesso...</p>;
+        return <LoadingScreen />;
     }
 
     if (estado === "sem_sessao") {

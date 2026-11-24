@@ -1,3 +1,4 @@
+import LoadingScreen from "../components/ui/LoadingScreen";
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router";
 
@@ -83,7 +84,7 @@ export default function HealthProvider({ children }) {
   }
 
   if (estado === "carregando") {
-    return <p className="p-6">Carregando os registros de saúde...</p>;
+    return <LoadingScreen />;
   }
 
   if (estado === "sem_sessao") {

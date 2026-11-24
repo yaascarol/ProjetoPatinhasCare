@@ -1,3 +1,4 @@
+import LoadingScreen from "../components/ui/LoadingScreen";
 import { useContext, useEffect, useState } from "react";
 
 import Input from "../components/ui/Input";
@@ -357,7 +358,7 @@ export default function StoriesPage() {
       </form>
 
       {estado === "carregando" && (
-        <p role="status">Carregando histórias...</p>
+        <LoadingScreen fullScreen={false} message="Carregando histórias…" />
       )}
 
       {estado === "erro" && (
