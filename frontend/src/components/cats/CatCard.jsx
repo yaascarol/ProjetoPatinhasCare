@@ -19,7 +19,7 @@ export default function CatCard({ gato }) {
                     <img
                         src={gato.fotoUrl}
                         alt={`Foto de ${gato.nome}`}
-                        className="h-full w-full object-cover"
+                        className="h-full w-full object-contain"
                     />
                 ) : (
                     <img src="../../imagens/icones-patinhascare/GATO SEM FOTO.png" />

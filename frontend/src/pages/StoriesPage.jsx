@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 
 import Input from "../components/ui/Input";
 import Button from "../components/ui/Button";
+import PhotoPicker from "../components/ui/PhotoPicker";
 
 import { CatsContext } from "../contexts/cats-context";
 import { SessionContext } from "../contexts/session-context";
@@ -45,29 +46,7 @@ function FormularioHistoria({
   const [status, setStatus] = useState(historia?.status ?? "rascunho");
   const [foto, setFoto] = useState(null);
   const [removerFoto, setRemoverFoto] = useState(false);
-  const [erroFoto, setErroFoto] = useState("");
   const [erroLocal, setErroLocal] = useState("");
-
-  function escolherFoto(event) {
-    const arquivo = event.target.files?.[0] ?? null;
-
-    if (arquivo && !["image/jpeg", "image/png", "image/webp"].includes(arquivo.type)) {
-      setErroFoto("Use uma foto JPG, PNG ou WebP.");
-      event.target.value = "";
-      return;
-    }
-
-    if (arquivo && arquivo.size > 5 * 1024 * 1024) {
-      setErroFoto("A foto não pode ultrapassar 5 MB.");
-      event.target.value = "";
-      return;
-    }
-
-    setErroFoto("");
-    setFoto(arquivo);
-
-    if (arquivo) setRemoverFoto(false);
-  }
 
   function enviar(event) {
     event.preventDefault();
@@ -168,29 +147,8 @@ function FormularioHistoria({
         </p>
       </div>
 
-      <div className="flex flex-col gap-2">
-        <label htmlFor="historia-foto" className="text-sm font-medium">
-          Foto (JPG, PNG ou WebP, até 5 MB)
-        </label>
-
-        <input
-          id="historia-foto"
-          type="file"
-          accept="image/jpeg,image/png,image/webp"
-          onChange={escolherFoto}
-        />
-
-        {historia?.fotoUrl && !foto && (
-          <label className="flex items-center gap-2 text-sm">
-            <input
-              type="checkbox"
-              checked={removerFoto}
-              onChange={(event) => setRemoverFoto(event.target.checked)}
-            />
-            Remover a foto atual
-          </label>
-        )}
-      </div>
+      <PhotoPicker currentUrl={historia?.fotoUrl} aspect={2} disabled={salvando}
+        onChange={(arquivo, remover) => { setFoto(arquivo); setRemoverFoto(remover); }} />
 
       {podePublicar ? (
         <div className="flex flex-col gap-2">
@@ -214,9 +172,9 @@ function FormularioHistoria({
         </p>
       )}
 
-      {(erroFoto || erroLocal || erro) && (
+      {(erroLocal || erro) && (
         <p role="alert" className="text-sm text-red-700">
-          {erroFoto || erroLocal || erro}
+          {erroLocal || erro}
         </p>
       )}
 
@@ -433,7 +391,7 @@ export default function StoriesPage() {
                       "/imagens/icones-patinhascare/GATO SEM FOTO.png"
                     }
                     alt=""
-                    className={`h-48 w-full bg-lilas/20 ${historia.fotoUrl ? "object-cover" : "object-contain"
+                    className={`aspect-[2/1] w-full bg-lilas/20 ${historia.fotoUrl ? "object-contain" : "object-contain"
                       }`}
                   />
 
